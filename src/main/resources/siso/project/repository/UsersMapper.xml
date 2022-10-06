@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siso.project.repository.UsersMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into users (user_name, user_id, password, address, phone_number, group_Id, users_location_Id, admin_Id)
+        values (#{userName}, #{userId}, #{password}, #{address}, #{phoneNumber}, #{groupId}, #{usersLocationId}, #{adminId})
+    </insert>
+
+
+
+
+
+
+
+</mapper>
