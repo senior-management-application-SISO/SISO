@@ -1,16 +1,13 @@
-package siso.project.domain;
+package siso.project.repository.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 @Data
-@NoArgsConstructor
-public class Users {
-
-    private Long id;
+public class UsersDto {
 
     private String userName;
     private String userId;
@@ -20,15 +17,13 @@ public class Users {
     private String phoneNumber;
     private Boolean alone;
 
-    //외래키
     private Long teamId;
-    private Long usersLocationId;
     private Long adminId;
+    private Long usersLocationId;
     private Long villageHallId;
 
     @Builder
-    public Users(Long id, String userName, String userId, String password, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, Long usersLocationId, Long adminId, Long villageHallId) {
-        this.id = id;
+    public UsersDto(String userName, String userId, String password, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, Long adminId, Long usersLocationId, Long villageHallId) {
         this.userName = userName;
         this.userId = userId;
         this.password = password;
@@ -37,8 +32,8 @@ public class Users {
         this.phoneNumber = phoneNumber;
         this.alone = alone;
         this.teamId = teamId;
-        this.usersLocationId = usersLocationId;
         this.adminId = adminId;
+        this.usersLocationId = usersLocationId;
         this.villageHallId = villageHallId;
     }
 }

@@ -4,14 +4,82 @@
 <mapper namespace="siso.project.repository.UsersMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into users (user_name, user_id, password, address, phone_number, group_Id, users_location_Id, admin_Id)
-        values (#{userName}, #{userId}, #{password}, #{address}, #{phoneNumber}, #{groupId}, #{usersLocationId}, #{adminId})
+        insert into users (user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id,
+        users_location_id, admin_id, village_hall_id)
+        values (#{userName}, #{userId}, #{password}, #{dateOfBirth}, #{address}, #{phoneNumber}, #{alone}, #{teamId},
+        #{usersLocationId}, #{adminId}, #{villageHallId})
     </insert>
 
+    <update id="update">
+        update users
+        <set>
+            <if test="updateParam.userName != null">
+                user_name=#{updateParam.userName},
+            </if>
+            <if test="updateParam.userId != null">
+                user_id=#{updateParam.userId},
+            </if>
+            <if test="updateParam.password != null">
+                password=#{updateParam.password},
+            </if>
+            <if test="updateParam.dateOfBirth != null">
+                date_of_birth=#{updateParam.dateOfBirth},
+            </if>
+            <if test="updateParam.address != null">
+                address=#{updateParam.address},
+            </if>
+            <if test="updateParam.phoneNumber != null">
+                phone_number=#{updateParam.phoneNumber},
+            </if>
+            <if test="updateParam.alone != null">
+                alone=#{updateParam.alone},
+            </if>
+            <if test="updateParam.teamId != null">
+                team_id=#{updateParam.teamId},
+            </if>
+            <if test="updateParam.adminId != null">
+                admin_id=#{updateParam.adminId},
+            </if>
+            <if test="updateParam.usersLocationId != null">
+                users_location_id=#{updateParam.usersLocationId},
+            </if>
+            <if test="updateParam.villageHallId != null">
+                village_hall_id=#{updateParam.villageHallId},
+            </if>
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
 
 
+    <delete id="delete">
+        delete from users where id=#{id}
+    </delete>
 
 
+    <select id="findById" resultType="Users">
+        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id,
+        users_location_id, village_hall_id
+        from users
+        <where>
+            Id = #{id}
+        </where>
+    </select>
+
+    <select id="selectAll" resultType="Users">
+        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id,
+        users_location_id, village_hall_id
+        from users
+        <where>
+            <if test="userName != null and userName != ''">
+                and user_name = #{userName}
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                and phone_number = #{phoneNumber}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

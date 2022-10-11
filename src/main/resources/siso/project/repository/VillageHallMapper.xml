@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siso.project.repository.VillageHallMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into village_hall (hall_name, lat, lon, address)
+        values (#{hallName}, #{lat}, #{lon}, #{address})
+    </insert>
+
+    <select id="select" resultType="VillageHall">
+        select *
+        from village_hall
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="villageHall != null">
+                and hall_name = #{villageHall.hallName}
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        update village_hall
+        <set>
+            <if test="updateParam.hallName != null">
+                hall_name=#{updateParam.hallName},
+            </if>
+            <if test="updateParam.lat != null">
+                lat=#{updateParam.lat},
+            </if>
+            <if test="updateParam.lon != null">
+                lon=#{updateParam.lon},
+            </if>
+            <if test="updateParam.address != null">
+                address=#{updateParam.address},
+            </if>
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        delete from village_hall
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+
+</mapper>

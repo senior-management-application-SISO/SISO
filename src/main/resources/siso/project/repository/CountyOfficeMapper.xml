@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siso.project.repository.CountyOfficeMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into county_office (office_name, office_city, office_county, office_address, office_phone_number)
+        values (#{officeName}, #{officeCity}, #{officeCounty}, #{officeAddress}, #{officePhoneNumber})
+    </insert>
+
+    <select id="select" resultType="CountyOffice">
+        select id, office_name, office_city, office_county, office_address, office_phone_number
+        from county_office
+        <where>
+            <!-- pk로 찾기 -->
+            <if test="id != null">
+                and id = #{id}
+            </if>
+
+            <if test="officeName != null">
+                and office_name = #{officeName}
+            </if>
+            <if test="officeCity != null">
+                and office_city = #{officeCity}
+            </if>
+            <if test="officeCounty != null">
+                and office_county = #{officeCounty}
+            </if>
+            <if test="officeAddress != null">
+                and office_address = #{officeAddress}
+            </if>
+            <if test="officePhoneNumber != null">
+                and office_phone_number = #{officePhoneNumber}
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        update county_office
+        <set>
+            <if test="countyOfficeDto.officeName != null">
+                office_name=#{countyOfficeDto.officeName},
+            </if>
+
+            <if test="countyOfficeDto.officeCity != null">
+                office_city=#{countyOfficeDto.officeCity},
+            </if>
+
+            <if test="countyOfficeDto.officeCounty != null">
+                office_county=#{countyOfficeDto.officeCounty},
+            </if>
+
+            <if test="countyOfficeDto.officeAddress != null">
+                office_address=#{countyOfficeDto.officeAddress},
+            </if>
+
+            <if test="countyOfficeDto.officePhoneNumber != null">
+                office_phone_number=#{countyOfficeDto.officePhoneNumber},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        delete from county_office
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+</mapper>
