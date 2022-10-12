@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siso.project.repository.AdminMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <if test="countyOfficeId != null">
+            insert into admin (admin_name, admin_id, admin_password, admin_phone_number, county_office_id)
+            values (#{adminName}, #{adminId}, #{adminPassword}, #{adminPhoneNumber}, #{countyOfficeId})
+        </if>
+        <if test="countyOfficeId == null">
+            insert into admin (admin_name, admin_id, admin_password, admin_phone_number)
+            values (#{adminName}, #{adminId}, #{adminPassword}, #{adminPhoneNumber})
+        </if>
+    </insert>
+
+    <select id="select" resultType="Admin">
+        select id, admin_name, admin_id, admin_phone_number, county_office_id
+        from admin
+        <where>
+            <!-- pk로 찾기 -->
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <!-- 사용자 담당 관리사 찾기 시 -->
+            <if test="name != null">
+                and admin_name = #{name}
+            </if>
+            <if test="phoneNumber != null">
+                and admin_phone_number = #{phoneNumber}
+            </if>
+        </where>
+    </select>
+
+    <update id="update">
+        update admin
+        <set>
+            <!-- 이름 변경 시 -->
+            <if test="admin.adminName != null">
+                admin_name=#{admin.adminName},
+            </if>
+
+            <!-- 비밀번호 변경 시 -->
+            <if test="admin.adminPassword != null">
+                admin_password=#{admin.adminPassword},
+            </if>
+
+            <!-- 전화번호 변경 시 -->
+            <if test="admin.adminPhoneNumber != null">
+                admin_phone_number=#{admin.adminPhoneNumber},
+            </if>
+
+            <!-- 사무소 변경 시 -->
+            <if test="admin.countyOfficeId != null">
+                county_office_id=#{admin.countyOfficeId},
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        delete from admin where id=#{id}
+    </delete>
+
+</mapper>
