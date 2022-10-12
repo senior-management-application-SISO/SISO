@@ -18,18 +18,17 @@
         select id, admin_name, admin_id, admin_phone_number, county_office_id
         from admin
         <where>
-            <!-- pk로 찾기 -->
             <if test="id != null">
                 and id = #{id}
             </if>
-            <if test="name != null">
-                and admin_name = #{name}
+            <if test="adminName != null">
+                and admin_name = #{adminName}
             </if>
             <if test="adminId != null">
                 and admin_id = #{adminId}
             </if>
-            <if test="phoneNumber != null">
-                and admin_phone_number = #{phoneNumber}
+            <if test="adminPhoneNumber != null">
+                and admin_phone_number = #{adminPhoneNumber}
             </if>
         </where>
     </select>

@@ -13,9 +13,7 @@ import java.util.Map;
 public interface AdminMapper {
     void save(Admin admin);
 
-    List<Admin> select(@Param("id") Long id, @Param("name") String name, @Param("phoneNumber") String phoneNumber);
-
-    List<Admin> select(@Param("id") Long id, @Param("name") String name, @Param("adminId") String adminId, @Param("phoneNumber") String phoneNumber);
+    List<Admin> select(Admin admin);
 
     void update(@Param("id") Long id, @Param("admin") AdminDto adminDto);
 

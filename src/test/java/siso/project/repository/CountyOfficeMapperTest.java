@@ -1,8 +1,10 @@
 package siso.project.repository;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import siso.project.domain.Admin;
 import siso.project.domain.CountyOffice;
@@ -11,14 +13,16 @@ import siso.project.repository.dto.CountyOfficeDto;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 @SpringBootTest
 @Transactional
+@Rollback(value = true)
 class CountyOfficeMapperTest {
 
     @Autowired
     CountyOfficeMapper countyOfficeMapper;
-
 
     @Test
     void save() {
@@ -33,37 +37,49 @@ class CountyOfficeMapperTest {
 
     @Test
     void idSelect() {
-        List<CountyOffice> woo = countyOfficeMapper.select(4L, null, null, null, null, null);
-        System.out.println("woo = " + woo);
-    }
+        CountyOffice countyOffice = CountyOffice.builder()
+                .officeName("woo")
+                .officeCity("seoul")
+                .officeCounty("tokyo")
+                .build();
 
-    @Test
-    void nameAndNumberSelect() {
-        List<CountyOffice> woo = countyOfficeMapper.select(null, "woo", "seoul", null,null, null);
-        System.out.println("woo = " + woo);
-    }
+        countyOfficeMapper.save(countyOffice);
 
+        CountyOffice selectCountyOffice = CountyOffice.builder()
+                .officeName("woo")
+                .build();
+
+        List<CountyOffice> woo = countyOfficeMapper.select(selectCountyOffice);
+        assertThat(woo.get(0).getId()).isEqualTo(countyOffice.getId());
+    }
 
     @Test
     void infoUpdate() {
-        List<CountyOffice> woo = countyOfficeMapper.select(4L, null, null, null,null, null);
-        Long id = Long.parseLong(woo.get(0).getId().toString());
-
-        System.out.println("id = " + id);
-
-        CountyOfficeDto countyOfficeDto = CountyOfficeDto.builder()
-                .officeName("hyuk")
-                .officeCity("tokyo")
+        CountyOffice countyOffice = CountyOffice.builder()
+                .officeName("woo")
+                .officeCity("seoul")
+                .officeCounty("tokyo")
                 .build();
 
-        countyOfficeMapper.update(id, countyOfficeDto);
+        countyOfficeMapper.save(countyOffice);
+
+        CountyOfficeDto updateCountyOfficeDto = CountyOfficeDto.builder()
+                .officeName("koo")
+                .build();
+
+        countyOfficeMapper.update(countyOffice.getId(), updateCountyOfficeDto);
     }
 
     @Test
     void delete() {
-        List<CountyOffice> woo = countyOfficeMapper.select(4L, null, null, null,null, null);
-        Long id = Long.parseLong(woo.get(0).getId().toString());
+        CountyOffice countyOffice = CountyOffice.builder()
+                .officeName("woo")
+                .officeCity("seoul")
+                .officeCounty("tokyo")
+                .build();
 
-        countyOfficeMapper.delete(id);
+        countyOfficeMapper.save(countyOffice);
+
+        countyOfficeMapper.delete(countyOffice.getId());
     }
 }

@@ -1,5 +1,7 @@
 package siso.project.etc;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
