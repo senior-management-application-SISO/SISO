@@ -4,12 +4,12 @@
 <mapper namespace="siso.project.repository.CountyOfficeMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into county_office (office_name, office_city, office_county, office_address, office_phone_number)
-        values (#{officeName}, #{officeCity}, #{officeCounty}, #{officeAddress}, #{officePhoneNumber})
+        insert into county_office (office_name, office_city, office_county, office_address)
+        values (#{officeName}, #{officeCity}, #{officeCounty}, #{officeAddress})
     </insert>
 
     <select id="select" resultType="CountyOffice">
-        select id, office_name, office_city, office_county, office_address, office_phone_number
+        select id, office_name, office_city, office_county, office_address
         from county_office
         <where>
             <!-- pk로 찾기 -->
@@ -28,9 +28,6 @@
             </if>
             <if test="officeAddress != null">
                 and office_address = #{officeAddress}
-            </if>
-            <if test="officePhoneNumber != null">
-                and office_phone_number = #{officePhoneNumber}
             </if>
         </where>
     </select>
@@ -52,10 +49,6 @@
 
             <if test="countyOfficeDto.officeAddress != null">
                 office_address=#{countyOfficeDto.officeAddress},
-            </if>
-
-            <if test="countyOfficeDto.officePhoneNumber != null">
-                office_phone_number=#{countyOfficeDto.officePhoneNumber},
             </if>
         </set>
         <where>

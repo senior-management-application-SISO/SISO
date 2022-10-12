@@ -11,7 +11,7 @@ import java.util.List;
 public interface CountyOfficeMapper {
     void save(CountyOffice countyOffice);
 
-    List<CountyOffice> select(@Param("id") Long id, @Param("officeName") String officeName, @Param("officeCity") String officeCity, @Param("officeCounty") String officeCounty, @Param("officeAddress") String officeAddress, @Param("officePhoneNumber") String officePhoneNumber);
+    List<CountyOffice> select(CountyOffice countyOffice);
 
     void update(@Param("id") Long id, @Param("countyOfficeDto") CountyOfficeDto countyOfficeDto);
 

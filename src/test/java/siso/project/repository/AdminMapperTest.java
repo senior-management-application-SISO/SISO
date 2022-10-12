@@ -34,32 +34,51 @@ class AdminMapperTest {
 
     @Test
     void idSelect() {
-        List<Admin> woo = adminMapper.select(11L, null, null, null);
-        assertThat(woo.get(0).getAdminName().equals("woo"));
-    }
+        Admin admin = Admin.builder()
+                .adminName("woo")
+                .adminId("id")
+                .adminPhoneNumber("pw")
+                .adminPhoneNumber("010-11")
+                .build();
 
-    @Test
-    void nameAndNumberSelect() {
-        List<Admin> woo = adminMapper.select(null, "woo", null, "010-11");
-        assertThat(woo.get(0).getAdminName().equals("woo"));
-    }
+        adminMapper.save(admin);
 
+        Admin selectAdmin = Admin.builder()
+                .adminName("woo")
+                .adminId("id")
+                .build();
+
+        List<Admin> woo = adminMapper.select(selectAdmin);
+        assertThat(woo.get(0).getId()).isEqualTo(admin.getId());
+    }
 
     @Test
     void infoUpdate() {
-        List<Admin> woo = adminMapper.select(null, "woo", null, "010-11");
-        Long id = Long.parseLong(woo.get(0).getId().toString());
+        Admin admin = Admin.builder()
+                .adminName("woo")
+                .adminId("id")
+                .adminPhoneNumber("pw")
+                .adminPhoneNumber("010-11")
+                .build();
 
-        AdminDto adminDto = new AdminDto("woo", null, "asd", "010-11", null);
+        adminMapper.save(admin);
 
-        adminMapper.update(id, adminDto);
+        AdminDto adminDto = new AdminDto("koo", null, "asd", "010-11", null);
+
+        adminMapper.update(admin.getId(), adminDto);
     }
 
     @Test
     void delete() {
-        List<Admin> woo = adminMapper.select(null, "woo", null, "010-11");
-        Long id = Long.parseLong(woo.get(0).getId().toString());
+        Admin admin = Admin.builder()
+                .adminName("woo")
+                .adminId("id")
+                .adminPhoneNumber("pw")
+                .adminPhoneNumber("010-11")
+                .build();
 
-        adminMapper.delete(id);
+        adminMapper.save(admin);
+
+        adminMapper.delete(admin.getId());
     }
 }

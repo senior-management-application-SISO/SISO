@@ -9,14 +9,12 @@ public class CountyOfficeDto {
     private String officeCity;
     private String officeCounty;
     private String officeAddress;
-    private String officePhoneNumber;
 
     @Builder
-    public CountyOfficeDto(String officeName, String officeCity, String officeCounty, String officeAddress, String officePhoneNumber) {
+    public CountyOfficeDto(String officeName, String officeCity, String officeCounty, String officeAddress) {
         this.officeName = officeName;
         this.officeCity = officeCity;
         this.officeCounty = officeCounty;
         this.officeAddress = officeAddress;
-        this.officePhoneNumber = officePhoneNumber;
     }
 }

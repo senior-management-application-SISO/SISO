@@ -1,5 +1,7 @@
 package siso.project.etc;
 
+import org.springframework.stereotype.Component;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +14,6 @@ public class CsvParser {
     private String filePath;
     private BufferedReader bufferedReader;
     private List<String[]> readCSV;
-
 
     private int index;
 
