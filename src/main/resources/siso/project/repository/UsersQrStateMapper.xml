@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siso.project.repository.UsersQrStateMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into users_qr_state (date, attendance_state, hall_state, users_id)
+        values (#{date}, #{attendanceState}, #{hallState}, #{usersId})
+    </insert>
+
+    <update id="update">
+        update users_qr_state
+        <set>
+            <if test="updateParam.date != null">
+                date=#{updateParam.date},
+            </if>
+            <if test="updateParam.attendanceState != null">
+                attendance_state=#{updateParam.attendanceState},
+            </if>
+            <if test="updateParam.hallState != null">
+                hall_state=#{updateParam.hallState},
+            </if>
+            <if test="updateParam.usersId != null">
+                users_id=#{updateParam.usersId},
+            </if>
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
+    <delete id="delete">
+        delete from users_qr_state
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+
+    <select id="select" resultType="UsersQrState">
+        select id, date, attendance_state, hall_state, users_id
+        from users_qr_state
+        <where>
+            <if test="attendanceState != null and attendanceState != ''">
+                and attendance_state = #{attendanceState}
+            </if>
+            <if test="hallState != null and hallState != ''">
+                and hall_state = #{hallState}
+            </if>
+            <if test="usersId != null and usersId != ''">
+                and users_id = #{usersId}
+            </if>
+        </where>
+    </select>
+
+
+
+</mapper>

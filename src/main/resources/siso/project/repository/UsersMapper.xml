@@ -4,8 +4,10 @@
 <mapper namespace="siso.project.repository.UsersMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into users (user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, users_location_id, admin_id, village_hall_id)
-        values (#{userName}, #{userId}, #{password}, #{dateOfBirth}, #{address}, #{phoneNumber}, #{alone}, #{teamId}, #{usersLocationId}, #{adminId}, #{villageHallId})
+        insert into users (user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id,
+        users_location_id, admin_id, village_hall_id)
+        values (#{userName}, #{userId}, #{password}, #{dateOfBirth}, #{address}, #{phoneNumber}, #{alone}, #{teamId},
+        #{usersLocationId}, #{adminId}, #{villageHallId})
     </insert>
 
     <update id="update">
@@ -36,16 +38,18 @@
                 team_id=#{updateParam.teamId},
             </if>
             <if test="updateParam.adminId != null">
-                admin_id=#{updateParam.adminId}
+                admin_id=#{updateParam.adminId},
             </if>
             <if test="updateParam.usersLocationId != null">
-                users_location_id=#{updateParam.usersLocationId}
+                users_location_id=#{updateParam.usersLocationId},
             </if>
             <if test="updateParam.villageHallId != null">
-                village_hall_id=#{updateParam.villageHallId}
+                village_hall_id=#{updateParam.villageHallId},
             </if>
         </set>
-        where Id = #{id}
+        <where>
+            Id = #{id}
+        </where>
     </update>
 
 
@@ -55,13 +59,17 @@
 
 
     <select id="findById" resultType="Users">
-        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id, users_location_id, village_hall_id
+        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id,
+        users_location_id, village_hall_id
         from users
-        where Id = #{id}
+        <where>
+            Id = #{id}
+        </where>
     </select>
 
     <select id="select" resultType="Users">
-        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id, users_location_id, village_hall_id
+        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id,
+        users_location_id, village_hall_id
         from users
         <where>
             <if test="userName != null and userName != ''">

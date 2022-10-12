@@ -43,7 +43,10 @@
     </update>
 
     <delete id="delete">
-        delete from village_hall where id=#{id}
+        delete from village_hall
+        <where>
+            id=#{id}
+        </where>
     </delete>
 
 </mapper>

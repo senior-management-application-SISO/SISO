@@ -1,5 +1,7 @@
 package siso.project.domain;
 
+
+import lombok.Builder;
 import lombok.Data;
 
 @Data
@@ -15,7 +17,11 @@ public class Admin {
     //외래키
     private Long countyOfficeId;
 
-    public Admin(String adminName, String adminId, String adminPassword, String adminPhoneNumber, Long countyOfficeId) {
+
+
+    @Builder
+    public Admin(Long id, String adminName, String adminId, String adminPassword, String adminPhoneNumber, Long countyOfficeId) {
+        this.id = id;
         this.adminName = adminName;
         this.adminId = adminId;
         this.adminPassword = adminPassword;
@@ -23,9 +29,10 @@ public class Admin {
         this.countyOfficeId = countyOfficeId;
     }
 
-    public Admin(String adminName, String adminPassword, String adminPhoneNumber, Long countyOfficeId) {
+    public Admin(Long id, String adminName, String adminId, String adminPhoneNumber, Long countyOfficeId) {
+        this.id = id;
         this.adminName = adminName;
-        this.adminPassword = adminPassword;
+        this.adminId = adminId;
         this.adminPhoneNumber = adminPhoneNumber;
         this.countyOfficeId = countyOfficeId;
     }

@@ -15,7 +15,10 @@ public interface AdminMapper {
 
     List<Admin> select(@Param("id") Long id, @Param("name") String name, @Param("phoneNumber") String phoneNumber);
 
+    List<Admin> select(@Param("id") Long id, @Param("name") String name, @Param("adminId") String adminId, @Param("phoneNumber") String phoneNumber);
+
     void update(@Param("id") Long id, @Param("admin") AdminDto adminDto);
 
     void delete(Long id);
 }
+

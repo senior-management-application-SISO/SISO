@@ -22,9 +22,11 @@
             <if test="id != null">
                 and id = #{id}
             </if>
-            <!-- 사용자 담당 관리사 찾기 시 -->
             <if test="name != null">
                 and admin_name = #{name}
+            </if>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
             </if>
             <if test="phoneNumber != null">
                 and admin_phone_number = #{phoneNumber}
@@ -61,7 +63,9 @@
     </update>
 
     <delete id="delete">
-        delete from admin where id=#{id}
+        delete from admin
+        <where>
+            id=#{id}
+        </where>
     </delete>
-
 </mapper>

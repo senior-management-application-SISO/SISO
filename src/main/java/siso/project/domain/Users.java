@@ -26,7 +26,6 @@ public class Users {
     private Long adminId;
     private Long villageHallId;
 
-
     @Builder
     public Users(Long id, String userName, String userId, String password, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, Long usersLocationId, Long adminId, Long villageHallId) {
         this.id = id;

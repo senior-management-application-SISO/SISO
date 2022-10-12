@@ -1,4 +1,4 @@
-package siso.project.domain;
+package siso.project.repository.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,9 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class UsersQrState {
-
-    private Long id;
+public class UsersQrStateDto {
 
     private LocalDateTime date;
     private Boolean attendanceState;
@@ -18,8 +16,7 @@ public class UsersQrState {
     private Long usersId;
 
     @Builder
-    public UsersQrState(Long id, LocalDateTime date, Boolean attendanceState, Boolean hallState, Long usersId) {
-        this.id = id;
+    public UsersQrStateDto(LocalDateTime date, Boolean attendanceState, Boolean hallState, Long usersId) {
         this.date = date;
         this.attendanceState = attendanceState;
         this.hallState = hallState;

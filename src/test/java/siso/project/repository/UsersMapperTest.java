@@ -12,10 +12,8 @@ import siso.project.repository.dto.UsersDto;
 import java.sql.Date;
 import java.util.List;
 
-
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
 class UsersMapperTest {
 
     @Autowired
@@ -120,6 +118,4 @@ class UsersMapperTest {
 
         System.out.println("users: " + users);
     }
-
-
 }

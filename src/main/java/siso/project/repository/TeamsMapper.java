@@ -8,10 +8,10 @@ import siso.project.repository.dto.TeamsDto;
 @Mapper
 public interface TeamsMapper {
 
-    //저장
+    // 저장
     void save(Teams team);
 
-    //업데이트
+    // 업데이트
     void update(@Param("id") Long id, @Param("updateParam") TeamsDto updateDto);
 
     //삭제

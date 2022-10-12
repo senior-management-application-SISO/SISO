@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="siso.project.repository.DiningFriendsMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into dining_friends (mem_number, time, address, name, phone_number, members, memo, state, team_id,
+        users_id)
+        values (#{memNumber}, #{time}, #{address}, #{name}, #{phoneNumber}, #{members}, #{memo}, #{state}, #{teamId},
+        #{usersId})
+    </insert>
+
+    <update id="update">
+        update dining_friends
+        <set>
+            <if test="updateParam.memNumber != null">
+                mem_number=#{updateParam.memNumber},
+            </if>
+            <if test="updateParam.time != null">
+                time=#{updateParam.time},
+            </if>
+            <if test="updateParam.address != null">
+                address=#{updateParam.address},
+            </if>
+            <if test="updateParam.name != null">
+                name=#{updateParam.name},
+            </if>
+            <if test="updateParam.phoneNumber != null">
+                phone_number=#{updateParam.phoneNumber},
+            </if>
+            <if test="updateParam.members != null">
+                members=#{updateParam.members},
+            </if>
+            <if test="updateParam.memo != null">
+                memo=#{updateParam.memo},
+            </if>
+            <if test="updateParam.state != null">
+                state=#{updateParam.state},
+            </if>
+            <if test="updateParam.teamId != null">
+                team_id=#{updateParam.teamId},
+            </if>
+            <if test="updateParam.usersId != null">
+                users_id=#{updateParam.usersId},
+            </if>
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
+
+    <delete id="delete">
+        delete from dining_friends
+        <where>
+            id=#{id}
+        </where>
+    </delete>
+
+</mapper>

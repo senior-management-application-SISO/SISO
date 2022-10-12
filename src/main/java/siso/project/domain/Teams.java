@@ -21,4 +21,9 @@ public class Teams {
         this.teamAddress = teamAddress;
         this.adminId = adminId;
     }
+
+    public Teams(String teamName, String teamAddress) {
+        this.teamName = teamName;
+        this.teamAddress = teamAddress;
+    }
 }

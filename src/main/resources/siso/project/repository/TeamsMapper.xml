@@ -8,5 +8,30 @@
         values (#{teamName}, #{teamAddress}, #{adminId})
     </insert>
 
+    <update id="update">
+        update teams
+        <set>
+            <if test="updateParam.teamName != null">
+                team_name=#{updateParam.teamName},
+            </if>
+            <if test="updateParam.teamAddress != null">
+                team_address=#{updateParam.teamAddress},
+            </if>
+            <if test="updateParam.adminId != null">
+                admin_id=#{updateParam.adminId},
+            </if>
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+
+    </update>
+
+    <delete id="delete">
+        delete from teams
+        <where>
+            id=#{id}
+        </where>
+    </delete>
 
 </mapper>

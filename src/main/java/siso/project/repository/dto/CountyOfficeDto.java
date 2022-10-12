@@ -1,13 +1,10 @@
-package siso.project.domain;
+package siso.project.repository.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class CountyOffice {
-
-    private Long id;
-
+public class CountyOfficeDto {
     private String officeName;
     private String officeCity;
     private String officeCounty;
@@ -15,8 +12,7 @@ public class CountyOffice {
     private String officePhoneNumber;
 
     @Builder
-    public CountyOffice(Long id, String officeName, String officeCity, String officeCounty, String officeAddress, String officePhoneNumber) {
-        this.id = id;
+    public CountyOfficeDto(String officeName, String officeCity, String officeCounty, String officeAddress, String officePhoneNumber) {
         this.officeName = officeName;
         this.officeCity = officeCity;
         this.officeCounty = officeCounty;
