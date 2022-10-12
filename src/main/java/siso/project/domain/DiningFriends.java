@@ -39,21 +39,4 @@ public class DiningFriends {
         this.teamId = teamId;
         this.usersId = usersId;
     }
-
-    public DiningFriends(Integer memNumber, LocalTime time, String address, String name, String phoneNumber, String members, String memo, Boolean state) {
-        this.memNumber = memNumber;
-        this.time = time;
-        this.address = address;
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.members = members;
-        this.state = state;
-        this.memo = memo;
-    }
-
-    // 외래키
-    public DiningFriends(Long teamId, Long usersId) {
-        this.teamId = teamId;
-        this.usersId = usersId;
-    }
 }

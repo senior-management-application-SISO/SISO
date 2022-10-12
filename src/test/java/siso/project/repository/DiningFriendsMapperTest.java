@@ -18,32 +18,13 @@ public class DiningFriendsMapperTest {
 
     @Autowired
     DiningFriendsMapper diningFriendsMapper;
-
     @Autowired
     TeamsMapper teamsMapper;
-
     @Autowired
     UsersMapper usersMapper;
 
     @Test
     void saveWithoutForeignKey() {
-        Integer memNumber = 1;
-        LocalTime time = LocalTime.of(0, 1, 1);
-        String address = "address";
-        String name = "name";
-        String phoneNumber = "phoneNumber";
-        String member = "member";
-        String memo = "memo";
-        Boolean state = true;
-        DiningFriends diningFriends = new DiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state);
-
-        diningFriendsMapper.save(diningFriends);
-    }
-
-
-    @Test
-    void updateWithoutForeignKey() {
-        // 기존 DiningFriends 정보
         Integer memNumber = 1;
         LocalTime time = LocalTime.of(0, 0, 0);
         String address = "address";
@@ -52,10 +33,45 @@ public class DiningFriendsMapperTest {
         String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = new DiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state);
+        DiningFriends diningFriends = DiningFriends.builder()
+                .memNumber(memNumber)
+                .time(time)
+                .address(address)
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .members(member)
+                .memo(memo)
+                .state(state)
+                .build();
+
+        diningFriendsMapper.save(diningFriends);
+    }
+
+
+    @Test
+    void updateWithoutForeignKey() {
+        // 기존 DiningFriends 정보 save
+        Integer memNumber = 1;
+        LocalTime time = LocalTime.of(0, 0, 0);
+        String address = "address";
+        String name = "name";
+        String phoneNumber = "phoneNumber";
+        String member = "member";
+        String memo = "memo";
+        Boolean state = true;
+        DiningFriends diningFriends = DiningFriends.builder()
+                .memNumber(memNumber)
+                .time(time)
+                .address(address)
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .members(member)
+                .memo(memo)
+                .state(state)
+                .build();
         diningFriendsMapper.save(diningFriends);
 
-        // update DiningFriends 정보
+        // update DiningFriends 정보 update
         Integer updateMemNumber = 2;
         LocalTime updateTime = LocalTime.of(1, 1, 1);
         String updateAddress = "updateAddress";
@@ -64,7 +80,18 @@ public class DiningFriendsMapperTest {
         String updateMember = "updateMember";
         String updateMemo = "updateMemo";
         Boolean updateState = false;
-        DiningFriendsDto diningFriendsDto = new DiningFriendsDto(updateMemNumber, updateTime, updateAddress, updateName, updatePhoneNumber, updateMember, updateMemo, updateState, null, null);
+        DiningFriendsDto diningFriendsDto = DiningFriendsDto.builder()
+                .memNumber(updateMemNumber)
+                .time(updateTime)
+                .address(updateAddress)
+                .name(updateName)
+                .phoneNumber(updatePhoneNumber)
+                .members(updateMember)
+                .memo(updateMemo)
+                .state(updateState)
+                .teamId(null)
+                .usersId(null)
+                .build();
 
         diningFriendsMapper.update(diningFriends.getId(), diningFriendsDto);
     }
@@ -80,15 +107,35 @@ public class DiningFriendsMapperTest {
         String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = new DiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state);
+        DiningFriends diningFriends = DiningFriends.builder()
+                .memNumber(memNumber)
+                .time(time)
+                .address(address)
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .members(member)
+                .memo(memo)
+                .state(state)
+                .build();
         diningFriendsMapper.save(diningFriends);
 
         // Users 생성
-        Users user = new Users(null, "userName", "userId", "userPassword", Date.valueOf("2022-10-01"), "userAddress", "010-11", false, null, null, null, null);
+        Users user = Users.builder()
+                .userName("userName")
+                .userId("userId")
+                .password("userPassword")
+                .dateOfBirth(Date.valueOf("2022-10-01"))
+                .address("userAddress")
+                .phoneNumber("010-11")
+                .build();
         usersMapper.save(user);
 
         // Teams 생성
-        Teams team = new Teams("teamA", "teamAddress");
+        Teams team = Teams.builder()
+                .teamName("teamA")
+                .teamAddress("teamAddress")
+                .build();
+
         teamsMapper.save(team);
 
         // DiningFriendsDto 정보
@@ -112,7 +159,16 @@ public class DiningFriendsMapperTest {
         String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = new DiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state);
+        DiningFriends diningFriends = DiningFriends.builder()
+                .memNumber(memNumber)
+                .time(time)
+                .address(address)
+                .name(name)
+                .phoneNumber(phoneNumber)
+                .members(member)
+                .memo(memo)
+                .state(state)
+                .build();
         diningFriendsMapper.save(diningFriends);
 
         //삭제

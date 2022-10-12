@@ -21,9 +21,12 @@ public class TeamsMapperTest {
     void saveWithoutAdminId() {
         String teamName = "teamA";
         String teamAddress = "teamAddress";
-        Teams teams = new Teams(teamName, teamAddress);
+        Teams team = Teams.builder()
+                .teamName(teamName)
+                .teamAddress(teamAddress)
+                .build();
 
-        teamsMapper.save(teams);
+        teamsMapper.save(team);
     }
 
     @Test
@@ -57,7 +60,11 @@ public class TeamsMapperTest {
         // Team 등록
         String teamName = "teamA";
         String teamAddress = "teamAddress";
-        Teams team = new Teams(teamName, teamAddress);
+        Teams team = Teams.builder()
+                .teamName(teamName)
+                .teamAddress(teamAddress)
+                .build();
+
         teamsMapper.save(team);
 
         // Get teamId
@@ -78,9 +85,23 @@ public class TeamsMapperTest {
     @Test
     void updateWithAdmin() {
         //Admin 등록
-        Admin admin1 = new Admin(null, "adminName1", "adminId1", "adminPw1", "010-11", null);
+        Admin admin1 = Admin.builder()
+                .id(null)
+                .adminName("adminName1")
+                .adminId("adminId1")
+                .adminPassword("adminPw1")
+                .adminPhoneNumber("010-11")
+                .countyOfficeId(null)
+                .build();
         adminMapper.save(admin1);
-        Admin admin2 = new Admin(null, "adminName2", "adminId2", "adminPw2", "010-22", null);
+        Admin admin2 = Admin.builder()
+                .id(null)
+                .adminName("adminName2")
+                .adminId("adminId2")
+                .adminPassword("adminPw2")
+                .adminPhoneNumber("010-22")
+                .countyOfficeId(null)
+                .build();
         adminMapper.save(admin2);
 
         // Admin1 id 조회
@@ -88,14 +109,25 @@ public class TeamsMapperTest {
         Long admin2Id = admin2.getId();
 
         // Team 등록
-        Teams team = new Teams(null, "teamA", "teamAddress", admin1Id);
+        Teams team = Teams.builder()
+                .teamName("teamA")
+                .teamAddress("teamAddress")
+                .adminId(admin1Id)
+                .build();
+
         teamsMapper.save(team);
 
         // TeamUpdateDto 생성
         // 1. (teamName, teamAddress, null)
-        TeamsDto teamsUpdateDto = new TeamsDto("updatedTeamName", "updatedTeamAddress", admin2Id);
+        TeamsDto teamsUpdateDto = TeamsDto.builder()
+                .teamName("updatedTeamName")
+                .teamAddress("updatedTeamAddress")
+                .adminId(admin2Id)
+                .build();
         // 2. (null, null, adminId)
-//        TeamsDto teamsUpdateDto = new TeamsDto(admin2Id);
+//        TeamsDto teamsUpdateDto = TeamsDto.builder()
+//                .adminId(admin2Id)
+//                .build();
 
         // team update with admin
         teamsMapper.update(team.getId(), teamsUpdateDto);
@@ -104,7 +136,11 @@ public class TeamsMapperTest {
     @Test
     void delete() {
         // Team 저장
-        Teams team = new Teams("teamA", "teamAddress");
+        Teams team = Teams.builder()
+                .teamName("teamA")
+                .teamAddress("teamAddress")
+                .build();
+
         teamsMapper.save(team);
 
         // team 삭제
