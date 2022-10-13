@@ -23,7 +23,7 @@ public class CountyOfficeService {
             CsvParser csvParser = new CsvParser(resource.getFile());
             csvParser.nextRead();
             while ((line = csvParser.nextRead()) != null) {
-                CountyOffice countyOffice = new CountyOffice(null, line[3], line[1], line[2], line[5]);
+                CountyOffice countyOffice = new CountyOffice(null, line[3], line[1], line[2].replace(" ", ""), line[5]);
                 countyOfficeMapper.save(countyOffice);
             }
         } catch (Exception e) {
