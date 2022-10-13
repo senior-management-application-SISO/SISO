@@ -8,12 +8,15 @@ import siso.project.repository.dto.AdminDto;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Mapper
 public interface AdminMapper {
     void save(Admin admin);
 
     List<Admin> select(Admin admin);
+
+    Optional<Admin> findByLoginId(String loginId);
 
     void update(@Param("id") Long id, @Param("admin") AdminDto adminDto);
 

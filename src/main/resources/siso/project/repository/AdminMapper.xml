@@ -33,6 +33,16 @@
         </where>
     </select>
 
+    <select id="findByLoginId" resultType="Admin">
+        select id, admin_name, admin_id, admin_password, admin_phone_number, county_office_id
+        from admin
+        <where>
+            <if test="loginId != null">
+                and admin_id = #{loginId}
+            </if>
+        </where>
+    </select>
+
     <update id="update">
         update admin
         <set>
