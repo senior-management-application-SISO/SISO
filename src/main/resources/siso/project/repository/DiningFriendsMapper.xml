@@ -57,4 +57,27 @@
         </where>
     </delete>
 
+    <select id="findById" resultType="DiningFriends">
+        select id, mem_number, time, address, name, phone_number, members, memo, state, team_id, users_id
+        from dining_friends
+        <where>
+            Id = #{id}
+        </where>
+    </select>
+
+
+    <select id="select" resultType="DiningFriends">
+        select id, mem_number, time, address, name, phone_number, members, memo, state, team_id, users_id
+        from dining_friends
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="phoneNumber != null and phoneNumber != ''">
+                and phone_number like concat('%', #{phoneNumber}, '%')
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Param;
 import siso.project.domain.Teams;
 import siso.project.repository.dto.TeamsDto;
 
+import java.util.List;
+import java.util.Optional;
+
 @Mapper
 public interface TeamsMapper {
 
@@ -16,4 +19,10 @@ public interface TeamsMapper {
 
     //삭제
     void delete(Long id);
+
+    //단건 조회
+    Optional<Teams> findById(Long id);
+
+    // 전체 조회
+    List<Teams> select(TeamsDto teamsDto);
 }

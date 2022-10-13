@@ -34,4 +34,25 @@
         </where>
     </delete>
 
+    <select id="findById" resultType="Teams">
+        select id, team_name, team_address, admin_id
+        from teams
+        <where>
+            Id = #{id}
+        </where>
+    </select>
+
+    <select id="select" resultType="Teams">
+        select id, team_name, team_address, admin_id
+        from teams
+        <where>
+            <if test="teamName != null and teamName != ''">
+                and team_name like concat('%', #{teamName}, '%')
+            </if>
+            <if test="teamAddress != null and teamAddress != ''">
+                and team_address like concat ('%', #{teamAddress}, '%')
+            </if>
+        </where>
+    </select>
+
 </mapper>
