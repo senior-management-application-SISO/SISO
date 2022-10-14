@@ -1,11 +1,11 @@
 package siso.project.repository.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class VillageHallDto {
 
@@ -14,4 +14,11 @@ public class VillageHallDto {
     private Integer lon;
     private String address;
 
+    @Builder
+    public VillageHallDto(String hallName, Integer lat, Integer lon, String address) {
+        this.hallName = hallName;
+        this.lat = lat;
+        this.lon = lon;
+        this.address = address;
+    }
 }

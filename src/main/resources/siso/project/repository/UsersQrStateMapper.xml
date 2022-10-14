@@ -40,6 +40,9 @@
         select id, date, attendance_state, hall_state, users_id
         from users_qr_state
         <where>
+            <if test="date != null">
+                and date = #{date}
+            </if>
             <if test="attendanceState != null and attendanceState != ''">
                 and attendance_state = #{attendanceState}
             </if>
@@ -49,6 +52,14 @@
             <if test="usersId != null and usersId != ''">
                 and users_id = #{usersId}
             </if>
+        </where>
+    </select>
+
+    <select id="findById" resultType="UsersQrState">
+        select id, date, attendance_state, hall_state, users_id
+        from users_qr_state
+        <where>
+            Id = #{id}
         </where>
     </select>
 

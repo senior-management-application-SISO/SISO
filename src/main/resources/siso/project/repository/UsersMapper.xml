@@ -68,7 +68,7 @@
     </select>
 
     <select id="select" resultType="Users">
-        select user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id,
+        select id, user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id, admin_id,
         users_location_id, village_hall_id
         from users
         <where>

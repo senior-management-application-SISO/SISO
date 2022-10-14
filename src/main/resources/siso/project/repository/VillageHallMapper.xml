@@ -12,11 +12,17 @@
         select *
         from village_hall
         <where>
-            <if test="id != null">
-                and id = #{id}
+            <if test="hallName != null">
+                and hall_name = #{hallName}
             </if>
-            <if test="villageHall != null">
-                and hall_name = #{villageHall.hallName}
+            <if test="lat != null">
+                and lat = #{lat}
+            </if>
+            <if test="lon != null">
+                and lon = #{lon}
+            </if>
+            <if test="address != null">
+                and address = #{address}
             </if>
         </where>
     </select>

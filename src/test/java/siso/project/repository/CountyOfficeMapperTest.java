@@ -14,6 +14,7 @@ import siso.project.repository.dto.CountyOfficeDto;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 @SpringBootTest
@@ -26,60 +27,80 @@ class CountyOfficeMapperTest {
 
     @Test
     void save() {
+        //given
         CountyOffice countyOffice = CountyOffice.builder()
                 .officeName("woo")
                 .officeCity("seoul")
                 .officeCounty("tokyo")
                 .build();
 
+        //expected
         countyOfficeMapper.save(countyOffice);
     }
 
     @Test
     void idSelect() {
+        //given
         CountyOffice countyOffice = CountyOffice.builder()
                 .officeName("woo")
                 .officeCity("seoul")
                 .officeCounty("tokyo")
                 .build();
-
         countyOfficeMapper.save(countyOffice);
 
+        //when
         CountyOffice selectCountyOffice = CountyOffice.builder()
                 .officeName("woo")
                 .build();
-
         List<CountyOffice> woo = countyOfficeMapper.select(selectCountyOffice);
+
+        //then
         assertThat(woo.get(0).getId()).isEqualTo(countyOffice.getId());
     }
 
     @Test
     void infoUpdate() {
+        //given
         CountyOffice countyOffice = CountyOffice.builder()
                 .officeName("woo")
                 .officeCity("seoul")
                 .officeCounty("tokyo")
                 .build();
-
         countyOfficeMapper.save(countyOffice);
 
+        //when
         CountyOfficeDto updateCountyOfficeDto = CountyOfficeDto.builder()
                 .officeName("koo")
                 .build();
-
         countyOfficeMapper.update(countyOffice.getId(), updateCountyOfficeDto);
+
+        //then
+        CountyOffice selectCountyOffice = CountyOffice.builder()
+                .officeName("koo")
+                .build();
+        List<CountyOffice> findCountyOffice = countyOfficeMapper.select(selectCountyOffice);
+        assertThat(countyOffice.getId()).isEqualTo(findCountyOffice.get(0).getId());
+
     }
 
     @Test
     void delete() {
+        //given
         CountyOffice countyOffice = CountyOffice.builder()
                 .officeName("woo")
                 .officeCity("seoul")
                 .officeCounty("tokyo")
                 .build();
-
         countyOfficeMapper.save(countyOffice);
 
+        //when
         countyOfficeMapper.delete(countyOffice.getId());
+
+        //then
+        CountyOffice selectCountyOffice = CountyOffice.builder()
+                .officeName("woo")
+                .build();
+        List<CountyOffice> findCountyOffice = countyOfficeMapper.select(selectCountyOffice);
+        assertThatThrownBy(() -> findCountyOffice.get(0)).isInstanceOf(IndexOutOfBoundsException.class);
     }
 }

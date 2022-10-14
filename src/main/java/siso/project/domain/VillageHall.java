@@ -1,8 +1,11 @@
 package siso.project.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class VillageHall {
 
     private Long id;
@@ -12,10 +15,9 @@ public class VillageHall {
     private Integer lon;
     private String address;
 
-    public VillageHall() {
-    }
-
-    public VillageHall(String hallName, Integer lat, Integer lon, String address) {
+    @Builder
+    public VillageHall(Long id, String hallName, Integer lat, Integer lon, String address) {
+        this.id = id;
         this.hallName = hallName;
         this.lat = lat;
         this.lon = lon;

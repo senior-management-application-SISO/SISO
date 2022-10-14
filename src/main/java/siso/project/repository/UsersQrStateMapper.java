@@ -8,6 +8,7 @@ import siso.project.repository.dto.UsersDto;
 import siso.project.repository.dto.UsersQrStateDto;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface UsersQrStateMapper {
@@ -24,4 +25,7 @@ public interface UsersQrStateMapper {
     //검색
     List<UsersQrState> select(UsersQrStateDto usersQrStateDto);
 
+
+    //단건조회
+    Optional<UsersQrState> findById(Long id);
 }

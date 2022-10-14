@@ -10,6 +10,7 @@ import siso.project.domain.Teams;
 import siso.project.repository.dto.TeamsDto;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -151,6 +152,11 @@ public class TeamsMapperTest {
 
         // team 삭제
         teamsMapper.delete(team.getId());
+
+        //검증
+        //삭제 해서 데이터가 없는데 조회하여서 NoSuchElementException 발생
+        assertThatThrownBy(() -> teamsMapper.findById(team.getId()).get())
+                .isInstanceOf(NoSuchElementException.class);
     }
 
     @Test
