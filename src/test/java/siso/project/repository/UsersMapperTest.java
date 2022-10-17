@@ -203,35 +203,35 @@ class UsersMapperTest {
         assertThat(findUser.getAlone()).isFalse();
     }
 
-    @Test
-    @DisplayName("이름 또는 번호로 유저 조회")
-    void findAll() {
-        //given
-        Users users = Users.builder()
-                .userName("joe")
-                .userId("id")
-                .password("password")
-                .dateOfBirth(Date.valueOf("2022-10-07"))
-                .address("address")
-                .phoneNumber("010")
-                .alone(false)
-                .build();
-        usersMapper.save(users);
-
-        //when
-        String name = "joe";
-        String phoneNumber = "010";
-
-        UsersDto selectUsers = UsersDto.builder()
-                .userName(name)
-                .phoneNumber(phoneNumber)
-                .build();
-
-        List<Users> findUsers = usersMapper.select(selectUsers);
-
-        //then
-        assertThat(findUsers.get(0).getUserName()).isEqualTo("joe");
-        assertThat(findUsers.get(0).getPhoneNumber()).isEqualTo("010");
-    }
+//    @Test
+//    @DisplayName("이름 또는 번호로 유저 조회")
+//    void findAll() {
+//        //given
+//        Users users = Users.builder()
+//                .userName("joe")
+//                .userId("id")
+//                .password("password")
+//                .dateOfBirth(Date.valueOf("2022-10-07"))
+//                .address("address")
+//                .phoneNumber("010")
+//                .alone(false)
+//                .build();
+//        usersMapper.save(users);
+//
+//        //when
+//        String name = "joe";
+//        String phoneNumber = "010";
+//
+//        UsersDto selectUsers = UsersDto.builder()
+//                .userName(name)
+//                .phoneNumber(phoneNumber)
+//                .build();
+//
+//        List<Users> findUsers = usersMapper.select(selectUsers);
+//
+//        //then
+//        assertThat(findUsers.get(0).getUserName()).isEqualTo("joe");
+//        assertThat(findUsers.get(0).getPhoneNumber()).isEqualTo("010");
+//    }
 
 }

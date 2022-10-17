@@ -24,7 +24,7 @@ public interface UsersMapper {
     Optional<Users> findById(Long id);
 
     //전제 조회
-    List<Users> select(UsersDto usersDto);
+    List<Users> select(@Param("adminId") Long loginAdminId, @Param("searchParam") UsersDto usersDto);
 
 }
 

@@ -72,11 +72,14 @@
         users_location_id, village_hall_id
         from users
         <where>
-            <if test="userName != null and userName != ''">
-                and user_name = #{userName}
+            <if test="searchParam.userName != null and searchParam.userName != ''">
+                and user_name = #{searchParam.userName}
             </if>
-            <if test="phoneNumber != null and phoneNumber != ''">
-                and phone_number = #{phoneNumber}
+            <if test="searchParam.phoneNumber != null and searchParam.phoneNumber != ''">
+                and phone_number = #{searchParam.phoneNumber}
+            </if>
+            <if test="adminId != null and adminId != ''">
+                and admin_id = #{adminId}
             </if>
         </where>
     </select>

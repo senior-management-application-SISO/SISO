@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>멤버 목록</h2>
+    </div>
+
+    <form th:object="${userSearch}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" th:field="*{userName}" class="form-control" placeholder="이름"/>
+            </div>
+            <div class="col">
+                <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="휴대전화 번호"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='addForm.html'"
+                            th:onclick="|location.href='@{/save}'|"
+                            type="button">멤버 등록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>이름</th>
+                <th>생년월일</th>
+                <th>주소</th>
+                <th>핸드폰 번호</th>
+                <th>독거 유무</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">id</td>
+                <td th:text="${user.userName}">이름</td>
+                <td th:text="${user.dateOfBirth}">1999-09-29</td>
+                <td th:text="${user.address}">지족북로33</td>
+                <td th:text="${user.phoneNumber}">010-0000-0000</td>
+                <td th:text="${user.alone}">o</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+
+</body>
+</html>
