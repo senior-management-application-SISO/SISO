@@ -12,6 +12,9 @@
             border-color: #dc3545;
             color: #dc3545;
         }
+
+
+
     </style>
 </head>
 <body>
@@ -31,7 +34,7 @@
             <label for="loginId">로그인 ID</label>
             <input type="text" id="loginId" th:field="*{adminId}" class="form-control"
                    th:errorclass="field-error">
-            <div class="field-error" th:errors="*{adminId}" />
+            <div class="field-error" th:errors="*{adminId}"/>
         </div>
 
         <div>
@@ -39,43 +42,52 @@
             <input type="password" id="password" th:field="*{adminPassword}"
                    class="form-control"
                    th:errorclass="field-error">
-            <div class="field-error" th:errors="*{adminPassword}" />
+            <div class="field-error" th:errors="*{adminPassword}"/>
         </div>
 
         <div>
             <label for="name">이름</label>
             <input type="text" id="name" th:field="*{adminName}" class="form-control"
                    th:errorclass="field-error">
-            <div class="field-error" th:errors="*{adminName}" />
+            <div class="field-error" th:errors="*{adminName}"/>
         </div>
 
         <div>
             <label for="name">전화번호</label>
             <input type="text" id="phoneNumber" th:field="*{adminPhoneNumber}" class="form-control"
                    th:errorclass="field-error">
-            <div class="field-error" th:errors="*{adminPhoneNumber}" />
+            <div class="field-error" th:errors="*{adminPhoneNumber}"/>
         </div>
 
-<!--        <div>-->
-<!--            <label for="name">소속 동사무소</label>-->
-<!--            <input type="text" id="countyOfficeId" th:field="*{countyOfficeId}" class="form-control"-->
-<!--                   th:errorclass="field-error">-->
-<!--            <div class="field-error" th:errors="*{countyOfficeId}" />-->
-<!--        </div>-->
+        <div class="row align-items-center">
+            <div class="col">
+                <label for="name">소속 동사무소</label>
+                <input type="text" id="countyOfficeId" th:field="*{countyOfficeId}" class="form-control"
+                       th:errorclass="field-error" disabled>
+                <div class="field-error" th:errors="*{countyOfficeId}"/>
+            </div>
 
+            <div class="col-md-4">
+                <button class="w-80 btn btn-success btn-lg"
+                        onclick="location.href='countyOfficeListForm.html'"
+                        th:onclick="window.open('/countyOffice/list', 'window_name', 'width=700, height=600, location=no, status=no, scrollbars=yes');"
+                        type="button">동사무소 찾기
+                </button>
+            </div>
+        </div>
         <hr class="my-4">
         <div class="row">
 
             <div class="col">
-                <button class="w-100 btn btn-primary btn-lg" type="submit">회원
-                    가입</button>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">회원 가입</button>
             </div>
 
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='items.html'"
                         th:onclick="|location.href='@{/}'|"
-                        type="button">취소</button>
+                        type="button">취소
+                </button>
             </div>
 
         </div>
