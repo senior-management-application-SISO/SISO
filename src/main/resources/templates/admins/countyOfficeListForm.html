@@ -4,6 +4,15 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="css/bootstrap.min.css" rel="stylesheet">
+
+    <script type="text/javascript">
+
+        function setCountyOffice(id, name){
+        window.opener.testCheck(id, name);
+            window.close();
+        }
+
+    </script>
 </head>
 <body>
 <div class="container" style="max-width: 600px">
@@ -37,15 +46,15 @@
             </thead>
             <tbody>
             <tr th:each="countyOffice : ${countyOfficeList}">
-                <td><a href="item.html" th:href="@{/items/{itemId}(itemId=${countyOffice.id})}" th:text="${countyOffice.officeName}">동사무소</a>
+
+                <td><a href="#" th:onclick="setCountyOffice([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
+                       th:text="${countyOffice.officeName}">동사무소</a>
                 </td>
                 <td><a th:text="${countyOffice.officeAddress}">주소</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-
-
 </div> <!-- /container -->
 
 </body>

@@ -35,7 +35,7 @@ public class SignUpController {
                 .adminPassword(form.getAdminPassword())
                 .adminName(form.getAdminName())
                 .adminPhoneNumber(form.getAdminPhoneNumber())
-                //.countyOfficeId(form.getCountyOfficeId())
+                .countyOfficeId(form.getCountyOfficeId())
                 .build();
 
         signUpService.SignUp(admin);

@@ -16,6 +16,23 @@
 
 
     </style>
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+
+function testCheck(id, name){
+document.getElementById('countyOfficeId').value = id;
+document.getElementById('countyOfficeName').value = name;
+}
+            window.onload = function(){
+                document.getElementById("newwin").onclick = function(){
+                    window.open("/countyOffice/list","","width=700px,height=500px,top=200px,left=200px;");
+                }
+
+            };
+
+
+        </script>
+    </th:block>
 </head>
 <body>
 <div class="container">
@@ -62,19 +79,26 @@
         <div class="row align-items-center">
             <div class="col">
                 <label for="name">소속 동사무소</label>
+                <input type="text" id="countyOfficeName" class="form-control" disabled>
+            </div>
+
+            <div class="col" style="display: none; ">
+                <label for="name">소속 동사무소</label>
                 <input type="text" id="countyOfficeId" th:field="*{countyOfficeId}" class="form-control"
-                       th:errorclass="field-error" disabled>
+                       th:errorclass="field-error">
                 <div class="field-error" th:errors="*{countyOfficeId}"/>
             </div>
 
             <div class="col-md-4">
-                <button class="w-80 btn btn-success"
+                <button id="newwin" class="w-80 btn btn-success"
                         onclick="location.href='countyOfficeListForm.html'"
                         th:onclick="window.open('/countyOffice/list', 'window_name', 'width=700, height=600, location=no, status=no, scrollbars=yes');"
                         type="button">동사무소 찾기
                 </button>
             </div>
         </div>
+
+
         <hr class="my-4">
         <div class="row">
 
