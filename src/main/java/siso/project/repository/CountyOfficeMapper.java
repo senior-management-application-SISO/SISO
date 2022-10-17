@@ -13,6 +13,8 @@ public interface CountyOfficeMapper {
 
     List<CountyOffice> select(CountyOffice countyOffice);
 
+    List<CountyOffice> findAll();
+
     void update(@Param("id") Long id, @Param("countyOfficeDto") CountyOfficeDto countyOfficeDto);
 
     void delete(Long id);

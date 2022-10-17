@@ -10,6 +10,7 @@ import siso.project.domain.Admin;
 import siso.project.domain.CountyOffice;
 import siso.project.repository.dto.AdminDto;
 import siso.project.repository.dto.CountyOfficeDto;
+import siso.project.service.CountyOfficeService;
 
 import java.util.List;
 
@@ -19,23 +20,27 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = true)
+@Rollback(value = false)
 class CountyOfficeMapperTest {
 
     @Autowired
     CountyOfficeMapper countyOfficeMapper;
+    @Autowired
+    CountyOfficeService countyOfficeService;
 
     @Test
     void save() {
-        //given
-        CountyOffice countyOffice = CountyOffice.builder()
-                .officeName("woo")
-                .officeCity("seoul")
-                .officeCounty("tokyo")
-                .build();
+        countyOfficeService.saveCountyOffices();
 
-        //expected
-        countyOfficeMapper.save(countyOffice);
+//        //given
+//        CountyOffice countyOffice = CountyOffice.builder()
+//                .officeName("woo")
+//                .officeCity("seoul")
+//                .officeCounty("tokyo")
+//                .build();
+//
+//        //expected
+//        countyOfficeMapper.save(countyOffice);
     }
 
     @Test
@@ -56,6 +61,12 @@ class CountyOfficeMapperTest {
 
         //then
         assertThat(woo.get(0).getId()).isEqualTo(countyOffice.getId());
+    }
+
+    @Test
+    void findAll(){
+        List<CountyOffice> countyOffices = countyOfficeMapper.findAll();
+//        System.out.println("countyOffices = " + countyOffices);
     }
 
     @Test

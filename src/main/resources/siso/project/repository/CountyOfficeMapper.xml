@@ -18,7 +18,7 @@
             </if>
 
             <if test="officeName != null">
-                and office_name = #{officeName}
+                and office_name like concat('%', #{officeName}, '%')
             </if>
             <if test="officeCity != null">
                 and office_city = #{officeCity}
@@ -27,9 +27,14 @@
                 and office_county = #{officeCounty}
             </if>
             <if test="officeAddress != null">
-                and office_address = #{officeAddress}
+                and office_address like concat('%', #{officeAddress}, '%')
             </if>
         </where>
+    </select>
+
+    <select id="findAll" resultType="CountyOffice">
+        select id, office_name, office_city, office_county, office_address
+        from county_office
     </select>
 
     <update id="update">

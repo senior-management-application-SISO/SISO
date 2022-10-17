@@ -1,19 +1,34 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout/basic">
-<th:block layout:fragment="title">
-    <title>리스트 페이지</title>
-</th:block>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>동사무소 목록</h2>
+    </div>
 
-<th:block layout:fragment="search">
-    <form id="searchForm" class="searchform js__toggle active pull-right" onsubmit="return false;" autocomplete="off">
-        <input type="search" class="input-search" placeholder="Search..." />
-        <button type="button" class="mdi mdi-magnify button-search"><i class="fa fa-search" aria-hidden="true"></i></button>
+    <form th:object="${countyOfficeSearch}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" th:field="*{officeName}" class="form-control" placeholder="동사무소"/>
+            </div>
+            <div class="col">
+                <input type="text" th:field="*{officeAddress}" class="form-control" placeholder="주소"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+        </div>
+
     </form>
-</th:block>
 
-<th:block layout:fragment="content">
-    <div class="table-responsive clearfix">
-        <table class="table table-hover">
+    <hr class="my-4">
+    <div>
+        <table class="table">
             <thead>
             <tr>
                 <th>동사무소</th>
@@ -21,36 +36,17 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:if="${not #lists.isEmpty( posts )}" th:each="row, status : ${posts}">
-                <td th:text="${row.noticeYn == true ? '공지' : status.size - status.index}"></td>
-                <td class="text-left"><a th:href="@{/post/view.do( id=${row.id} )}" th:text="${row.title}"></a></td>
-                <td th:text="${row.writer}"></td>
-                <td th:text="${#temporals.format( row.createdDate, 'yyyy-MM-dd HH:mm:ss' )}"></td>
-                <td th:text="${row.viewCnt}"></td>
-            </tr>
-            <tr th:unless="${not #lists.isEmpty( posts )}">
-                <td colspan="5">검색된 결과가 없습니다.</td>
+            <tr th:each="countyOffice : ${countyOfficeList}">
+                <td><a href="item.html" th:href="@{/items/{itemId}(itemId=${countyOffice.id})}" th:text="${countyOffice.officeName}">동사무소</a>
+                </td>
+                <td><a th:text="${countyOffice.officeAddress}">주소</a></td>
             </tr>
             </tbody>
         </table>
-
-        <div class="btn_wrap text-right">
-            <a th:href="@{/post/write.do}" class="btn btn-primary waves-effect waves-light">등록</a>
-        </div>
-
-        <th:block layout:fragment="paging">
-            <nav aria-label="Page navigation" class="text-center">
-                <ul class="pagination">
-                    <li><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                </ul>
-            </nav>
-        </th:block>
     </div>
-</th:block>
+
+
+</div> <!-- /container -->
+
+</body>
 </html>
