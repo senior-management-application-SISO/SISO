@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div class="container" style="max-width: 600px">
+<div class="container" style="max-width: 900px">
     <div class="py-5 text-center">
         <h2>멤버 목록</h2>
     </div>
@@ -49,6 +49,9 @@
                 <th>주소</th>
                 <th>핸드폰 번호</th>
                 <th>독거 유무</th>
+                <th>출석 유무</th>
+                <th>출석 날짜</th>
+                <th>소속</th>
             </tr>
             </thead>
             <tbody>
@@ -59,6 +62,9 @@
                 <td th:text="${user.address}">지족북로33</td>
                 <td th:text="${user.phoneNumber}">010-0000-0000</td>
                 <td th:text="${user.alone}">o</td>
+                <td th:text="${user.attendanceState}">o</td>
+                <td th:text="${user.date}">0000-00-00</td>
+                <td th:text="${user.teamName}">소속</td>
             </tr>
             </tbody>
         </table>

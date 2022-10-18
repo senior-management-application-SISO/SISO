@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import siso.project.domain.Admin;
 import siso.project.domain.CountyOffice;
@@ -23,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
+@Rollback(value = false)
 class UsersMapperTest {
 
     @Autowired
@@ -206,16 +208,19 @@ class UsersMapperTest {
     @Test
     @DisplayName("유저 정보, 팀, 현황 조회")
     void findUserInfoStateTeam(){
-
+        UsersDto searchDto = UsersDto.builder()
+                .userName("joe")
+                .phoneNumber("010")
+                .build();
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -3);
 
         Date date =new Date(calendar.getTimeInMillis());
 
-        List<UserInfoTeamStateVO> userInfoStateTeam = usersMapper.findUserInfoTeamState(1L, date);
+        List<UserInfoTeamStateVO> userInfoStateTeam = usersMapper.findUserInfoTeamState(1L, searchDto, date);
         for (UserInfoTeamStateVO userInfoTeamStateVO : userInfoStateTeam) {
-            System.out.println("userInfoTeamStateVO = " + userInfoTeamStateVO);
+            System.out.println(">>>>>>>>userInfoTeamStateVO = " + userInfoTeamStateVO);
         }
     }
 

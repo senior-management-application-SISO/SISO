@@ -27,7 +27,7 @@ public interface UsersMapper {
     Optional<Users> findById(Long id);
 
     //팀, 출석 여부 조회
-    List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId")Long adminId, @Param("date")Date date);
+    List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId")Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date")Date date);
 
     //전제 조회
     List<Users> select(@Param("adminId") Long loginAdminId, @Param("searchParam") UsersDto usersDto);

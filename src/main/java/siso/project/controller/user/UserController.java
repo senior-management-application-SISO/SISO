@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import siso.project.domain.Admin;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserInfoTeamStateVO;
 import siso.project.service.UserService;
 import siso.project.web.SessionConst;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Slf4j
@@ -24,7 +27,7 @@ public class UserController {
 
     @GetMapping("/users")
     public String members(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute("userSearch") UsersDto cond, Model model) {
-        List<Users> users = userService.findUserList(loginAdmin.getId(), cond);
+        List<UserInfoTeamStateVO> users = userService.findUserListVO(loginAdmin.getId(), cond);
         model.addAttribute("users", users);
         return "users/users";
     }
