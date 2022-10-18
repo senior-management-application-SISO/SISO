@@ -1,6 +1,5 @@
 package siso.project.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import siso.project.domain.Users;
-import siso.project.domain.UsersQrState;
+import siso.project.domain.UsersState;
 import siso.project.repository.dto.UsersQrStateDto;
 
 import java.sql.Date;
@@ -22,11 +21,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
-class UsersQrStateMapperTest {
+class UsersStateMapperTest {
 
     @Autowired
-    UsersQrStateMapper usersQrStateMapper;
+    UsersStateMapper usersStateMapper;
 
     @Autowired
     UsersMapper usersMapper;
@@ -48,7 +46,7 @@ class UsersQrStateMapperTest {
         usersMapper.save(users);
 
         LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 12, 14, 0, 0);
-        UsersQrState usersQrState = UsersQrState.builder()
+        UsersState usersState = UsersState.builder()
                 .date(localDateTime)
                 .attendanceState(true)
                 .hallState(true)
@@ -56,11 +54,11 @@ class UsersQrStateMapperTest {
                 .build();
 
         //when
-        usersQrStateMapper.save(usersQrState);
+        usersStateMapper.save(usersState);
 
         //then
-        UsersQrState findUsersQrState = usersQrStateMapper.findById(usersQrState.getId()).get();
-        assertThat(findUsersQrState.getId()).isEqualTo(usersQrState.getId());
+        UsersState findUsersState = usersStateMapper.findById(usersState.getId()).get();
+        assertThat(findUsersState.getId()).isEqualTo(usersState.getId());
     }
 
     @Test
@@ -79,13 +77,13 @@ class UsersQrStateMapperTest {
         usersMapper.save(users);
 
         LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 12, 14, 0, 0);
-        UsersQrState usersQrState = UsersQrState.builder()
+        UsersState usersState = UsersState.builder()
                 .date(localDateTime)
                 .attendanceState(true)
                 .hallState(true)
                 .usersId(users.getId())
                 .build();
-        usersQrStateMapper.save(usersQrState);
+        usersStateMapper.save(usersState);
 
         LocalDateTime updateLocalDateTime = LocalDateTime.of(2023, 8, 1, 14, 0, 0);
         UsersQrStateDto usersQrStateDto = UsersQrStateDto.builder()
@@ -96,10 +94,10 @@ class UsersQrStateMapperTest {
                 .build();
 
         //when
-        usersQrStateMapper.update(usersQrState.getId(), usersQrStateDto);
+        usersStateMapper.update(usersState.getId(), usersQrStateDto);
 
         //then
-        UsersQrState findUserQrState = usersQrStateMapper.findById(usersQrState.getId()).get();
+        UsersState findUserQrState = usersStateMapper.findById(usersState.getId()).get();
         assertThat(findUserQrState.getAttendanceState()).isFalse();
         assertThat(findUserQrState.getHallState()).isFalse();
     }
@@ -120,19 +118,19 @@ class UsersQrStateMapperTest {
         usersMapper.save(users);
 
         LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 12, 14, 0, 0);
-        UsersQrState usersQrState = UsersQrState.builder()
+        UsersState usersState = UsersState.builder()
                 .date(localDateTime)
                 .attendanceState(true)
                 .hallState(true)
                 .usersId(users.getId())
                 .build();
-        usersQrStateMapper.save(usersQrState);
+        usersStateMapper.save(usersState);
 
         //when
-        usersQrStateMapper.delete(usersQrState.getId());
+        usersStateMapper.delete(usersState.getId());
 
         //then
-        assertThatThrownBy(() -> usersQrStateMapper.findById(usersQrState.getId())
+        assertThatThrownBy(() -> usersStateMapper.findById(usersState.getId())
                 .orElseThrow(() -> new NoSuchElementException()))
                 .isInstanceOf(NoSuchElementException.class);
     }
@@ -153,13 +151,13 @@ class UsersQrStateMapperTest {
         usersMapper.save(users);
 
         LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 12, 14, 0, 0);
-        UsersQrState usersQrState = UsersQrState.builder()
+        UsersState usersState = UsersState.builder()
                 .date(localDateTime)
                 .attendanceState(true)
                 .hallState(true)
                 .usersId(users.getId())
                 .build();
-        usersQrStateMapper.save(usersQrState);
+        usersStateMapper.save(usersState);
 
         //when
         UsersQrStateDto usersQrStateDto = UsersQrStateDto.builder()
@@ -169,12 +167,12 @@ class UsersQrStateMapperTest {
                 .usersId(users.getId())
                 .build();
 
-        List<UsersQrState> findUsersQrStates = usersQrStateMapper.select(usersQrStateDto);
+        List<UsersState> findUsersStates = usersStateMapper.select(usersQrStateDto);
 
         //then
-        assertThat(findUsersQrStates.get(0).getAttendanceState()).isTrue();
-        assertThat(findUsersQrStates.get(0).getHallState()).isTrue();
-        assertThat(findUsersQrStates.get(0).getUsersId()).isEqualTo(users.getId());
+        assertThat(findUsersStates.get(0).getAttendanceState()).isTrue();
+        assertThat(findUsersStates.get(0).getHallState()).isTrue();
+        assertThat(findUsersStates.get(0).getUsersId()).isEqualTo(users.getId());
     }
 
     @Test
@@ -193,21 +191,21 @@ class UsersQrStateMapperTest {
         usersMapper.save(users);
 
         LocalDateTime localDateTime = LocalDateTime.of(2022, 10, 12, 14, 00, 00);
-        UsersQrState usersQrState = UsersQrState.builder()
+        UsersState usersState = UsersState.builder()
                 .date(localDateTime)
                 .attendanceState(true)
                 .hallState(true)
                 .usersId(users.getId())
                 .build();
-        usersQrStateMapper.save(usersQrState);
+        usersStateMapper.save(usersState);
 
         //when
-        UsersQrState findUsersQrState = usersQrStateMapper.findById(usersQrState.getId()).get();
+        UsersState findUsersState = usersStateMapper.findById(usersState.getId()).get();
 
         //then
-        assertThat(findUsersQrState.getAttendanceState()).isTrue();
-        assertThat(findUsersQrState.getHallState()).isTrue();
-        assertThat(findUsersQrState.getId()).isEqualTo(usersQrState.getId());
+        assertThat(findUsersState.getAttendanceState()).isTrue();
+        assertThat(findUsersState.getHallState()).isTrue();
+        assertThat(findUsersState.getId()).isEqualTo(usersState.getId());
     }
 
 

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class UsersQrState {
+public class UsersState {
 
     private Long id;
 
@@ -18,7 +18,7 @@ public class UsersQrState {
     private Long usersId;
 
     @Builder
-    public UsersQrState(Long id, LocalDateTime date, Boolean attendanceState, Boolean hallState, Long usersId) {
+    public UsersState(Long id, LocalDateTime date, Boolean attendanceState, Boolean hallState, Long usersId) {
         this.id = id;
         this.date = date;
         this.attendanceState = attendanceState;
