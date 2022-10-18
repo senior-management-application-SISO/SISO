@@ -18,15 +18,13 @@
     </style>
     <th:block>
         <script th:inline="javascript">
-
-            function testCheck(id, name) {
+            function setCountyOffice(id, name){
                 document.getElementById('countyOfficeId').value = id;
                 document.getElementById('countyOfficeName').value = name;
             }
-
-            window.onload = function () {
-                document.getElementById("newwin").onclick = function () {
-                    window.open("/countyOffice/list", "", "width=700px,height=500px,top=200px,left=200px;");
+            window.onload = function(){
+                document.getElementById("newwin").onclick = function(){
+                    window.open("/countyOffice/list","","width=700px,height=500px,top=200px,left=200px;");
                 }
 
             };
@@ -81,13 +79,13 @@
             <div class="col">
                 <label for="name">소속 동사무소</label>
                 <input type="text" id="countyOfficeName" class="form-control" disabled>
+                <div class="field-error" th:errors="*{countyOfficeId}"/>
             </div>
 
             <div class="col" style="display: none; ">
                 <label for="name">소속 동사무소</label>
                 <input type="text" id="countyOfficeId" th:field="*{countyOfficeId}" class="form-control"
                        th:errorclass="field-error">
-                <div class="field-error" th:errors="*{countyOfficeId}"/>
             </div>
 
             <div class="col-md-4">
