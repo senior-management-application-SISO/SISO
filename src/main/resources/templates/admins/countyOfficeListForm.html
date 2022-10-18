@@ -7,8 +7,8 @@
 
     <script type="text/javascript">
 
-        function setCountyOffice(id, name){
-        window.opener.testCheck(id, name);
+        function sendCountyOffice(id, name){
+            window.opener.setCountyOffice(id, name);
             window.close();
         }
 
@@ -47,7 +47,7 @@
             <tbody>
             <tr th:each="countyOffice : ${countyOfficeList}">
 
-                <td><a href="#" th:onclick="setCountyOffice([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
+                <td><a href="#" th:onclick="sendCountyOffice([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
                        th:text="${countyOffice.officeName}">동사무소</a>
                 </td>
                 <td><a th:text="${countyOffice.officeAddress}">주소</a></td>
