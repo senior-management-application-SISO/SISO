@@ -28,9 +28,7 @@
                 document.getElementById("newwin").onclick = function(){
                     window.open("/countyOffice/list","","width=700px,height=500px,top=200px,left=200px;");
                 }
-
             };
-
 
         </script>
     </th:block>
@@ -85,7 +83,7 @@
             </div>
 
             <div class="col" style="display: none; ">
-                <label for="name">소속 동사무소</label>
+                <label for="name">소속 동사무소 ID</label>
                 <input type="text" id="countyOfficeId" th:field="*{countyOfficeId}" class="form-control"
                        th:errorclass="field-error">
             </div>
@@ -117,6 +115,6 @@
 
         </div>
     </form>
-</div> <!-- /container -->
+</div>
 </body>
 </html>

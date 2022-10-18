@@ -32,7 +32,6 @@
                 <button type="submit" class="btn btn-secondary mb-2">검색</button>
             </div>
         </div>
-
     </form>
 
     <hr class="my-4">
@@ -46,7 +45,6 @@
             </thead>
             <tbody>
             <tr th:each="countyOffice : ${countyOfficeList}">
-
                 <td><a href="#" th:onclick="sendCountyOffice([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
                        th:text="${countyOffice.officeName}">동사무소</a>
                 </td>
@@ -55,7 +53,6 @@
             </tbody>
         </table>
     </div>
-</div> <!-- /container -->
-
+</div>
 </body>
 </html>

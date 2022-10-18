@@ -1,22 +1,22 @@
 package siso.project.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import siso.project.domain.Admin;
 import siso.project.domain.CountyOffice;
 import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserInfoTeamStateVO;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -201,6 +201,22 @@ class UsersMapperTest {
         assertThat(findUser.getAddress()).isEqualTo("address");
         assertThat(findUser.getPhoneNumber()).isEqualTo("010");
         assertThat(findUser.getAlone()).isFalse();
+    }
+
+    @Test
+    @DisplayName("유저 정보, 팀, 현황 조회")
+    void findUserInfoStateTeam(){
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -3);
+
+        Date date =new Date(calendar.getTimeInMillis());
+
+        List<UserInfoTeamStateVO> userInfoStateTeam = usersMapper.findUserInfoTeamState(1L, date);
+        for (UserInfoTeamStateVO userInfoTeamStateVO : userInfoStateTeam) {
+            System.out.println("userInfoTeamStateVO = " + userInfoTeamStateVO);
+        }
     }
 
 //    @Test
