@@ -85,7 +85,9 @@
     </select>
 
     <select id="findUserInfoTeamState" resultType="UserInfoTeamStateVO">
-        SELECT users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone, users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id, users_state.date, users_state.attendance_state, users_state.hall_state
+        SELECT users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
+        users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id,
+        users_state.date, users_state.attendance_state, users_state.hall_state
         FROM users
         LEFT OUTER JOIN teams
         ON users.team_id = teams.id
@@ -93,7 +95,9 @@
         ON users.id = users_state.users_id
         <where>
             and users.admin_id = #{adminId}
-            and users_state.date >= #{date}
+            <if test="date != null">
+                and users_state.date >= #{date}
+            </if>
         </where>
     </select>
 

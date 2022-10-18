@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(value = true)
 class CountyOfficeMapperTest {
 
     @Autowired
