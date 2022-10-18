@@ -8,24 +8,25 @@
         .container {
             max-width: 560px;
         }
+
         .field-error {
             border-color: #dc3545;
             color: #dc3545;
         }
 
 
-
     </style>
     <th:block>
         <script th:inline="javascript">
 
-function testCheck(id, name){
-document.getElementById('countyOfficeId').value = id;
-document.getElementById('countyOfficeName').value = name;
-}
-            window.onload = function(){
-                document.getElementById("newwin").onclick = function(){
-                    window.open("/countyOffice/list","","width=700px,height=500px,top=200px,left=200px;");
+            function testCheck(id, name) {
+                document.getElementById('countyOfficeId').value = id;
+                document.getElementById('countyOfficeName').value = name;
+            }
+
+            window.onload = function () {
+                document.getElementById("newwin").onclick = function () {
+                    window.open("/countyOffice/list", "", "width=700px,height=500px,top=200px,left=200px;");
                 }
 
             };
