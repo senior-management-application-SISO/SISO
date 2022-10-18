@@ -4,10 +4,29 @@
     <meta charset="utf-8">
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+    <th:block>
+        <script th:inline="javascript">
+            window.onload = function(){
+                document.getElementById("newwin").onclick = function(){
+                    window.open("/users/"+document.getElementById("table").getElementsByTagName("tr")[1].getElementsByTagName("td")[0].innerHTML,"","width=700px,height=500px,top=200px,left=200px;");
+                }
+            };
+        </script>
+    </th:block>
+
 </head>
 <body>
 
-<div class="container" style="max-width: 900px">
+<div class="container" style="max-width: 600px">
     <div class="py-5 text-center">
         <h2>멤버 목록</h2>
     </div>
@@ -40,7 +59,7 @@
 
     <hr class="my-4">
     <div>
-        <table class="table">
+        <table id="table" class="table">
             <thead>
             <tr>
                 <th>ID</th>
@@ -49,22 +68,16 @@
                 <th>주소</th>
                 <th>핸드폰 번호</th>
                 <th>독거 유무</th>
-                <th>출석 유무</th>
-                <th>출석 날짜</th>
-                <th>소속</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="user : ${users}">
-                <td th:text="${user.id}">id</td>
-                <td th:text="${user.userName}">이름</td>
+                <td id="userId" th:text="${user.id}">id</td>
+                <td><a id="newwin" href="#" th:text="${user.userName}">이름</a></td>
                 <td th:text="${user.dateOfBirth}">1999-09-29</td>
                 <td th:text="${user.address}">지족북로33</td>
                 <td th:text="${user.phoneNumber}">010-0000-0000</td>
                 <td th:text="${user.alone}">o</td>
-                <td th:text="${user.attendanceState}">o</td>
-                <td th:text="${user.date}">0000-00-00</td>
-                <td th:text="${user.teamName}">소속</td>
             </tr>
             </tbody>
         </table>
