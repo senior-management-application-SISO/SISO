@@ -124,7 +124,7 @@
         LEFT OUTER JOIN village_hall
         ON users.village_hall_id = village_hall.id
         <where>
-            and users.admin_id = #{adminId}
+            and users.id = #{userId}
         </where>
     </select>
 
