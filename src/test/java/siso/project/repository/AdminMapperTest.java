@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
+@Rollback(value = false)
 class AdminMapperTest {
 
     @Autowired
@@ -30,8 +31,8 @@ class AdminMapperTest {
         //given
         Admin admin = Admin.builder()
                 .adminName("woo")
-                .adminId("id")
-                .adminPassword("pw")
+                .adminId("11")
+                .adminPassword("11")
                 .adminPhoneNumber("010")
                 .build();
 
