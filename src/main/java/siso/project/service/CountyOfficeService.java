@@ -9,6 +9,7 @@ import siso.project.repository.CountyOfficeMapper;
 import siso.project.repository.dto.CountyOfficeDto;
 
 import java.net.URL;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -31,8 +32,8 @@ public class CountyOfficeService {
         }
     }
 
-    public void selectCountyOffices(CountyOffice countyOffice) {
-        countyOfficeMapper.select(countyOffice);
+    public List<CountyOffice> selectCountyOffices(CountyOffice countyOffice) {
+        return countyOfficeMapper.select(countyOffice);
     }
 
     public void updateCountyOffice(Long id, CountyOfficeDto CountyOfficeDto) {
