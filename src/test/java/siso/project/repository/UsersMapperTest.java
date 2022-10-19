@@ -12,6 +12,7 @@ import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserInfoTeamStateVO;
+import siso.project.repository.vo.UserInfoVO;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -225,6 +226,15 @@ class UsersMapperTest {
         List<UserInfoTeamStateVO> userInfoStateTeam = usersMapper.findUserInfoTeamState(1L, searchDto, date);
         for (UserInfoTeamStateVO userInfoTeamStateVO : userInfoStateTeam) {
             System.out.println(">>>>>>>>userInfoTeamStateVO = " + userInfoTeamStateVO);
+        }
+    }
+
+    @Test
+    @DisplayName("유저 모든 정보 select")
+    void selectUserInfo() {
+        List<UserInfoVO> userInfo = usersMapper.findUserInfo(1L);
+        for (UserInfoVO userInfoVO : userInfo) {
+            System.out.println("userInfoVO = " + userInfoVO);
         }
     }
 
