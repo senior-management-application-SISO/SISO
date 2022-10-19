@@ -25,6 +25,11 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             return false;
         }
 
+        if(requestURI.contains(";jsession")){
+            response.sendRedirect("/");
+            return false;
+        }
+
         return true;
     }
 }
