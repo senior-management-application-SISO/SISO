@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+<div class="container" style="max-width: 900px">
+    <div class="py-5 text-center">
+        <h2>마을 관리</h2>
+    </div>
+
+    <form th:object="${teamSearch}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" th:field="*{teamName}" class="form-control" placeholder="마을 이름"/>
+            </div>
+            <div class="col">
+                <input type="text" th:field="*{teamAddress}" class="form-control" placeholder="마을 주소"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='addForm.html'"
+                            th:onclick="|location.href='@{/teams/save}'|"
+                            type="button">마을 등록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table id="table" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>마을 이름</th>
+                <th>마을 주소</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="team : ${teams}">
+                <td id="userId" th:text="${team.id}">id</td>
+                <td th:text="${team.teamName}"마을 이름></td>
+                <td th:text="${team.teamAddress}">마을 주소</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>

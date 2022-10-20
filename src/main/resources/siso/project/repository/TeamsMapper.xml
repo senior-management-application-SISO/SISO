@@ -46,11 +46,14 @@
         select id, team_name, team_address, admin_id
         from teams
         <where>
-            <if test="teamName != null and teamName != ''">
-                and team_name like concat('%', #{teamName}, '%')
+            <if test="adminId != null and adminId != ''">
+                and admin_id = #{adminId}
             </if>
-            <if test="teamAddress != null and teamAddress != ''">
-                and team_address like concat ('%', #{teamAddress}, '%')
+            <if test="searchParam.teamName != null and searchParam.teamName != ''">
+                and team_name like concat('%', #{searchParam.teamName}, '%')
+            </if>
+            <if test="searchParam.teamAddress != null and searchParam.teamAddress != ''">
+                and team_address like concat ('%', #{searchParam.teamAddress}, '%')
             </if>
         </where>
     </select>

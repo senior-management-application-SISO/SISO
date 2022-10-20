@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <link th:href="@{/css/bootstrap.min.css}"
           href="../css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -26,9 +28,11 @@
 </head>
 <body>
 
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+
 <div class="container" style="max-width: 900px">
     <div class="py-5 text-center">
-        <h2>멤버 목록</h2>
+        <h2>멤버 관리</h2>
     </div>
 
     <form th:object="${userSearch}" method="get" class="form-inline">
@@ -45,13 +49,13 @@
             <div class="col">
             </div>
             <div class="col">
-                <div class="col">
-                    <button class="btn btn-primary float-end"
-                            onclick="location.href='addForm.html'"
-                            th:onclick="|location.href='@{/save}'|"
-                            type="button">멤버 등록
-                    </button>
-                </div>
+<!--                <div class="col">-->
+<!--                    <button class="btn btn-primary float-end"-->
+<!--                            onclick="location.href='addForm.html'"-->
+<!--                            th:onclick="|location.href='@{/save}'|"-->
+<!--                            type="button">소속 생성-->
+<!--                    </button>-->
+<!--                </div>-->
             </div>
         </div>
 
@@ -67,7 +71,7 @@
                 <th>생년월일</th>
                 <th>주소</th>
                 <th>핸드폰 번호</th>
-                <th>독거 유무</th>
+                <th>독거 여부</th>
                 <th>날짜</th>
                 <th>출석</th>
                 <th>소속</th>
