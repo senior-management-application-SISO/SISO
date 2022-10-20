@@ -23,13 +23,12 @@ import java.util.List;
 @RequestMapping("/countyOffice")
 public class CountyOfficePopupController {
 
-    private final SignUpService signUpService;
-    private final CountyOfficeMapper countyOfficeMapper;
+    private final CountyOfficeService countyOfficeService;
 
     @GetMapping("/list")
     public String selectCountyOffice(@ModelAttribute("countyOfficeSearch") CountyOffice countyOfficeSearch, Model model) {
-        List<CountyOffice> countyOfficeList = countyOfficeMapper.select(countyOfficeSearch);
-        model.addAttribute("countyOfficeList", countyOfficeList);
+        List<CountyOffice> countyOffices = countyOfficeService.selectCountyOffices(countyOfficeSearch);
+        model.addAttribute("countyOfficeList", countyOffices);
         return "admins/countyOfficeListForm";
     }
 
@@ -41,5 +40,4 @@ public class CountyOfficePopupController {
 
         return "redirect:/";
     }
-
 }

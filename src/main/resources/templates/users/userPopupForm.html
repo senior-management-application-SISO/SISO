@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="../css/bootstrap.min.css" rel="stylesheet">
+  <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<hr class="my-4">
+<div>
+  <table id="table" class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>이름</th>
+      <th>생년월일</th>
+      <th>주소</th>
+      <th>핸드폰 번호</th>
+      <th>독거 유무</th>
+      <th>날짜</th>
+      <th>출석</th>
+      <th>소속</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td id="userId" th:text="${user.id}">id</td>
+      <td><a href="" th:onclick="userPopup([[${user.id}]], [[${user.userName}]])" th:text="${user.userName}">이름</a></td>
+      <td th:text="${user.dateOfBirth}">1999-09-29</td>
+      <td th:text="${user.address}">지족북로33</td>
+      <td th:text="${user.phoneNumber}">010-0000-0000</td>
+      <td th:if="${user.alone == true}">o</td>
+      <td th:if="${user.alone == false}">x</td>
+      <td th:text="${user.date}">0000-00-00</td>
+      <td th:if="${user.attendanceState == true}">o</td>
+      <td th:if="${user.attendanceState == false}">x</td>
+      <td th:text="${user.teamAddress}">소속</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

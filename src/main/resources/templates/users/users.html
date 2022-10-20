@@ -14,14 +14,15 @@
             border-color: #dc3545;
             color: #dc3545;
         }
+
     </style>
     <th:block>
         <script th:inline="javascript">
-            window.onload = function(){
-                document.getElementById("newwin").onclick = function(){
-                    window.open("/users/"+document.getElementById("table").getElementsByTagName("tr")[1].getElementsByTagName("td")[0].innerHTML,"","width=700px,height=500px,top=200px,left=200px;");
-                }
-            };
+
+        function userPopup(id, name){
+            window.open("/users/"+id,name+"님의 정보","width=700px,height=500px,top=200px,left=200px;");
+        }
+
         </script>
     </th:block>
 
@@ -80,7 +81,7 @@
             <tbody>
             <tr th:each="user : ${users}">
                 <td id="userId" th:text="${user.id}">id</td>
-                <td><a id="newwin" href="#" th:text="${user.userName}">이름</a></td>
+                <td><a href="" th:onclick="userPopup([[${user.id}]], [[${user.userName}]])" th:text="${user.userName}">이름</a></td>
                 <td th:text="${user.dateOfBirth}">1999-09-29</td>
                 <td th:text="${user.address}">지족북로33</td>
                 <td th:text="${user.phoneNumber}">010-0000-0000</td>

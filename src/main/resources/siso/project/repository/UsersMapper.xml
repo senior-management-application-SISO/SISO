@@ -91,7 +91,8 @@
         FROM users
         LEFT OUTER JOIN teams
         ON users.team_id = teams.id
-        LEFT OUTER JOIN (select users_state.Id, max(users_state.date) as date, users_state.attendance_state, users_state.hall_state, users_state.users_id from users_state group by users_state.users_id) users_state
+        LEFT OUTER JOIN (select users_state.Id, max(users_state.date) as date, users_state.attendance_state,
+        users_state.hall_state, users_state.users_id from users_state group by users_state.users_id) users_state
         ON users.id = users_state.users_id
         <where>
             and users.admin_id = #{adminId}
@@ -104,6 +105,26 @@
             <if test="date != null">
                 and users_state.date >= #{date}
             </if>
+        </where>
+    </select>
+
+    <select id="findUserInfo" resultType="UserInfoVO">
+        SELECT users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
+        users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id,
+        users_state.date as user_state_date, users_state.attendance_state, users_state.hall_state,
+        users_location.address as location_address, users_location.lat as location_lat, users_location.lon as location_lon, users_location.time as location_time,
+        village_hall.hall_name as village_hall_name, village_hall.lat as villageHall_lat, village_hall.lon as villageHall_lon, village_hall.address as village_hall_address
+        FROM users
+        LEFT OUTER JOIN teams
+        ON users.team_id = teams.id
+        LEFT OUTER JOIN (select * from users_state group by users_state.users_id having max(date)) users_state
+        ON users.id = users_state.users_id
+        LEFT OUTER JOIN users_location
+        ON users.users_location_id = users_location.id
+        LEFT OUTER JOIN village_hall
+        ON users.village_hall_id = village_hall.id
+        <where>
+            and users.id = #{userId}
         </where>
     </select>
 
