@@ -9,4 +9,6 @@ import siso.project.repository.VillageHallMapper;
 public class VillageHallService {
 
     private static VillageHallMapper villageHallMapper;
+
+
 }

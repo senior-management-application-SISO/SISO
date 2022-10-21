@@ -35,7 +35,6 @@ public class UserController {
     @GetMapping("/{userid}")
     public String users(@PathVariable long userId, Model model) {
 
-
         return "users/userPopupForm";
     }
 }
