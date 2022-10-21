@@ -4,8 +4,8 @@
 <mapper namespace="siso.project.repository.VillageHallMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into village_hall (hall_name, lat, lon, address)
-        values (#{hallName}, #{lat}, #{lon}, #{address})
+        insert into village_hall (hall_name, lat, lon, address, admin_id)
+        values (#{hallName}, #{lat}, #{lon}, #{address}, #{adminId})
     </insert>
 
     <select id="select" resultType="VillageHall">
@@ -24,6 +24,9 @@
             <if test="address != null">
                 and address = #{address}
             </if>
+            <if test="adminId != null">
+                and admin_id = #{adminId}
+            </if>
         </where>
     </select>
 
@@ -41,6 +44,9 @@
             </if>
             <if test="updateParam.address != null">
                 address=#{updateParam.address},
+            </if>
+            <if test="updateParam.adminId != null">
+                and admin_id = #{updateParam.adminId}
             </if>
         </set>
         <where>
