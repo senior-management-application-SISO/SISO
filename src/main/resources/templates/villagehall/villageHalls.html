@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+    <th:block>
+        <script th:inline="javascript">
+
+            function villageHallPopup(id, name){
+                window.open("/villagehall/"+id, "popup", "width=700px,height=500px,top=200px,left=200px;");
+            }
+
+        </script>
+    </th:block>
+</head>
+<body>
+
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+<div class="container" style="max-width: 900px">
+    <div class="py-5 text-center">
+        <h2>마을회관 관리</h2>
+    </div>
+
+    <form th:object="${villageHallSearch}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" th:field="*{hallName}" class="form-control" placeholder="마을회관"/>
+            </div>
+            <div class="col">
+                <input type="text" th:field="*{address}" class="form-control" placeholder="마을회관 주소"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='addForm.html'"
+                            th:onclick="|location.href='@{/villagehall/save}'|"
+                            type="button">마을회관 등록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table id="table" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>마을회관</th>
+                <th>마을회관 주소</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="villageHall : ${villageHalls}">
+                <td id="userId" th:text="${villageHall.id}">id</td>
+                <td><a href="" th:onclick="villageHallPopup([[${villageHall.id}]], [[${villageHall.hallName}]])" th:text="${villageHall.hallName}">마을회관</a></td>
+                <td th:text="${villageHall.address}">마을회관 주소</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

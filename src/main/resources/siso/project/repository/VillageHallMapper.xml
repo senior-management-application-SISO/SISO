@@ -12,17 +12,17 @@
         select *
         from village_hall
         <where>
-            <if test="hallName != null">
-                and hall_name = #{hallName}
+            <if test="searchParam.hallName != null and searchParam.hallName != ''">
+                and hall_name = #{searchParam.hallName}
             </if>
-            <if test="lat != null">
-                and lat = #{lat}
+            <if test="searchParam.lat != null and searchParam.lat != ''">
+                and lat = #{searchParam.lat}
             </if>
-            <if test="lon != null">
-                and lon = #{lon}
+            <if test="searchParam.lon != null and searchParam.lon != ''">
+                and lon = #{searchParam.lon}
             </if>
-            <if test="address != null">
-                and address = #{address}
+            <if test="searchParam.address != null and searchParam.address != ''">
+                and address = #{searchParam.address}
             </if>
             <if test="adminId != null">
                 and admin_id = #{adminId}
