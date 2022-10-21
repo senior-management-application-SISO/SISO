@@ -9,6 +9,7 @@ import siso.project.domain.Admin;
 import siso.project.domain.Users;
 import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 import siso.project.service.UserService;
 import siso.project.web.SessionConst;
@@ -32,9 +33,10 @@ public class UserController {
         return "users/users";
     }
 
-    @GetMapping("/{userid}")
+    @GetMapping("/{userId}")
     public String users(@PathVariable long userId, Model model) {
-
+        UserDetailInfoVO userDetailInfo = userService.findUserDetailInfo(userId);
+        model.addAttribute("userDetailInfo",userDetailInfo);
 
         return "users/userPopupForm";
     }

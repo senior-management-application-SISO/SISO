@@ -108,8 +108,8 @@
         </where>
     </select>
 
-    <select id="findUserInfo" resultType="UserInfoVO">
-        SELECT users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
+    <select id="findUserDetailInfo" resultType="UserDetailInfoVO">
+        SELECT users.id, users.user_id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
         users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id,
         users_state.date as user_state_date, users_state.attendance_state, users_state.hall_state,
         users_location.address as location_address, users_location.lat as location_lat, users_location.lon as location_lon, users_location.time as location_time,

@@ -12,38 +12,82 @@
 </head>
 <body>
 
-<hr class="my-4">
+<div class="container" style="max-width: 900px">
+  <div class="py-5 text-center">
+    <h2>멤버 정보</h2>
+  </div>
+
+<hr class="my-2">
 <div>
   <table id="table" class="table">
     <thead>
     <tr>
-      <th>ID</th>
-      <th>이름</th>
-      <th>생년월일</th>
-      <th>주소</th>
-      <th>핸드폰 번호</th>
-      <th>독거 유무</th>
-      <th>날짜</th>
-      <th>출석</th>
-      <th>소속</th>
+      <td>ID</td>
+      <td th:text="${userDetailInfo.userId}">id</td>
+    </tr>
+    <tr>
+      <td>이름</td>
+      <td th:text="${userDetailInfo.userName}">이름</td>
+    </tr>
+    <tr>
+      <td>생년월일</td>
+      <td th:text="${userDetailInfo.dateOfBirth}">1999-09-29</td>
+    </tr>
+    <tr>
+      <td>주소</td>
+      <td th:text="${userDetailInfo.address}">주소</td>
+    </tr>
+    <tr>
+      <td>핸드폰 번호</td>
+      <td th:text="${userDetailInfo.phoneNumber}">010-0000-0000</td>
+    </tr>
+    <tr>
+      <td>독거 여부</td>
+      <td th:if="${userDetailInfo.alone == true}">o</td>
+    <td th:if="${userDetailInfo.alone == false}">x</td>
+    </tr>
+    <tr>
+      <td>마을 이름</td>
+      <td th:text="${userDetailInfo.teamName}">마을 이름</td>
+    </tr>
+    <tr>
+     <td>마을 주소</td>
+      <td th:text="${userDetailInfo.teamAddress}">마을 주소</td>
+    </tr>
+    <tr>
+      <td>최근 출석일</td>
+      <td th:text="${userDetailInfo.userStateDate}">최근 출석일</td>
+    </tr>
+    <tr>
+      <td>최근 유저 위치</td>
+      <td th:text="${userDetailInfo.locationAddress}">최근 유저 위치</td>
+    </tr>
+    <tr>
+      <td>위치 등록 시간</td>
+      <td th:text="${userDetailInfo.locationTime}">위치 등록 시간</td>
+    </tr>
+    <tr>
+      <td>마을 회관 이름</td>
+      <td th:text="${userDetailInfo.villageHallName}">마을 회관 이름</td>
+    </tr>
+    <tr>
+      <td>마을 회관 주소</td>
+      <td th:text="${userDetailInfo.villageHallAddress}">마을 회관 주소</td>
     </tr>
     </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-      <td id="userId" th:text="${user.id}">id</td>
-      <td><a href="" th:onclick="userPopup([[${user.id}]], [[${user.userName}]])" th:text="${user.userName}">이름</a></td>
-      <td th:text="${user.dateOfBirth}">1999-09-29</td>
-      <td th:text="${user.address}">지족북로33</td>
-      <td th:text="${user.phoneNumber}">010-0000-0000</td>
-      <td th:if="${user.alone == true}">o</td>
-      <td th:if="${user.alone == false}">x</td>
-      <td th:text="${user.date}">0000-00-00</td>
-      <td th:if="${user.attendanceState == true}">o</td>
-      <td th:if="${user.attendanceState == false}">x</td>
-      <td th:text="${user.teamAddress}">소속</td>
-    </tr>
-    </tbody>
   </table>
+<!--  <div style="position:relative; left:600px; top:0px;">-->
+<!--    <button type="button" class="btn btn-danger"-->
+<!--            onclick="if(confirm('삭제하시겠습니까?'))window.close();-->
+<!--                     ">삭제</button>-->
+
+  <div style="position:relative; left:600px; top:0px;">
+    <button type="button" class="btn btn-danger"
+            th:onclick="if(confirm('삭제하시겠습니까?'))window.close();">
+            삭제</button>
+
+  </div>
 </div>
+
 </body>
 </html>

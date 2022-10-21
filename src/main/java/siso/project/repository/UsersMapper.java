@@ -5,10 +5,9 @@ import org.apache.ibatis.annotations.Param;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserInfoTeamStateVO;
-import siso.project.repository.vo.UserInfoVO;
+import siso.project.repository.vo.UserDetailInfoVO;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +30,7 @@ public interface UsersMapper {
     List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId")Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date")Date date);
 
     //유저 모든 정보
-    List<UserInfoVO> findUserInfo(Long userId);
+    UserDetailInfoVO findUserDetailInfo(Long userId);
 
     //전제 조회
     List<Users> select(@Param("adminId") Long loginAdminId, @Param("searchParam") UsersDto usersDto);

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import siso.project.domain.Users;
 import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 
 import java.sql.Date;
@@ -29,5 +30,9 @@ public class UserService {
         Date date =new Date(calendar.getTimeInMillis());
 
         return usersMapper.findUserInfoTeamState(loginAdminId, cond, date);
+    }
+
+    public UserDetailInfoVO findUserDetailInfo(Long userId) {
+        return usersMapper.findUserDetailInfo(userId);
     }
 }

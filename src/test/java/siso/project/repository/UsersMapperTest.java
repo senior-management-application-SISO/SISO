@@ -12,10 +12,9 @@ import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserInfoTeamStateVO;
-import siso.project.repository.vo.UserInfoVO;
+import siso.project.repository.vo.UserDetailInfoVO;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(value = true)
 class UsersMapperTest {
 
     @Autowired
@@ -154,6 +153,36 @@ class UsersMapperTest {
     }
 
     @Test
+    @DisplayName("teamId 삭제")
+    void usersTeamUpdate() {
+        //given
+        Users users = Users.builder()
+                .userName("33")
+                .userId("33")
+                .password("33")
+                .dateOfBirth(Date.valueOf("2022-10-07"))
+                .address("33")
+                .phoneNumber("010")
+                .alone(false)
+                .teamId(1L)
+                .adminId(1L)
+                .usersLocationId(2L)
+                .villageHallId(1L)
+                .build();
+        usersMapper.save(users);
+
+        //when
+        UsersDto updateUsers = UsersDto.builder()
+                .teamId(null)
+                .build();
+        usersMapper.update(users.getId(), updateUsers);
+
+        //then
+        Users findUser = usersMapper.findById(users.getId()).get();
+        assertThat(findUser.getTeamId()).isNull();
+    }
+
+    @Test
     @DisplayName("삭제")
     void delete() {
         //given
@@ -212,7 +241,7 @@ class UsersMapperTest {
 
     @Test
     @DisplayName("유저 정보, 팀, 현황 조회")
-    void findUserInfoStateTeam(){
+    void findUserInfoStateTeam() {
         UsersDto searchDto = UsersDto.builder()
                 .userName("joe")
                 .phoneNumber("010")
@@ -221,7 +250,7 @@ class UsersMapperTest {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -3);
 
-        Date date =new Date(calendar.getTimeInMillis());
+        Date date = new Date(calendar.getTimeInMillis());
 
         List<UserInfoTeamStateVO> userInfoStateTeam = usersMapper.findUserInfoTeamState(1L, searchDto, date);
         for (UserInfoTeamStateVO userInfoTeamStateVO : userInfoStateTeam) {
@@ -232,10 +261,8 @@ class UsersMapperTest {
     @Test
     @DisplayName("유저 모든 정보 select")
     void selectUserInfo() {
-        List<UserInfoVO> userInfo = usersMapper.findUserInfo(1L);
-        for (UserInfoVO userInfoVO : userInfo) {
-            System.out.println("userInfoVO = " + userInfoVO);
-        }
+        UserDetailInfoVO userInfo = usersMapper.findUserDetailInfo(1L);
+        System.out.println("userInfoVO = " + userInfo);
     }
 
     @Test
