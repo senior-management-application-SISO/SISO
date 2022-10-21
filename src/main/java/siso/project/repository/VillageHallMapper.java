@@ -13,7 +13,7 @@ public interface VillageHallMapper {
     //저장
     void save(VillageHall villageHall);
 
-    List<VillageHall> select(VillageHall villageHall);
+    List<VillageHall> select(@Param("adminId") Long adminId, @Param("searchParam") VillageHall villageHall);
 
     //업데이트
     void update(@Param("id") Long id, @Param("updateParam") VillageHallDto updateDto);
