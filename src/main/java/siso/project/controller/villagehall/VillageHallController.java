@@ -13,12 +13,12 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/villageHall")
+@RequestMapping("/villagehall")
 public class VillageHallController {
 
     private final VillageHallService villageHallService;
 
-    @GetMapping("/villagehall")
+    @GetMapping
     public String villageHalls(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute("villageHallSearch") VillageHall cond, Model model) {
         List<VillageHall> villageHalls = villageHallService.villageHallSelect(loginAdmin.getId(), cond);
         model.addAttribute("villageHalls", villageHalls);
@@ -27,25 +27,28 @@ public class VillageHallController {
 
     @GetMapping("/{villageHallId}")
     public String villageHallInfo(@PathVariable long villageHallId, Model model) {
-        List<VillageHall> select = villageHallService.villageHallSelect(villageHallId, null);
+        VillageHall villageHall = VillageHall.builder()
+                .id(villageHallId)
+                .build();
+        List<VillageHall> select = villageHallService.villageHallSelect(null, villageHall);
         model.addAttribute("villageHall", select.get(0));
-        return "villageHall/villageHallPopupForm";
+        return "villagehall/villageHallPopupForm";
     }
 
     // 게시글 삭제
-    @PostMapping("/post/delete.do")
+    @PostMapping("/delete")
     public String deletePost(@RequestParam final Long id) {
-        System.out.println("id = " + id);
-        return "redirect:/post/list.do";
+        villageHallService.villageHallDelete(id);
+        return "redirect:/villagehall";
     }
 
-    @GetMapping("/villagehall/save")
+    @GetMapping("/save")
     public String villageHallFormView(Model model) {
         model.addAttribute("villageHall", VillageHall.builder().build());
         return "villagehall/addVillageHallForm";
     }
 
-    @PostMapping("/villagehall/save")
+    @PostMapping("/save")
     public String villageHallSave(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute VillageHall villageHall) {
         villageHallService.villageHallSave(loginAdmin.getId(), villageHall);
         return "redirect:/villagehall";

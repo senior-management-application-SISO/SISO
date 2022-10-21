@@ -10,6 +10,7 @@
         }
 
 
+
     </style>
 
     <th:block layout:fragment="script">
@@ -23,13 +24,14 @@
         }
 
             function deleteVillageHall() {
+                const id = [[ ${villageHall.id} ]];
                 const hallName = [[ ${villageHall.hallName} ]];
                 if ( !confirm(hallName + "을 삭제할까요?") ) {
                     return false;
                 }
 
                 const formHtml = `
-                    <form id="deleteForm" action="/villageHall/post/delete.do" method="post">
+                    <form id="deleteForm" action="/villagehall/delete" method="post">
                         <input type="hidden" id="id" name="id" value="${id}" />
                     </form>
                 `;
@@ -37,8 +39,12 @@
                 const form = doc.body.firstChild;
                 document.body.append(form);
                 document.getElementById('deleteForm').submit();
-            }
 
+                           setTimeout(function () {
+                opener.location.reload();
+                window.close();
+                }, 10);
+            }
 
 
         </script>
@@ -73,12 +79,14 @@
             <div class="col">
                 <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="popupClose()">수정</button>
             </div>
-            <div class="col">
-                <button class="w-100 btn btn-danger btn-lg" type="submit" onclick="deleteVillageHall()">삭제</button>
-            </div>
+
         </div>
     </form>
 
-</div> <!-- /container -->
+    <div class="col">
+        <button class="w-100 btn btn-danger btn-lg" type="submit" onclick="deleteVillageHall()">삭제</button>
+    </div>
+
+</div>
 </body>
 </html>

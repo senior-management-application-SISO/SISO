@@ -27,4 +27,8 @@ public class VillageHallService {
                 .build();
         villageHallMapper.save(saveVillageHall);
     }
+
+    public void villageHallDelete(Long id) {
+        villageHallMapper.delete(id);
+    }
 }
