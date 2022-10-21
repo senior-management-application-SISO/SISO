@@ -38,4 +38,17 @@ public class TeamController {
         return "redirect:/teams";
     }
 
+    @GetMapping("/teams/{teamId}")
+    public String teamEditForm(@PathVariable Long teamId, Model model) {
+        Teams team = teamService.findById(teamId);
+        model.addAttribute("team", team);
+
+        return "teams/editTeamForm";
+    }
+
+    @PostMapping("/teams/{teamId}")
+    public void teamEdit(@PathVariable Long teamId, @ModelAttribute TeamsDto teamsDto) {
+        teamService.teamUpdate(teamId, teamsDto);
+    }
+
 }

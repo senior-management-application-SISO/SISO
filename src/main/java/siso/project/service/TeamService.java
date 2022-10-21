@@ -29,4 +29,12 @@ public class TeamService {
         teamsMapper.save(saveTeams);
     }
 
+    public Teams findById(Long teamId) {
+        return teamsMapper.findById(teamId).get();
+    }
+
+    public void teamUpdate(Long teamId, TeamsDto teamsDto) {
+        teamsMapper.update(teamId, teamsDto);
+    }
+
 }

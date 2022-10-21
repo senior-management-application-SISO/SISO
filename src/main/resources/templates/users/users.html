@@ -42,7 +42,7 @@
                 <input type="text" th:field="*{userName}" class="form-control" placeholder="이름"/>
             </div>
             <div class="col">
-                <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="휴대전화 번호"/>
+                <input type="text" th:field="*{phoneNumber}" class="form-control" placeholder="핸드폰 번호"/>
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-secondary mb-2">검색</button>
@@ -97,6 +97,6 @@
     </div>
 
 </div> <!-- /container -->
-
+<div th:replace="fragments/footer :: footer" />
 </body>
 </html>
