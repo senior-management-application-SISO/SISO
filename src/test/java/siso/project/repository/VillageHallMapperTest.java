@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import siso.project.domain.Admin;
 import siso.project.domain.VillageHall;
 import siso.project.repository.dto.VillageHallDto;
 
@@ -22,7 +23,7 @@ class VillageHallMapperTest {
     @Autowired
     VillageHallMapper villageHallMapper;
     @Autowired
-    TeamsMapper teamsMapper;
+    AdminMapper adminMapper;
 
     @Test
     void save() {
@@ -40,18 +41,34 @@ class VillageHallMapperTest {
     @Test
     void select() {
         //given
+        Admin admin = Admin.builder()
+                .adminName("woo")
+                .adminId("123123")
+                .adminPassword("123")
+                .adminPhoneNumber("010")
+                .build();
+        adminMapper.save(admin);
+
         VillageHall villageHall = VillageHall.builder()
                 .hallName("WooSong")
                 .lat(1111)
                 .lon(2222)
                 .address("자양동")
+                .adminId(admin.getId())
                 .build();
         villageHallMapper.save(villageHall);
 
+        VillageHall villageHall2 = VillageHall.builder()
+                .hallName("WooSong2")
+                .lat(11111)
+                .lon(22221)
+                .address("자양동2")
+                .build();
+        villageHallMapper.save(villageHall2);
+
         //when
         VillageHall selectVillageHall = VillageHall.builder()
-                .hallName("WooSong")
-                .address("자양동")
+                .adminId(admin.getId())
                 .build();
         List<VillageHall> list = villageHallMapper.select(selectVillageHall);
 
@@ -59,6 +76,7 @@ class VillageHallMapperTest {
         assertThat(list.get(0).getId()).isEqualTo(villageHall.getId());
         assertThat(list.get(0).getHallName()).isEqualTo(villageHall.getHallName());
         assertThat(list.get(0).getAddress()).isEqualTo(villageHall.getAddress());
+        assertThat(list.get(0).getAdminId()).isEqualTo(admin.getId());
     }
 
     @Test
