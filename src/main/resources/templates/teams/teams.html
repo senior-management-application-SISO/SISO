@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+    <th:block>
+        <script th:inline="javascript">
+
+            function teamPopup(id, name){
+                window.open("/teams/"+id, "popup", "width=700px,height=500px,top=200px,left=200px;");
+            }
+
+        </script>
+    </th:block>
+</head>
+<body>
+
+<div th:replace="fragments/bodyHeader :: bodyHeader" />
+
+<div class="container" style="max-width: 900px">
+    <div class="py-5 text-center">
+        <h2>소속 관리</h2>
+    </div>
+
+    <form th:object="${teamSearch}" method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" th:field="*{teamName}" class="form-control" placeholder="소속"/>
+            </div>
+            <div class="col">
+                <input type="text" th:field="*{teamAddress}" class="form-control" placeholder="소속 주소"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='addForm.html'"
+                            th:onclick="|location.href='@{/teams/save}'|"
+                            type="button">소속 등록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table id="table" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>소속</th>
+                <th>소속 주소</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="team : ${teams}">
+                <td id="userId" th:text="${team.id}">id</td>
+                <td><a href="" th:onclick="teamPopup([[${team.id}]], [[${team.teamName}]])" th:text="${team.teamName}">소속</a></td>
+                <td th:text="${team.teamAddress}">소속 주소</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div> <!-- /container -->
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

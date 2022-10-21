@@ -24,5 +24,5 @@ public interface TeamsMapper {
     Optional<Teams> findById(Long id);
 
     // 전체 조회
-    List<Teams> select(TeamsDto teamsDto);
+    List<Teams> select(@Param("adminId") Long loginAdminId, @Param("searchParam")TeamsDto teamsDto);
 }
