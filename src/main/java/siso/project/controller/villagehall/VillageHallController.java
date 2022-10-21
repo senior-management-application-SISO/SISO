@@ -38,4 +38,17 @@ public class VillageHallController {
         System.out.println("id = " + id);
         return "redirect:/post/list.do";
     }
+
+    @GetMapping("/villagehall/save")
+    public String villageHallFormView(Model model) {
+        model.addAttribute("villageHall", VillageHall.builder().build());
+        return "villagehall/addVillageHallForm";
+    }
+
+    @PostMapping("/villagehall/save")
+    public String villageHallSave(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute VillageHall villageHall) {
+        villageHallService.villageHallSave(loginAdmin.getId(), villageHall);
+        return "redirect:/villagehall";
+    }
+
 }

@@ -2,6 +2,7 @@ package siso.project.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import siso.project.domain.Teams;
 import siso.project.domain.VillageHall;
 import siso.project.repository.VillageHallMapper;
 import siso.project.repository.dto.TeamsDto;
@@ -16,5 +17,14 @@ public class VillageHallService {
 
     public List<VillageHall> villageHallSelect(Long loginAdminId, VillageHall villageHall) {
         return villageHallMapper.select(loginAdminId, villageHall);
+    }
+
+    public void villageHallSave(Long loginAdminId, VillageHall villageHall) {
+        VillageHall saveVillageHall = VillageHall.builder()
+                .hallName(villageHall.getHallName())
+                .address(villageHall.getAddress())
+                .adminId(loginAdminId)
+                .build();
+        villageHallMapper.save(saveVillageHall);
     }
 }
