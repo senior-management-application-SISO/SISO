@@ -9,84 +9,103 @@
             max-width: 560px;
         }
     </style>
+
+  <script type="text/javascript">
+
+        function popupClose(){
+            setTimeout(function () {
+            opener.location.reload();
+                window.close();
+            });
+        }
+
+    </script>
+
 </head>
 <body>
 
-<div class="container" style="max-width: 900px">
+<div class="container">
+
   <div class="py-5 text-center">
     <h2>멤버 정보</h2>
   </div>
 
-<hr class="my-2">
-<div>
-  <table id="table" class="table">
-    <thead>
-    <tr>
-      <td>ID</td>
-      <td th:text="${userDetailInfo.userId}">id</td>
-    </tr>
-    <tr>
-      <td>이름</td>
-      <td th:text="${userDetailInfo.userName}">이름</td>
-    </tr>
-    <tr>
-      <td>생년월일</td>
-      <td th:text="${userDetailInfo.dateOfBirth}">1999-09-29</td>
-    </tr>
-    <tr>
-      <td>주소</td>
-      <td th:text="${userDetailInfo.address}">주소</td>
-    </tr>
-    <tr>
-      <td>핸드폰 번호</td>
-      <td th:text="${userDetailInfo.phoneNumber}">010-0000-0000</td>
-    </tr>
-    <tr>
-      <td>독거 여부</td>
-      <td th:if="${userDetailInfo.alone == true}">o</td>
-    <td th:if="${userDetailInfo.alone == false}">x</td>
-    </tr>
-    <tr>
-      <td>마을 이름</td>
-      <td th:text="${userDetailInfo.teamName}">마을 이름</td>
-    </tr>
-    <tr>
-     <td>마을 주소</td>
-      <td th:text="${userDetailInfo.teamAddress}">마을 주소</td>
-    </tr>
-    <tr>
-      <td>최근 출석일</td>
-      <td th:text="${userDetailInfo.userStateDate}">최근 출석일</td>
-    </tr>
-    <tr>
-      <td>최근 유저 위치</td>
-      <td th:text="${userDetailInfo.locationAddress}">최근 유저 위치</td>
-    </tr>
-    <tr>
-      <td>위치 등록 시간</td>
-      <td th:text="${userDetailInfo.locationTime}">위치 등록 시간</td>
-    </tr>
-    <tr>
-      <td>마을 회관 이름</td>
-      <td th:text="${userDetailInfo.villageHallName}">마을 회관 이름</td>
-    </tr>
-    <tr>
-      <td>마을 회관 주소</td>
-      <td th:text="${userDetailInfo.villageHallAddress}">마을 회관 주소</td>
-    </tr>
-    </thead>
-  </table>
-<!--  <div style="position:relative; left:600px; top:0px;">-->
-<!--    <button type="button" class="btn btn-danger"-->
-<!--            onclick="if(confirm('삭제하시겠습니까?'))window.close();-->
-<!--                     ">삭제</button>-->
+  <form action="users.html" th:action th:object="${userDetailInfo}" method="post">
+    <div>
+      <label for="id">유저 ID</label>
+      <input type="text" id="id" class="form-control" th:field="*{userId}" disabled>
+    </div>
+    <div>
+      <label for="userName">이름</label>
+      <input type="text" id="userName" class="form-control" th:field="*{userName}" disabled>
+    </div>
+    <div>
+      <label for="dateOfBirth">생년월일</label>
+      <input type="text" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}" disabled>
+    </div>
+    <div>
+      <label for="address">주소</label>
+      <input type="text" id="address" class="form-control" th:field="*{address}" disabled>
+    </div>
+    <div>
+      <label for="phoneNumber">핸드폰 번호</label>
+      <input type="text" id="phoneNumber" class="form-control" th:field="*{phoneNumber}" disabled>
+    </div>
+    <div>
+      <label for="alone">독거 여부</label>
+<!--      <input type="text" id="alone" class="form-control" th:field="*{alone}" disabled>-->
+      <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o" disabled>
+      <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x" disabled>
+    </div>
 
-  <div style="position:relative; left:600px; top:0px;">
-    <button type="button" class="btn btn-danger"
-            th:onclick="if(confirm('삭제하시겠습니까?'))window.close();">
-            삭제</button>
+    <hr class="my-4">
 
-  </div>
+    <div>
+      <label for="teamName">마을 이름</label>
+      <input type="text" id="teamName" class="form-control" th:field="*{teamName}" disabled>
+    </div>
+    <div>
+      <label for="teamAddress">마을 주소</label>
+      <input type="text" id="teamAddress" class="form-control" th:field="*{teamAddress}" disabled>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+      <label for="userStateDate">최근 출석일</label>
+      <input type="text" id="userStateDate" class="form-control" th:field="*{userStateDate}" disabled>
+    </div>
+    <div>
+      <label for="locationAddress">최근 유저 위치</label>
+      <input type="text" id="locationAddress" class="form-control" th:field="*{locationAddress}" disabled>
+    </div>
+    <div>
+      <label for="locationTime">위치 등록 시간</label>
+      <input type="text" id="locationTime" class="form-control" th:field="*{locationTime}" disabled>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+      <label for="villageHallName">마을 회관 이름</label>
+      <input type="text" id="villageHallName" class="form-control" th:field="*{villageHallName}" disabled>
+    </div>
+    <div>
+      <label for="villageHallAddress">마을 회관 주소</label>
+      <input type="text" id="villageHallAddress" class="form-control" th:field="*{villageHallAddress}" disabled>
+    </div>
+
+    <hr class="my-4">
+
+    <div class="row">
+      <div class="col">
+        <button class="w-100 btn btn-danger btn-lg" type="submit" onclick="popupClose()">삭제</button>
+      </div>
+    </div>
+  </form>
+
+  <button  style="visibility:hidden;" class="w-100 btn btn-danger btn-lg">x</button>
+
 </div>
 
 </body>

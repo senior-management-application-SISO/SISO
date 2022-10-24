@@ -34,6 +34,5 @@ public interface UsersMapper {
 
     //전제 조회
     List<Users> select(@Param("adminId") Long loginAdminId, @Param("searchParam") UsersDto usersDto);
-
 }
 

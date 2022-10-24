@@ -10,7 +10,7 @@
         #{usersLocationId}, #{adminId}, #{villageHallId})
     </insert>
 
-    <update id="update">
+    <update id="update" parameterType="Users">
         update users
         <set>
             <if test="updateParam.userName != null">
@@ -37,8 +37,14 @@
             <if test="updateParam.teamId != null">
                 team_id=#{updateParam.teamId},
             </if>
+            <if test="updateParam.teamId == null">
+                team_id=null,
+            </if>
             <if test="updateParam.adminId != null">
                 admin_id=#{updateParam.adminId},
+            </if>
+            <if test="updateParam.adminId == null">
+                admin_id=null,
             </if>
             <if test="updateParam.usersLocationId != null">
                 users_location_id=#{updateParam.usersLocationId},

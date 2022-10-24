@@ -153,36 +153,6 @@ class UsersMapperTest {
     }
 
     @Test
-    @DisplayName("teamId 삭제")
-    void usersTeamUpdate() {
-        //given
-        Users users = Users.builder()
-                .userName("33")
-                .userId("33")
-                .password("33")
-                .dateOfBirth(Date.valueOf("2022-10-07"))
-                .address("33")
-                .phoneNumber("010")
-                .alone(false)
-                .teamId(1L)
-                .adminId(1L)
-                .usersLocationId(2L)
-                .villageHallId(1L)
-                .build();
-        usersMapper.save(users);
-
-        //when
-        UsersDto updateUsers = UsersDto.builder()
-                .teamId(null)
-                .build();
-        usersMapper.update(users.getId(), updateUsers);
-
-        //then
-        Users findUser = usersMapper.findById(users.getId()).get();
-        assertThat(findUser.getTeamId()).isNull();
-    }
-
-    @Test
     @DisplayName("삭제")
     void delete() {
         //given

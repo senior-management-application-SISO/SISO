@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import siso.project.domain.Admin;
-import siso.project.domain.Users;
 import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserDetailInfoVO;
@@ -15,7 +14,6 @@ import siso.project.service.UserService;
 import siso.project.web.SessionConst;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -39,5 +37,10 @@ public class UserController {
         model.addAttribute("userDetailInfo",userDetailInfo);
 
         return "users/userPopupForm";
+    }
+
+    @PostMapping("/{userId}")
+    public void usersTeamDelete(@PathVariable long userId, @ModelAttribute UsersDto usersDto) {
+        userService.userTeamDelete(userId, usersDto);
     }
 }

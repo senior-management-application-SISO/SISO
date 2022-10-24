@@ -35,4 +35,8 @@ public class UserService {
     public UserDetailInfoVO findUserDetailInfo(Long userId) {
         return usersMapper.findUserDetailInfo(userId);
     }
+
+    public void userTeamDelete(Long userId, UsersDto usersDto) {
+        usersMapper.update(userId, usersDto);
+    }
 }
