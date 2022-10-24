@@ -23,7 +23,6 @@ public interface UsersStateMapper {
     //검색
     List<UsersState> select(UsersQrStateDto usersQrStateDto);
 
-
     //단건조회
     Optional<UsersState> findById(Long id);
 }

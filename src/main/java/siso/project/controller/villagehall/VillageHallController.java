@@ -1,6 +1,7 @@
 package siso.project.controller.villagehall;
 
 import com.google.code.geocoder.model.LatLng;
+import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,11 @@ import siso.project.service.VillageHallService;
 import siso.project.web.SessionConst;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
+
+import static siso.project.etc.Qr.getQRCodeImage;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,13 +39,26 @@ public class VillageHallController {
     }
 
     @GetMapping("/{villageHallId}")
-    public String villageHallInfo(@PathVariable long villageHallId, Model model) {
+    public String villageHallInfo(@PathVariable long villageHallId, Model model) throws IOException, WriterException {
         VillageHall villageHall = VillageHall.builder()
                 .id(villageHallId)
                 .build();
         List<VillageHall> select = villageHallService.villageHallSelect(null, villageHall);
         model.addAttribute("villageHall", select.get(0));
+
+        String img = getQRCodeImage("localhost:8080/villagehall/qrcheck?villageHallId=" + villageHallId, 400, 400);
+        model.addAttribute("img", img);
+
         return "villagehall/villageHallPopupForm";
+    }
+
+    @GetMapping("/qrcheck")
+    public String villageHallInfo(@RequestParam final Long villageHallId, @RequestParam final Long userId, Model model) {
+        villageHallService.villageHallQrCheck(villageHallId, userId);
+
+        model.addAttribute("qrCheckedTime", LocalDateTime.now());
+
+        return "villagehall/qrchecked";
     }
 
     @PostMapping("/{villageHallId}")
@@ -64,7 +82,6 @@ public class VillageHallController {
         return "redirect:/villagehall/" + villageHallId;
     }
 
-    // 게시글 삭제
     @GetMapping("/delete")
     public void deletePost(@RequestParam final Long id) {
         villageHallService.villageHallDelete(id);
