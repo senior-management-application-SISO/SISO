@@ -23,7 +23,6 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
-    private final UsersMapper usersMapper;
 
     @GetMapping
     public String members(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute("userSearch") UsersDto cond, Model model) {

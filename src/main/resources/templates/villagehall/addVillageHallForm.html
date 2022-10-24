@@ -8,6 +8,10 @@
         .container {
             max-width: 560px;
         }
+                        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -19,13 +23,21 @@
     </div>
 
     <form action="teams.html" th:action th:object="${villageHall}" method="post">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+               th:text="${err}">전체 오류 메시지</p>
+        </div>
+
         <div>
             <label for="itemName">마을회관 이름</label>
-            <input type="text" id="itemName" th:field="*{hallName}" class="form-control" placeholder="마을회관 이름을 입력하세요">
+            <input type="text" id="itemName" th:field="*{hallName}" class="form-control" placeholder="마을회관 이름을 입력하세요" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{hallName}"/>
         </div>
+
         <div>
             <label for="price">마을회관 주소</label>
-            <input type="text" id="price" th:field="*{address}" class="form-control" placeholder="마을회관 주소를 입력하세요">
+            <input type="text" id="price" th:field="*{address}" class="form-control" placeholder="마을회관 주소를 입력하세요" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{address}"/>
         </div>
 
         <hr class="my-4">

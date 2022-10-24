@@ -10,7 +10,7 @@
         #{usersLocationId}, #{adminId}, #{villageHallId})
     </insert>
 
-    <update id="update">
+    <update id="update" parameterType="Users">
         update users
         <set>
             <if test="updateParam.userName != null">
@@ -37,8 +37,14 @@
             <if test="updateParam.teamId != null">
                 team_id=#{updateParam.teamId},
             </if>
+            <if test="updateParam.teamId == null">
+                team_id=null,
+            </if>
             <if test="updateParam.adminId != null">
                 admin_id=#{updateParam.adminId},
+            </if>
+            <if test="updateParam.adminId == null">
+                admin_id=null,
             </if>
             <if test="updateParam.usersLocationId != null">
                 users_location_id=#{updateParam.usersLocationId},
@@ -52,6 +58,15 @@
         </where>
     </update>
 
+    <update id="updateVillageHall">
+        update users
+        <set>
+            village_hall_id=#{villageHallId},
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
 
     <delete id="delete">
         delete from users where id=#{id}
@@ -77,6 +92,9 @@
             </if>
             <if test="searchParam.phoneNumber != null and searchParam.phoneNumber != ''">
                 and phone_number = #{searchParam.phoneNumber}
+            </if>
+            <if test="searchParam.userId != null and searchParam.userId != ''">
+                and user_id = #{searchParam.userId}
             </if>
             <if test="adminId != null and adminId != ''">
                 and admin_id = #{adminId}
@@ -112,8 +130,10 @@
         SELECT users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
         users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id,
         users_state.date as user_state_date, users_state.attendance_state, users_state.hall_state,
-        users_location.address as location_address, users_location.lat as location_lat, users_location.lon as location_lon, users_location.time as location_time,
-        village_hall.hall_name as village_hall_name, village_hall.lat as villageHall_lat, village_hall.lon as villageHall_lon, village_hall.address as village_hall_address
+        users_location.address as location_address, users_location.lat as location_lat, users_location.lon as
+        location_lon, users_location.time as location_time,
+        village_hall.hall_name as village_hall_name, village_hall.lat as villageHall_lat, village_hall.lon as
+        villageHall_lon, village_hall.address as village_hall_address
         FROM users
         LEFT OUTER JOIN teams
         ON users.team_id = teams.id

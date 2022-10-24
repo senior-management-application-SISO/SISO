@@ -12,6 +12,9 @@
         select *
         from village_hall
         <where>
+            <if test="searchParam.id != null and searchParam.id != ''">
+                and id = #{searchParam.id}
+            </if>
             <if test="searchParam.hallName != null and searchParam.hallName != ''">
                 and hall_name = #{searchParam.hallName}
             </if>

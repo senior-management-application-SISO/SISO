@@ -10,12 +10,23 @@
         .container {
             max-width: 560px;
         }
+                .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
     </style>
     <th:block>
         <script th:inline="javascript">
 
+
             function villageHallPopup(id, name){
-                window.open("/villagehall/"+id, "popup", "width=700px,height=550px,top=200px,left=200px;");
+                var popup = window.open("/villagehall/"+id, "VillageHallInfo", "width=700px,height=550px,top=200px,left=200px;");
+            }
+
+            function reload(){
+                setTimeout(function () {
+                location.reload();
+                }, 300);
             }
 
         </script>
