@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>내프로필</h2>
+    </div>
+
+    <form action="teams.html" th:action th:object="${admin}" method="post">
+        <div>
+            <label for="id">Id</label>
+            <input type="text" id="id" th:field="*{id}" class="form-control" readonly>
+        </div>
+        <div>
+            <label for="adminName">이름</label>
+            <input type="text" id="adminName" th:field="*{adminName}" class="form-control" readonly>
+        </div>
+        <div>
+            <label for="adminId">로그인 id</label>
+            <input type="text" id="adminId" th:field="*{adminId}" class="form-control" readonly>
+        </div>
+        <div>
+            <label for="adminPassword">비밀번호</label>
+            <input type="text" id="adminPassword" th:field="*{adminPassword}" class="form-control" readonly>
+        </div>
+        <div>
+            <label for="adminPhoneNumber">핸드폰 번호</label>
+            <input type="text" id="adminPhoneNumber" th:field="*{adminPhoneNumber}" class="form-control" readonly>
+        </div>
+        <div>
+            <label for="countyOfficeId">소속 동사무소</label>
+            <input type="text" id="countyOfficeId" th:field="*{officeName}" class="form-control" readonly>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='users.html'"
+                        th:onclick="|location.href='@{/users}'|"
+                        type="button">확인</button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+<div th:replace="fragments/footer :: footer" />
+</body>
+</html>

@@ -51,6 +51,11 @@
                 admin_name=#{admin.adminName},
             </if>
 
+            <!-- 아이디 변경 시 -->
+            <if test="admin.adminId != null">
+                admin_id=#{admin.adminId},
+            </if>
+
             <!-- 비밀번호 변경 시 -->
             <if test="admin.adminPassword != null">
                 admin_password=#{admin.adminPassword},
@@ -77,4 +82,15 @@
             id=#{id}
         </where>
     </delete>
+
+    <select id="selectAdminOfficeName" resultType="AdminCountyOfficeVO">
+        SELECT admin.id, admin.admin_name, admin.admin_id, admin.admin_password, admin.admin_phone_number, admin.county_office_id, county_office.office_name
+        FROM admin
+        JOIN county_office
+        ON admin.county_office_id = county_office.id
+        <where>
+            admin.id=#{id}
+        </where>
+    </select>
+
 </mapper>

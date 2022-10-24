@@ -16,13 +16,6 @@
     <th:block layout:fragment="script">
         <script th:inline="javascript">
 
-        function popupClose(){
-            setTimeout(function () {
-                opener.location.reload();
-                window.close();
-            }, 10);
-        }
-
             function deleteVillageHall() {
                 const id = [[ ${villageHall.id} ]];
                 const hallName = [[ ${villageHall.hallName} ]];

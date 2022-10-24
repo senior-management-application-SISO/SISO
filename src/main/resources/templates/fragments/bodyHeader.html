@@ -14,15 +14,36 @@
                         <a class="nav-link" href="/teams">소속 관리</a>
                         <a class="nav-link" href="/villagehall">마을회관 관리</a>
                     </ul>
-                    <ul class="navbar-nav">
-                        <div class="dropdown">
-                            <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                관리자 정보
-                            </a>
 
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">프로필</a></li>
-                                <li><a class="dropdown-item" href="#">프로필 수정</a></li>
+<!--                    <ul class="navbar-nav">-->
+<!--                        <div class="dropdown">-->
+<!--                            <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                                관리자 정보-->
+<!--                            </a>-->
+
+<!--                            <ul class="dropdown-menu dropdown-menu-end">-->
+<!--                                <li><a class="dropdown-item" href="/admin">내프로필</a></li>-->
+<!--                                <li><a class="dropdown-item" href="/admin/edit">프로필 수정</a></li>-->
+<!--                                <li><hr class="dropdown-divider"></li>-->
+<!--                                <li><form th:action="@{/logout}" method="post">-->
+<!--                                    <button class="w-100 btn btn-danger btn-sm" type="submit">-->
+<!--                                        로그아웃-->
+<!--                                    </button>-->
+<!--                                </form></li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+
+
+                        <div class="flex-shrink-0 dropdown">
+                            <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16" style="fill: #ffffff">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" style="fill: #ffffff"/>
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu text-small shadow dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/admin">내프로필</a></li>
+                                <li><a class="dropdown-item" href="/admin/edit">프로필 수정</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><form th:action="@{/logout}" method="post">
                                     <button class="w-100 btn btn-danger btn-sm" type="submit">
@@ -31,6 +52,8 @@
                                 </form></li>
                             </ul>
                         </div>
+
+
                     </ul>
 <!--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">&copy;Senior Care Solution</a>-->
             </div>
