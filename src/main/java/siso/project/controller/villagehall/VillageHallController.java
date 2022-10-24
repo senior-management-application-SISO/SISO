@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import siso.project.controller.signup.SignUpForm;
 import siso.project.domain.Admin;
+import siso.project.domain.Users;
 import siso.project.domain.VillageHall;
 import siso.project.etc.GeoCoder;
 import siso.project.repository.dto.VillageHallDto;
@@ -45,9 +46,13 @@ public class VillageHallController {
     @PostMapping("/{villageHallId}")
     public String updateVillageHallInfo(@PathVariable long villageHallId, @Valid @ModelAttribute("villageHall") VillageHallForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "villagehall/" + villageHallId;
+            return "villagehall/villageHallPopupForm";
         }
 
+        GeoCoder geoCoder = new GeoCoder();
+        LatLng latLng = geoCoder.geoCoding(form.getAddress());
+
+        System.out.println("latLng = " + latLng);
 
         VillageHallDto villageHallDto = VillageHallDto.builder()
                 .hallName(form.getHallName())
@@ -72,7 +77,23 @@ public class VillageHallController {
     }
 
     @PostMapping("/save")
-    public String villageHallSave(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute VillageHall villageHall) {
+    public String villageHallSave(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @Valid @ModelAttribute("villageHall") VillageHallForm form, BindingResult bindingResult) {
+
+        VillageHall villageHall = VillageHall.builder()
+                .hallName(form.getHallName())
+                .address(form.getAddress())
+                .build();
+
+        // ID 중복 검사
+        List<VillageHall> villageHalls = villageHallService.villageHallSelect(loginAdmin.getId(), villageHall);
+        if (villageHalls.size() != 0) {
+            bindingResult.reject("villageHall", new Object[]{form.getHallName()}, null);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "villagehall/addVillageHallForm";
+        }
+
         villageHallService.villageHallSave(loginAdmin.getId(), villageHall);
         return "redirect:/villagehall";
     }
