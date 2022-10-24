@@ -3,7 +3,9 @@ package siso.project.controller.team;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import siso.project.controller.signup.SignUpForm;
 import siso.project.domain.Admin;
 import siso.project.domain.Teams;
 import siso.project.repository.dto.TeamsDto;
@@ -11,6 +13,7 @@ import siso.project.repository.dto.UsersDto;
 import siso.project.service.TeamService;
 import siso.project.web.SessionConst;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,7 +36,16 @@ public class TeamController {
     }
 
     @PostMapping("/teams/save")
-    public String teamsSave(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute Teams teams) {
+    public String teamsSave(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @Valid @ModelAttribute("teams") TeamsForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "teams/addTeamForm";
+        }
+
+        Teams teams = Teams.builder()
+                .teamName(form.getTeamName())
+                .teamAddress(form.getTeamAddress())
+                .build();
+
         teamService.teamSave(loginAdmin.getId(), teams);
         return "redirect:/teams";
     }
@@ -41,14 +53,25 @@ public class TeamController {
     @GetMapping("/teams/{teamId}")
     public String teamEditForm(@PathVariable Long teamId, Model model) {
         Teams team = teamService.findById(teamId);
-        model.addAttribute("team", team);
+        model.addAttribute("teams", team);
 
         return "teams/editTeamForm";
     }
 
     @PostMapping("/teams/{teamId}")
-    public void teamEdit(@PathVariable Long teamId, @ModelAttribute TeamsDto teamsDto) {
+    public String teamEdit(@PathVariable Long teamId, @Valid @ModelAttribute("teams") TeamsForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "teams/editTeamForm";
+        }
+
+        TeamsDto teamsDto = TeamsDto.builder()
+                .teamName(form.getTeamName())
+                .teamAddress(form.getTeamAddress())
+                .build();
+
         teamService.teamUpdate(teamId, teamsDto);
+
+        return "redirect:/teams/" + teamId;
     }
 
 }

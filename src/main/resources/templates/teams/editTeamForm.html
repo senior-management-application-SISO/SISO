@@ -8,15 +8,18 @@
         .container {
             max-width: 560px;
         }
+                                .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
     </style>
 
     <script type="text/javascript">
 
         function popupClose(){
-            setTimeout(function () {
-                opener.location.reload();
-                window.close();
-            }, 10);
+                opener.parent.reload();
+
+
         }
 
     </script>
@@ -30,18 +33,25 @@
         <h2>소속 수정</h2>
     </div>
 
-    <form action="teams.html" th:action th:object="${team}" method="post">
+    <form action="teams.html" th:action th:object="${teams}" method="post">
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}">글로벌 오류 메시지</p>
+        </div>
+
         <div>
             <label for="id">소속 ID</label>
             <input type="text" id="id" class="form-control" th:field="*{id}" readonly>
         </div>
         <div>
-            <label for="itemName">소속 이름</label>
-            <input type="text" id="itemName" class="form-control" th:field="*{teamName}">
+            <label for="teamName">소속 이름</label>
+            <input type="text" id="teamName" class="form-control" th:field="*{teamName}" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{teamName}"/>
         </div>
         <div>
-            <label for="price">소속 주소</label>
-            <input type="text" id="price" class="form-control" th:field="*{teamAddress}">
+            <label for="teamAddress">소속 주소</label>
+            <input type="text" id="teamAddress" class="form-control" th:field="*{teamAddress}" th:errorclass="field-error">
+            <div class="field-error" th:errors="*{teamAddress}"/>
         </div>
 
         <hr class="my-4">
