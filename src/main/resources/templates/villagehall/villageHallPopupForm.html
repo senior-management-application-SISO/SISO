@@ -9,19 +9,10 @@
             max-width: 560px;
         }
 
-
-
     </style>
 
     <th:block layout:fragment="script">
         <script th:inline="javascript">
-
-        function popupClose(){
-            setTimeout(function () {
-                opener.location.reload();
-                window.close();
-            }, 10);
-        }
 
             function deleteVillageHall() {
                 const id = [[ ${villageHall.id} ]];
@@ -30,26 +21,17 @@
                     return false;
                 }
 
-                const formHtml = `
-                    <form id="deleteForm" action="/villagehall/delete" method="post">
-                        <input type="hidden" id="id" name="id" value="${id}" />
-                    </form>
-                `;
-                const doc = new DOMParser().parseFromString(formHtml, 'text/html');
-                const form = doc.body.firstChild;
-                document.body.append(form);
-                document.getElementById('deleteForm').submit();
-popupClose();
+                window.location.href = '/villagehall/delete?id='+id;
+
+                opener.parent.reload();
+
+                window.close();
             }
 
-            function popupClose(){
-                setTimeout(function () {
-                    opener.location.reload();
-                    opener.parent.location.reload();
-                    opener.document.location.href=window.opener.document.URL;
-                    window.close();
-                }, 10);
+            function parentReload(){
+            opener.parent.reload();
             }
+
 
         </script>
     </th:block>
@@ -80,15 +62,18 @@ popupClose();
         <hr class="my-4">
 
         <div class="row">
-            <div class="col"style="margin: 5px;">
-                <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="popupClose()">수정</button>
+            <div class="col" style="margin:5px">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="parentReload()">수정</button>
             </div>
 
         </div>
     </form>
-    <div class="col"style="margin: 5px;">
+
+
+    <div class="col" style="margin:5px">
         <button class="w-100 btn btn-danger btn-lg" onclick="deleteVillageHall()">삭제</button>
     </div>
+
 
 </div>
 </body>

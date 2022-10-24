@@ -31,4 +31,8 @@ public class VillageHallService {
     public void villageHallDelete(Long id) {
         villageHallMapper.delete(id);
     }
+
+    public void villageHallUpdate(Long id, VillageHallDto villageHallDto) {
+        villageHallMapper.update(id, villageHallDto);
+    }
 }
