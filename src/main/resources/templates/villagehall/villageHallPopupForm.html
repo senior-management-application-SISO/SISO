@@ -39,13 +39,17 @@
                 const form = doc.body.firstChild;
                 document.body.append(form);
                 document.getElementById('deleteForm').submit();
-
-                           setTimeout(function () {
-                opener.location.reload();
-                window.close();
-                }, 10);
+popupClose();
             }
 
+            function popupClose(){
+                setTimeout(function () {
+                    opener.location.reload();
+                    opener.parent.location.reload();
+                    opener.document.location.href=window.opener.document.URL;
+                    window.close();
+                }, 10);
+            }
 
         </script>
     </th:block>
@@ -76,15 +80,14 @@
         <hr class="my-4">
 
         <div class="row">
-            <div class="col">
+            <div class="col"style="margin: 5px;">
                 <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="popupClose()">수정</button>
             </div>
 
         </div>
     </form>
-
-    <div class="col">
-        <button class="w-100 btn btn-danger btn-lg" type="submit" onclick="deleteVillageHall()">삭제</button>
+    <div class="col"style="margin: 5px;">
+        <button class="w-100 btn btn-danger btn-lg" onclick="deleteVillageHall()">삭제</button>
     </div>
 
 </div>

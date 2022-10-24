@@ -37,9 +37,9 @@ public class VillageHallController {
 
     // 게시글 삭제
     @PostMapping("/delete")
-    public String deletePost(@RequestParam final Long id) {
+    public void deletePost(@RequestParam final Long id) {
+        System.out.println("SDsf");
         villageHallService.villageHallDelete(id);
-        return "redirect:/villagehall";
     }
 
     @GetMapping("/save")
