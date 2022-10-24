@@ -13,7 +13,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class VillageHallService {
-
     private final VillageHallMapper villageHallMapper;
 
     public List<VillageHall> villageHallSelect(Long loginAdminId, VillageHall villageHall) {
@@ -27,5 +26,9 @@ public class VillageHallService {
                 .adminId(loginAdminId)
                 .build();
         villageHallMapper.save(saveVillageHall);
+    }
+
+    public void villageHallDelete(Long id) {
+        villageHallMapper.delete(id);
     }
 }
