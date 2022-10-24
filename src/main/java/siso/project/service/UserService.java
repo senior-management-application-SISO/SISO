@@ -37,6 +37,6 @@ public class UserService {
     }
 
     public void userTeamDelete(Long userId, UsersDto usersDto) {
-        usersMapper.update(userId, usersDto);
+        usersMapper.userTeamDelete(userId, usersDto);
     }
 }

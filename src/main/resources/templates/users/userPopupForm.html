@@ -10,16 +10,29 @@
         }
     </style>
 
+  <th:block layout:fragment="script">
   <script type="text/javascript">
 
-        function popupClose(){
-            setTimeout(function () {
-            opener.location.reload();
+            function deleteUserTeam() {
+                const id = [[ ${userDetailInfo.id} ]];
+                const userName = [[ ${userDetailInfo.userName} ]];
+                if ( !confirm(userName + "을(를) 삭제할까요?") ) {
+                    return false;
+                }
+
+                window.location.href = '/users/delete?id='+id;
+
+                opener.parent.reload();
+
                 window.close();
-            });
-        }
+            }
+
+            function parentReload(){
+            opener.parent.reload();
+            }
 
     </script>
+  </th:block>
 
 </head>
 <body>
@@ -30,7 +43,7 @@
     <h2>멤버 정보</h2>
   </div>
 
-  <form action="users.html" th:action th:object="${userDetailInfo}" method="post">
+  <form action="users.html" th:action th:object="${userDetailInfo}" method="get">
     <div>
       <label for="id">유저 ID</label>
       <input type="text" id="id" class="form-control" th:field="*{userId}" disabled>
@@ -97,12 +110,14 @@
 
     <hr class="my-4">
 
-    <div class="row">
-      <div class="col">
-        <button class="w-100 btn btn-danger btn-lg" type="submit" onclick="popupClose()">삭제</button>
-      </div>
-    </div>
+
   </form>
+
+  <div class="row">
+    <div class="col">
+      <button class="w-100 btn btn-danger btn-lg" onclick="deleteUserTeam()">삭제</button>
+    </div>
+  </div>
 
   <button  style="visibility:hidden;" class="w-100 btn btn-danger btn-lg">x</button>
 

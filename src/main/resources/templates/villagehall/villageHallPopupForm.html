@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+    </style>
+
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+
+            function deleteVillageHall() {
+                const id = [[ ${villageHall.id} ]];
+                const hallName = [[ ${villageHall.hallName} ]];
+                if ( !confirm(hallName + "을 삭제할까요?") ) {
+                    return false;
+                }
+
+                window.location.href = '/villagehall/delete?id='+id;
+
+                opener.parent.reload();
+
+                window.close();
+            }
+
+            function parentReload(){
+            opener.parent.reload();
+            }
+
+
+        </script>
+    </th:block>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>마을회관 정보</h2>
+    </div>
+
+    <form action="teams.html" th:action th:object="${villageHall}" method="post">
+        <div>
+            <label for="id">마을회관 ID</label>
+            <input type="text" id="id" class="form-control" th:field="*{id}" readonly>
+        </div>
+        <div>
+            <label for="itemName">마을회관 이름</label>
+            <input type="text" id="itemName" class="form-control" th:field="*{hallName}">
+        </div>
+        <div>
+            <label for="price">마을회관 주소</label>
+            <input type="text" id="price" class="form-control" th:field="*{address}">
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col" style="margin:5px">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="parentReload()">수정</button>
+            </div>
+
+        </div>
+    </form>
+
+
+    <div class="col" style="margin:5px">
+        <button class="w-100 btn btn-danger btn-lg" onclick="deleteVillageHall()">삭제</button>
+    </div>
+
+
+</div>
+</body>
+</html>

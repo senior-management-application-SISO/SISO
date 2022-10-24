@@ -34,6 +34,8 @@ dependencies {
 
 	implementation 'com.google.zxing:core:3.5.0'
 	implementation 'com.google.zxing:javase:3.5.0'
+
+	implementation 'com.google.code.geocoder-java:geocoder-java:0.16'
 }
 
 tasks.named('test') {

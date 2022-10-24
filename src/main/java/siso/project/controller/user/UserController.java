@@ -39,7 +39,7 @@ public class UserController {
         return "users/userPopupForm";
     }
 
-    @PostMapping("/{userId}")
+    @GetMapping("/delete/{userId}")
     public void usersTeamDelete(@PathVariable long userId, @ModelAttribute UsersDto usersDto) {
         userService.userTeamDelete(userId, usersDto);
     }
