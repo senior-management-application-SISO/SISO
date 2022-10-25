@@ -15,11 +15,11 @@ public class UserRestController {
 
     private final UserService userService;
 
-    @PostMapping("/user")
-    public String saveUser(@ModelAttribute Users users) {
-        userService.userSave(users);
-        return "ok";
-    }
+//    @PostMapping("/user")
+//    public String saveUser(@ModelAttribute Users users) {
+//        userService.userSave(users);
+//        return "ok";
+//    }
 
 
 

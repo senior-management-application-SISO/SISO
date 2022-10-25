@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import siso.project.domain.Users;
 import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 
 import java.sql.Date;
@@ -30,17 +31,17 @@ public class UserService {
 
         return usersMapper.findUserInfoTeamState(loginAdminId, cond, date);
     }
-
-    public void updateUsers(Long id, UsersDto usersDto) {
-        usersMapper.update(id, usersDto);
+    public UserDetailInfoVO findUserDetailInfo(Long userId) {
+        return usersMapper.findUserDetailInfo(userId);
     }
 
     public void updateVillageHall(Long id, Long villageHallId) {
         usersMapper.updateVillageHall(id, villageHallId);
     }
 
-    //회원가입
-    public void userSave(Users users) {
-        usersMapper.save(users);
+
+    public void deleteUserTeamAndAdmin(Long id, Long teamId, Long adminId) {
+        usersMapper.userTeamDelete(id, teamId);
+        usersMapper.userAdminDelete(id, adminId);
     }
 }
