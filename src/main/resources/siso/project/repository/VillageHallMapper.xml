@@ -13,10 +13,10 @@
         from village_hall
         <where>
             <if test="searchParam.id != null and searchParam.id != ''">
-                and id = #{searchParam.id}
+                and id like concat('%', #{searchParam.id}, '%')
             </if>
             <if test="searchParam.hallName != null and searchParam.hallName != ''">
-                and hall_name = #{searchParam.hallName}
+                and hall_name like concat('%', #{searchParam.hallName}, '%')
             </if>
             <if test="searchParam.lat != null and searchParam.lat != ''">
                 and lat = #{searchParam.lat}
@@ -25,7 +25,7 @@
                 and lon = #{searchParam.lon}
             </if>
             <if test="searchParam.address != null and searchParam.address != ''">
-                and address = #{searchParam.address}
+                and address like concat('%', #{searchParam.address}, '%')
             </if>
             <if test="adminId != null">
                 and admin_id = #{adminId}

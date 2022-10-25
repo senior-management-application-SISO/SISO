@@ -14,8 +14,8 @@ public class TeamService {
 
     private final TeamsMapper teamsMapper;
 
-    public List<Teams> teamSelect(Long loginAdminId, TeamsDto teamsDto) {
-        List<Teams> teams = teamsMapper.select(loginAdminId, teamsDto);
+    public List<Teams> teamSelect(Long loginAdminId, TeamsDto cond) {
+        List<Teams> teams = teamsMapper.select(loginAdminId, cond);
         return teams;
     }
 
