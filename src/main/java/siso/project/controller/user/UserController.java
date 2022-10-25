@@ -1,5 +1,6 @@
 package siso.project.controller.user;
 
+import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import siso.project.repository.vo.UserInfoTeamStateVO;
 import siso.project.service.UserService;
 import siso.project.web.SessionConst;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -31,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public String users(@PathVariable long userId, Model model) {
+    public String users(@PathVariable long userId, Model model) throws IOException, WriterException {
         UserDetailInfoVO userDetailInfo = userService.findUserDetailInfo(userId);
         model.addAttribute("userDetailInfo",userDetailInfo);
 
