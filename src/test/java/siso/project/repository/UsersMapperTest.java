@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -231,7 +232,7 @@ class UsersMapperTest {
     @Test
     @DisplayName("유저 모든 정보 select")
     void selectUserInfo() {
-        UserDetailInfoVO userInfo = usersMapper.findUserDetailInfo(1L);
+        Optional<UserDetailInfoVO> userInfo = usersMapper.findUserDetailInfo(1L);
         System.out.println("userInfoVO = " + userInfo);
     }
 
@@ -274,5 +275,46 @@ class UsersMapperTest {
         assertThat(findUsers.get(0).getUserName()).isEqualTo("joe");
         assertThat(findUsers.get(0).getPhoneNumber()).isEqualTo("010");
     }
+
+
+    @Test
+    void select() {
+
+        //Admin
+        Admin admin = Admin.builder()
+                .adminName("woo")
+                .adminId("11")
+                .adminPassword("11")
+                .adminPhoneNumber("010")
+                .build();
+        adminMapper.save(admin);
+
+        //Users
+        Users users = Users.builder()
+                .userName("joe")
+                .userId("qwe")
+                .password("password")
+                .dateOfBirth(Date.valueOf("2022-10-07"))
+                .address("address")
+                .phoneNumber("010")
+                .alone(false)
+                .adminId(admin.getId())
+                .build();
+        usersMapper.save(users);
+
+        List<Users> nameSearch = usersMapper.select(null, UsersDto.builder().userName("o").build());
+        List<Users> phoneSearch = usersMapper.select(null, UsersDto.builder().phoneNumber("1").build());
+
+
+
+
+        // 검증 result A
+        assertThat(nameSearch.size()).isEqualTo(1);
+        assertThat(nameSearch.get(0).getUserName()).isEqualTo(users.getUserName());
+        // 검증 result B
+        assertThat(phoneSearch.size()).isEqualTo(1);
+        assertThat(phoneSearch.get(0).getPhoneNumber()).isEqualTo(users.getPhoneNumber());
+    }
+
 
 }
