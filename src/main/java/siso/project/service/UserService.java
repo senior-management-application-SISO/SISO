@@ -38,4 +38,9 @@ public class UserService {
     public void updateVillageHall(Long id, Long villageHallId) {
         usersMapper.updateVillageHall(id, villageHallId);
     }
+
+    //회원가입
+    public void userSave(Users users) {
+        usersMapper.save(users);
+    }
 }
