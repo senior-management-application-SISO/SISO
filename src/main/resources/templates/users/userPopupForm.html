@@ -68,7 +68,6 @@
     </div>
     <div>
       <label for="alone">독거 여부</label>
-<!--      <input type="text" id="alone" class="form-control" th:field="*{alone}" disabled>-->
       <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o" disabled>
       <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x" disabled>
     </div>
@@ -76,7 +75,7 @@
     <hr class="my-4">
 
     <div>
-      <label for="teamName">마을 이름</label>
+      <label for="teamName">팀 이름</label>
       <input type="text" id="teamName" class="form-control" th:field="*{teamName}" disabled>
     </div>
     <div>
@@ -112,7 +111,11 @@
 
     <hr class="my-4">
 
-
+    <div class="row" style="padding:0px 0px 5px 0px">
+      <div class="col">
+        <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="parentReload()">수정</button>
+      </div>
+    </div>
   </form>
 
     <div class="col">
