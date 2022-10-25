@@ -9,41 +9,119 @@
             max-width: 560px;
         }
     </style>
+
+  <th:block layout:fragment="script">
+    <script th:inline="javascript">
+
+            function deleteUserTeam() {
+                const id = [[ ${userDetailInfo.id} ]];
+                const userName = [[ ${userDetailInfo.userName} ]];
+                if ( !confirm(userName + "을(를) 삭제할까요?") ) {
+                    return false;
+                }
+
+
+                window.location.href = '/users/delete?id='+id;
+
+                opener.parent.reload();
+
+                window.close();
+            }
+
+            function parentReload(){
+            opener.parent.reload();
+            }
+
+    </script>
+  </th:block>
+
 </head>
 <body>
 
-<hr class="my-4">
-<div>
-  <table id="table" class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>이름</th>
-      <th>생년월일</th>
-      <th>주소</th>
-      <th>핸드폰 번호</th>
-      <th>독거 유무</th>
-      <th>날짜</th>
-      <th>출석</th>
-      <th>소속</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-      <td id="userId" th:text="${user.id}">id</td>
-      <td><a href="" th:onclick="userPopup([[${user.id}]], [[${user.userName}]])" th:text="${user.userName}">이름</a></td>
-      <td th:text="${user.dateOfBirth}">1999-09-29</td>
-      <td th:text="${user.address}">지족북로33</td>
-      <td th:text="${user.phoneNumber}">010-0000-0000</td>
-      <td th:if="${user.alone == true}">o</td>
-      <td th:if="${user.alone == false}">x</td>
-      <td th:text="${user.date}">0000-00-00</td>
-      <td th:if="${user.attendanceState == true}">o</td>
-      <td th:if="${user.attendanceState == false}">x</td>
-      <td th:text="${user.teamAddress}">소속</td>
-    </tr>
-    </tbody>
-  </table>
+<div class="container">
+
+  <div class="py-5 text-center">
+    <h2>멤버 정보</h2>
+  </div>
+
+  <form action="users.html" th:action th:object="${userDetailInfo}" method="post">
+
+    <div>
+      <label for="id">유저 ID</label>
+      <input type="text" id="id" class="form-control" th:field="*{userId}" disabled>
+    </div>
+    <div>
+      <label for="userName">이름</label>
+      <input type="text" id="userName" class="form-control" th:field="*{userName}" disabled>
+    </div>
+    <div>
+      <label for="dateOfBirth">생년월일</label>
+      <input type="text" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}" disabled>
+    </div>
+    <div>
+      <label for="address">주소</label>
+      <input type="text" id="address" class="form-control" th:field="*{address}" disabled>
+    </div>
+    <div>
+      <label for="phoneNumber">핸드폰 번호</label>
+      <input type="text" id="phoneNumber" class="form-control" th:field="*{phoneNumber}" disabled>
+    </div>
+    <div>
+      <label for="alone">독거 여부</label>
+<!--      <input type="text" id="alone" class="form-control" th:field="*{alone}" disabled>-->
+      <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o" disabled>
+      <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x" disabled>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+      <label for="teamName">마을 이름</label>
+      <input type="text" id="teamName" class="form-control" th:field="*{teamName}" disabled>
+    </div>
+    <div>
+      <label for="teamAddress">마을 주소</label>
+      <input type="text" id="teamAddress" class="form-control" th:field="*{teamAddress}" disabled>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+      <label for="userStateDate">최근 출석일</label>
+      <input type="text" id="userStateDate" class="form-control" th:field="*{userStateDate}" disabled>
+    </div>
+    <div>
+      <label for="locationAddress">최근 유저 위치</label>
+      <input type="text" id="locationAddress" class="form-control" th:field="*{locationAddress}" disabled>
+    </div>
+    <div>
+      <label for="locationTime">위치 등록 시간</label>
+      <input type="text" id="locationTime" class="form-control" th:field="*{locationTime}" disabled>
+    </div>
+
+    <hr class="my-4">
+
+    <div>
+      <label for="villageHallName">마을 회관 이름</label>
+      <input type="text" id="villageHallName" class="form-control" th:field="*{villageHallName}" disabled>
+    </div>
+    <div>
+      <label for="villageHallAddress">마을 회관 주소</label>
+      <input type="text" id="villageHallAddress" class="form-control" th:field="*{villageHallAddress}" disabled>
+    </div>
+
+    <hr class="my-4">
+
+
+  </form>
+
+    <div class="col">
+      <button class="w-100 btn btn-danger btn-lg" onclick="deleteUserTeam()">삭제</button>
+    </div>
+
+  <button  style="visibility:hidden;" class="w-100 btn btn-danger btn-lg">x</button>
+
 </div>
+
 </body>
 </html>

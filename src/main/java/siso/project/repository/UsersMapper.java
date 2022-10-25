@@ -5,10 +5,9 @@ import org.apache.ibatis.annotations.Param;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserInfoTeamStateVO;
-import siso.project.repository.vo.UserInfoVO;
+import siso.project.repository.vo.UserDetailInfoVO;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,10 @@ public interface UsersMapper {
 
     //업데이트
     void update(@Param("id") Long id, @Param("updateParam") UsersDto updateDto);
+
+    void userTeamDelete(@Param("id") Long id, @Param("userTeamId") Long userTeamId);
+
+    void userAdminDelete(@Param("id") Long id, @Param("userAdminId") Long userAdminId);
 
     //마을회관 업데이트
     void updateVillageHall(@Param("id") Long id, @Param("villageHallId") Long villageHallId);
@@ -34,10 +37,9 @@ public interface UsersMapper {
     List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId")Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date")Date date);
 
     //유저 모든 정보
-    List<UserInfoVO> findUserInfo(Long userId);
+    UserDetailInfoVO findUserDetailInfo(Long userId);
 
     //전제 조회
     List<Users> select(@Param("adminId") Long loginAdminId, @Param("searchParam") UsersDto usersDto);
-
 }
 

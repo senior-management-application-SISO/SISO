@@ -4,7 +4,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import siso.project.domain.UsersState;
 import siso.project.repository.dto.UsersQrStateDto;
+import siso.project.repository.vo.UserHallStateVO;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,4 +27,7 @@ public interface UsersStateMapper {
 
     //단건조회
     Optional<UsersState> findById(Long id);
+
+    //마을회관 조회 (오늘날짜, 유저가 가는 마을회관 아이디)
+    List<UserHallStateVO> selectHallState(@Param("date") LocalDate date, @Param("hallId") Long hallId);
 }

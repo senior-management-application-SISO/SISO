@@ -7,8 +7,9 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
-public class UserInfoVO {
+public class UserDetailInfoVO {
     private Long id;
+    private String userId;
     private String userName;
     private Date dateOfBirth;
     private String address;
@@ -32,8 +33,9 @@ public class UserInfoVO {
     private String villageHallAddress;
 
     @Builder
-    public UserInfoVO(Long id, String userName, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, String teamName, String teamAddress, Long usersLocationId, Long villageHallId, LocalDateTime userStateDate, Boolean attendanceState, Boolean hallState, String locationAddress, double locationLat, double locationLon, Date locationTime, String villageHallName, double villageHallLat, double villageHallLon, String villageHallAddress) {
+    public UserDetailInfoVO(Long id, String userId, String userName, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, String teamName, String teamAddress, Long usersLocationId, Long villageHallId, LocalDateTime userStateDate, Boolean attendanceState, Boolean hallState, String locationAddress, double locationLat, double locationLon, Date locationTime, String villageHallName, double villageHallLat, double villageHallLon, String villageHallAddress) {
         this.id = id;
+        this.userId = userId;
         this.userName = userName;
         this.dateOfBirth = dateOfBirth;
         this.address = address;

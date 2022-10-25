@@ -4,13 +4,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import siso.project.domain.Users;
 import siso.project.domain.UsersState;
 import siso.project.repository.dto.UsersQrStateDto;
+import siso.project.repository.vo.UserHallStateVO;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -206,6 +207,14 @@ class UsersStateMapperTest {
         assertThat(findUsersState.getAttendanceState()).isTrue();
         assertThat(findUsersState.getHallState()).isTrue();
         assertThat(findUsersState.getId()).isEqualTo(usersState.getId());
+    }
+
+
+    @Test
+    void selectHallState() {
+        LocalDate now = LocalDate.now();
+        List<UserHallStateVO> userHallStateVOS = usersStateMapper.selectHallState(now, 2L);
+        System.out.println("userHallStateVOS = " + userHallStateVOS);
     }
 
 

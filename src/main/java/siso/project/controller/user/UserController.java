@@ -1,20 +1,21 @@
 package siso.project.controller.user;
 
+import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import siso.project.domain.Admin;
-import siso.project.domain.Users;
 import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 import siso.project.service.UserService;
 import siso.project.web.SessionConst;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -31,9 +32,16 @@ public class UserController {
         return "users/users";
     }
 
-    @GetMapping("/{userid}")
-    public String users(@PathVariable long userId, Model model) {
+    @GetMapping("/{userId}")
+    public String users(@PathVariable long userId, Model model) throws IOException, WriterException {
+        UserDetailInfoVO userDetailInfo = userService.findUserDetailInfo(userId);
+        model.addAttribute("userDetailInfo",userDetailInfo);
 
         return "users/userPopupForm";
+    }
+
+    @GetMapping("/delete")
+    public void deleteUserTeamAndAdmin(@RequestParam final Long id, Long teamId, Long adminId) {
+        userService.deleteUserTeamAndAdmin(id, teamId, adminId);
     }
 }
