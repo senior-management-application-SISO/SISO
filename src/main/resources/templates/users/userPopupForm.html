@@ -11,7 +11,7 @@
     </style>
 
   <th:block layout:fragment="script">
-  <script type="text/javascript">
+    <script th:inline="javascript">
 
             function deleteUserTeam() {
                 const id = [[ ${userDetailInfo.id} ]];
@@ -43,7 +43,8 @@
     <h2>멤버 정보</h2>
   </div>
 
-  <form action="users.html" th:action th:object="${userDetailInfo}" method="get">
+  <form action="users.html" th:action th:object="${userDetailInfo}" method="post">
+
     <div>
       <label for="id">유저 ID</label>
       <input type="text" id="id" class="form-control" th:field="*{userId}" disabled>
@@ -113,11 +114,9 @@
 
   </form>
 
-  <div class="row">
     <div class="col">
       <button class="w-100 btn btn-danger btn-lg" onclick="deleteUserTeam()">삭제</button>
     </div>
-  </div>
 
   <button  style="visibility:hidden;" class="w-100 btn btn-danger btn-lg">x</button>
 

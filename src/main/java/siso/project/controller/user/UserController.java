@@ -22,7 +22,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final UsersMapper usersMapper;
 
     @GetMapping
     public String members(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute("userSearch") UsersDto cond, Model model) {
@@ -39,8 +38,8 @@ public class UserController {
         return "users/userPopupForm";
     }
 
-    @GetMapping("/delete/{userId}")
-    public void usersTeamDelete(@PathVariable long userId, @ModelAttribute UsersDto usersDto) {
-        userService.userTeamDelete(userId, usersDto);
+    @GetMapping("/delete")
+    public void deleteUserTeamAndAdmin(@RequestParam final Long id, Long teamId, Long adminId) {
+        userService.deleteUserTeamAndAdmin(id, teamId, adminId);
     }
 }

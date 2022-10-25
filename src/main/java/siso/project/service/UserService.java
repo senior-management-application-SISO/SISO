@@ -27,16 +27,21 @@ public class UserService {
     public List<UserInfoTeamStateVO> findUserListVO(Long loginAdminId, UsersDto cond) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -3);
-        Date date =new Date(calendar.getTimeInMillis());
+        Date date = new Date(calendar.getTimeInMillis());
 
         return usersMapper.findUserInfoTeamState(loginAdminId, cond, date);
     }
-
     public UserDetailInfoVO findUserDetailInfo(Long userId) {
         return usersMapper.findUserDetailInfo(userId);
     }
 
-    public void userTeamDelete(Long userId, UsersDto usersDto) {
-        usersMapper.userTeamDelete(userId, usersDto);
+    public void updateVillageHall(Long id, Long villageHallId) {
+        usersMapper.updateVillageHall(id, villageHallId);
+    }
+
+
+    public void deleteUserTeamAndAdmin(Long id, Long teamId, Long adminId) {
+        usersMapper.userTeamDelete(id, teamId);
+        usersMapper.userAdminDelete(id, adminId);
     }
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 import siso.project.domain.Admin;
 import siso.project.domain.Teams;
 import siso.project.repository.dto.AdminDto;
+import siso.project.repository.vo.AdminCountyOfficeVO;
 
 import java.util.List;
 import java.util.Map;
@@ -21,5 +22,8 @@ public interface AdminMapper {
     void update(@Param("id") Long id, @Param("admin") AdminDto adminDto);
 
     void delete(Long id);
+
+    //admin, countyOffice 조회
+    AdminCountyOfficeVO selectAdminOfficeName(Long id);
 }
 
