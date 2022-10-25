@@ -88,16 +88,16 @@
         from users
         <where>
             <if test="searchParam.userName != null and searchParam.userName != ''">
-                and user_name = #{searchParam.userName}
+                and user_name like concat('%', #{searchParam.userName}, '%')
             </if>
             <if test="searchParam.phoneNumber != null and searchParam.phoneNumber != ''">
-                and phone_number = #{searchParam.phoneNumber}
+                and phone_number like concat('%', #{searchParam.phoneNumber}, '%')
             </if>
             <if test="searchParam.userId != null and searchParam.userId != ''">
-                and user_id = #{searchParam.userId}
+                and user_id like concat('%', #{searchParam.userId}, '%')
             </if>
             <if test="adminId != null and adminId != ''">
-                and admin_id = #{adminId}
+                and admin_id like concat('%', #{adminId}, '%')
             </if>
         </where>
     </select>
@@ -115,10 +115,10 @@
         <where>
             and users.admin_id = #{adminId}
             <if test="searchParam.userName != null and searchParam.userName != ''">
-                and user_name = #{searchParam.userName}
+                and user_name like concat('%', #{searchParam.userName}, '%')
             </if>
             <if test="searchParam.phoneNumber != null and searchParam.phoneNumber != ''">
-                and phone_number = #{searchParam.phoneNumber}
+                and phone_number like concat('%', #{searchParam.phoneNumber}, '%')
             </if>
             <if test="date != null">
                 and users_state.date >= #{date}
