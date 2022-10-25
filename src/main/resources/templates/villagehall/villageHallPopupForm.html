@@ -8,7 +8,8 @@
         .container {
             max-width: 560px;
         }
-                        .field-error {
+
+        .field-error {
             border-color: #dc3545;
             color: #dc3545;
         }
@@ -19,23 +20,23 @@
         <script th:inline="javascript">
 
             function deleteVillageHall() {
-                const id = [[ ${villageHall.id} ]];
-                const hallName = [[ ${villageHall.hallName} ]];
-                if ( !confirm(hallName + "을 삭제할까요?") ) {
+                const id = [[ ${villageHall.id}]];
+                const hallName = [[ ${villageHall.hallName}]];
+                if (!confirm(hallName + "을 삭제할까요?")) {
                     return false;
                 }
 
-                window.location.href = '/villagehall/delete?id='+id;
+                window.location.href = '/villagehall/delete?id=' + id;
 
-                    alert("삭제 되었습니다.")
+                alert("삭제 되었습니다.")
 
                 opener.parent.reload();
 
                 window.close();
             }
 
-            function parentReload(){
-            opener.parent.reload();
+            function parentReload() {
+                opener.parent.reload();
             }
 
 
