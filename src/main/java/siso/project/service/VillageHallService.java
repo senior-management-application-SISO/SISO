@@ -2,13 +2,11 @@ package siso.project.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.domain.UsersState;
 import siso.project.domain.VillageHall;
 import siso.project.repository.UsersStateMapper;
 import siso.project.repository.VillageHallMapper;
-import siso.project.repository.dto.TeamsDto;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.dto.UsersQrStateDto;
 import siso.project.repository.dto.VillageHallDto;

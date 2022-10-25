@@ -63,6 +63,24 @@
         </where>
     </select>
 
+    <select id="selectHallState" resultType="UserHallStateVO">
+        SELECT users.user_name, users.date_of_birth, users.phone_number, village_hall.hall_name, village_hall.address
+        FROM users
+        JOIN village_hall
+        ON users.village_hall_id = village_hall.Id
+        JOIN users_state
+        ON users.Id = users_state.users_id
+        <where>
+            and users_state.hall_state = 1
+            <if test="date != null">
+                and users_state.date = #{date}
+            </if>
+            <if test="hallId != null and hallId != ''">
+                and users.village_hall_id = #{hallId}
+            </if>
+        </where>
+    </select>
+
 
 
 </mapper>
