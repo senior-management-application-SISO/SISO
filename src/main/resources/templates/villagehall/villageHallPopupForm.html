@@ -73,7 +73,9 @@
             <div class="field-error" th:errors="*{address}"/>
         </div>
 
-        <img th:src="@{'data:image/jpeg;base64,'+${img}}">
+        <div class="row text-center">
+            <img id="qrcode" th:src="@{'data:image/jpeg;base64,'+${img}}">
+        </div>
 
         <hr class="my-4">
 

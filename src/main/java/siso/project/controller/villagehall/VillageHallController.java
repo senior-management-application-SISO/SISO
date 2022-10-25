@@ -46,7 +46,7 @@ public class VillageHallController {
         List<VillageHall> select = villageHallService.villageHallSelect(null, villageHall);
         model.addAttribute("villageHall", select.get(0));
 
-        String img = getQRCodeImage("localhost:8080/villagehall/qrcheck?villageHallId=" + villageHallId, 400, 400);
+        String img = getQRCodeImage("localhost:8080/villagehall/qrcheck?villageHallId=" + villageHallId, 350, 350);
         model.addAttribute("img", img);
 
         return "villagehall/villageHallPopupForm";
