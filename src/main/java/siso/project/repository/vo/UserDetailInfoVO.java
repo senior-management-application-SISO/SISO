@@ -24,16 +24,16 @@ public class UserDetailInfoVO {
     private Boolean attendanceState;
     private Boolean hallState;
     private String locationAddress;
-    private double locationLat;
-    private double locationLon;
+    private Double locationLat;
+    private Double locationLon;
     private Date locationTime;
     private String villageHallName;
-    private double villageHallLat;
-    private double villageHallLon;
+    private Double villageHallLat;
+    private Double villageHallLon;
     private String villageHallAddress;
 
     @Builder
-    public UserDetailInfoVO(Long id, String userId, String userName, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, String teamName, String teamAddress, Long usersLocationId, Long villageHallId, LocalDateTime userStateDate, Boolean attendanceState, Boolean hallState, String locationAddress, double locationLat, double locationLon, Date locationTime, String villageHallName, double villageHallLat, double villageHallLon, String villageHallAddress) {
+    public UserDetailInfoVO(Long id, String userId, String userName, Date dateOfBirth, String address, String phoneNumber, Boolean alone, Long teamId, String teamName, String teamAddress, Long usersLocationId, Long villageHallId, LocalDateTime userStateDate, Boolean attendanceState, Boolean hallState, String locationAddress, Double locationLat, Double locationLon, Date locationTime, String villageHallName, Double villageHallLat, Double villageHallLon, String villageHallAddress) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;

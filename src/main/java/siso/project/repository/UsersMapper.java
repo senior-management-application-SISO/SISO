@@ -37,7 +37,7 @@ public interface UsersMapper {
     List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId")Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date")Date date);
 
     //유저 모든 정보
-    UserDetailInfoVO findUserDetailInfo(Long userId);
+    Optional<UserDetailInfoVO> findUserDetailInfo(Long userId);
 
     //전제 조회
     List<Users> select(@Param("adminId") Long loginAdminId, @Param("searchParam") UsersDto usersDto);

@@ -167,6 +167,4 @@
             and users.id = #{userId}
         </where>
     </select>
-
-
 </mapper>

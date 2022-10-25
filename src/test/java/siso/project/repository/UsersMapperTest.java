@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -231,7 +232,7 @@ class UsersMapperTest {
     @Test
     @DisplayName("유저 모든 정보 select")
     void selectUserInfo() {
-        UserDetailInfoVO userInfo = usersMapper.findUserDetailInfo(1L);
+        Optional<UserDetailInfoVO> userInfo = usersMapper.findUserDetailInfo(1L);
         System.out.println("userInfoVO = " + userInfo);
     }
 

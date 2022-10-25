@@ -32,7 +32,7 @@ public class UserService {
         return usersMapper.findUserInfoTeamState(loginAdminId, cond, date);
     }
     public UserDetailInfoVO findUserDetailInfo(Long userId) {
-        return usersMapper.findUserDetailInfo(userId);
+        return usersMapper.findUserDetailInfo(userId).get();
     }
 
     public void updateVillageHall(Long id, Long villageHallId) {
