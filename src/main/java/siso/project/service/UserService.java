@@ -44,4 +44,9 @@ public class UserService {
         usersMapper.userTeamDelete(id, teamId);
         usersMapper.userAdminDelete(id, adminId);
     }
+
+    //회원가입
+    public void userSave(Users users) {
+        usersMapper.save(users);
+    }
 }
