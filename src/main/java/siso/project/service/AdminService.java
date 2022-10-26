@@ -27,4 +27,8 @@ public class AdminService {
     public AdminCountyOfficeVO adminOfficeNameSelect(Long id) {
         return adminMapper.selectAdminOfficeName(id);
     }
+
+    public List<Admin> adminListSelect(Admin admin) {
+        return adminMapper.select(admin);
+    }
 }

@@ -11,6 +11,7 @@ import siso.project.repository.vo.UserInfoTeamStateVO;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -48,5 +49,14 @@ public class UserService {
     //회원가입
     public void userSave(Users users) {
         usersMapper.save(users);
+    }
+
+    //로그인 가능한 회원인지 조회
+    public Users selectIdPassword(UsersDto usersDto) {
+        Users users = usersMapper.selectIdPassword(usersDto);
+        if(!Objects.isNull(users)) {    //로그인 가능하면
+            return users;
+        }
+        return null;
     }
 }

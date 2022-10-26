@@ -167,4 +167,12 @@
             and users.id = #{userId}
         </where>
     </select>
+
+
+    <select id="selectIdPassword" resultType="Users">
+        SELECT *
+        FROM users
+        WHERE users.user_id=#{userId} and users.password=#{password}
+    </select>
+
 </mapper>
