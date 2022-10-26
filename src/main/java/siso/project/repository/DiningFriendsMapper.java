@@ -18,6 +18,8 @@ public interface DiningFriendsMapper {
     // 수정
     void update(@Param("id") Long id, @Param("updateParam")DiningFriendsDto updateDto);
 
+    void updateTeamId(@Param("id") Long id, @Param("teamId") Long teamId);
+
     // 삭제
     void delete(Long id);
 

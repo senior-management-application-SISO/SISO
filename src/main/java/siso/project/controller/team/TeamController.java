@@ -74,4 +74,8 @@ public class TeamController {
         return "redirect:/teams/" + teamId;
     }
 
+    @GetMapping("teams/delete")
+    public void teamDelete(@RequestParam final Long id) {
+        teamService.teamDelete(id);
+    }
 }
