@@ -49,6 +49,16 @@
         </where>
     </update>
 
+    <update id="updateTeamId">
+        update teams
+        <set>
+            team_id=#{teamId},
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
 
     <delete id="delete">
         delete from dining_friends

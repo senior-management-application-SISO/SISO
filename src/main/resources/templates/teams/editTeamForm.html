@@ -8,21 +8,41 @@
         .container {
             max-width: 560px;
         }
-                                .field-error {
+        .field-error {
             border-color: #dc3545;
             color: #dc3545;
         }
     </style>
 
-    <script type="text/javascript">
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
 
-        function popupClose(){
+            function popupClose(){
+                    opener.parent.reload();
+            }
+
+            function deleteTeam() {
+                const id = [[${teams.id}]];
+                const teamName = [[ ${teams.teamName}]];
+                if (!confirm(teamName + "을 삭제할까요?")) {
+                    return false;
+                }
+
+                window.location.href = '/teams/delete?id=' + id;
+
+                alert("삭제 되었습니다.")
+
                 opener.parent.reload();
 
+                window.close();
+            }
 
-        }
+            function parentReload() {
+                opener.parent.reload();
+            }
 
-    </script>
+        </script>
+    </th:block>
 
 </head>
 <body>
@@ -62,6 +82,10 @@
             </div>
         </div>
     </form>
+    <div class="col" style="margin:5px">
+        <button class="w-100 btn btn-danger btn-lg" onclick="deleteTeam()">삭제</button>
+    </div>
+
 
 </div> <!-- /container -->
 </body>
