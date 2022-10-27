@@ -37,14 +37,11 @@
             <if test="updateParam.teamId != null">
                 team_id=#{updateParam.teamId},
             </if>
-            <if test="updateParam.teamId == null">
-                team_id=null,
-            </if>
             <if test="updateParam.adminId != null">
                 admin_id=#{updateParam.adminId},
             </if>
             <if test="updateParam.adminId == null">
-                admin_id=null,
+                admin_id #{updateParam.adminId},
             </if>
             <if test="updateParam.usersLocationId != null">
                 users_location_id=#{updateParam.usersLocationId},
@@ -118,6 +115,22 @@
             </if>
             <if test="adminId != null and adminId != ''">
                 and admin_id like concat('%', #{adminId}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAllUser" resultType="Users">
+        select  user_id, user_name, address
+        from users
+        <where>
+            <if test="userId != null">
+                and user_id like concat('%', #{userId}, '%')
+            </if>
+            <if test="userName != null">
+                and user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="address != null">
+                and address like concat('%', #{address}, '%')
             </if>
         </where>
     </select>

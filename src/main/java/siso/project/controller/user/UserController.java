@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import siso.project.domain.Admin;
-import siso.project.repository.UsersMapper;
+import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;

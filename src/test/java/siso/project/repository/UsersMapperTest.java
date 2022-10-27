@@ -315,6 +315,4 @@ class UsersMapperTest {
         assertThat(phoneSearch.size()).isEqualTo(1);
         assertThat(phoneSearch.get(0).getPhoneNumber()).isEqualTo(users.getPhoneNumber());
     }
-
-
 }

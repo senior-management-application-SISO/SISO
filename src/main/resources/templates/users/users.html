@@ -29,6 +29,17 @@
             location.reload();
             }, 300);
         }
+
+        function setSelectUsers(id, name){
+                document.getElementById('countyOfficeId').value = id;
+                document.getElementById('countyOfficeName').value = name;
+            }
+
+        window.onload = function(){
+                document.getElementById("newwin").onclick = function(){
+                    window.open("/users/list","","width=700px,height=500px,top=200px,left=200px;");
+                }
+            };
         </script>
     </th:block>
 
@@ -54,6 +65,10 @@
                 <button type="submit" class="btn btn-secondary mb-2">검색</button>
             </div>
             <div class="col">
+                <div class="col">
+                    <label for="newwin"></label>
+                    <button id="newwin" class="btn btn-primary float-end" type="button">멤버 추가</button>
+                </div>
             </div>
         </div>
 
