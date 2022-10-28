@@ -70,7 +70,6 @@
     </div>
     <div>
       <label for="alone">독거 여부</label>
-<!--      <input type="text" id="alone" class="form-control" th:field="*{alone}" disabled>-->
       <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o" disabled>
       <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x" disabled>
     </div>
@@ -113,8 +112,6 @@
     </div>
 
     <hr class="my-4">
-
-
   </form>
 
     <div class="col">

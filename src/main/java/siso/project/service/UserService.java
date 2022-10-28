@@ -24,6 +24,11 @@ public class UserService {
         return usersMapper.select(loginAdminId, cond);
     }
 
+    //전체 유저 출력(아이디, 이름, 주소)
+    public List<Users> SelectUserList(UsersDto usersDto) {
+            return usersMapper.selectAllUser(usersDto);
+    }
+
     //조인 조회
     public List<UserInfoTeamStateVO> findUserListVO(Long loginAdminId, UsersDto cond) {
         Calendar calendar = Calendar.getInstance();
@@ -40,6 +45,9 @@ public class UserService {
         usersMapper.updateVillageHall(id, villageHallId);
     }
 
+    public void addUserAdmin(Long id, UsersDto usersDto) {
+        usersMapper.update(id, usersDto);
+    }
 
     public void deleteUserTeamAndAdmin(Long id, Long teamId, Long adminId) {
         usersMapper.userTeamDelete(id, teamId);
