@@ -2,10 +2,14 @@ package siso.project.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import siso.project.domain.Users;
+import siso.project.domain.UsersState;
 import siso.project.repository.UsersStateMapper;
 import siso.project.repository.vo.UserHallStateVO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,5 +22,16 @@ public class UserStateService {
     public List<UserHallStateVO> selectVillageHall(Long hallId) {
         LocalDate date = LocalDate.now();
         return usersStateMapper.selectHallState(date, hallId);
+    }
+
+    public void saveUserState(Users user){
+        UsersState usersState = UsersState.builder()
+                .date(LocalDateTime.now())
+                .attendanceState(true)
+                .hallState(false)
+                .usersId(user.getId())
+                .build();
+
+        usersStateMapper.save(usersState);
     }
 }

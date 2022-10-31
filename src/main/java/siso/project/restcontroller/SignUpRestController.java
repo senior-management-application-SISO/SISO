@@ -7,10 +7,7 @@ import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.domain.VillageHall;
 import siso.project.repository.dto.TeamsDto;
-import siso.project.service.AdminService;
-import siso.project.service.TeamService;
-import siso.project.service.UserService;
-import siso.project.service.VillageHallService;
+import siso.project.service.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class SignUpRestController {
     private final TeamService teamService;
     private final AdminService adminService;
     private final VillageHallService villageHallService;
+    private final UserStateService userStateService;
 
     //1. 회원가입 전 소속 조회
     @GetMapping(value = {"/team/{adminId}/{teamName}", "/team/{adminId}"})
@@ -46,9 +44,8 @@ public class SignUpRestController {
         return adminService.adminListSelect(selectAdmin);
     }
 
-
     //3. 회원가입 전 마을회관 조회
-    @GetMapping(value= {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
+    @GetMapping(value = {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
     public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) Long adminId) {
         VillageHall villageHall = VillageHall.builder()
                 .hallName(name)
@@ -56,16 +53,11 @@ public class SignUpRestController {
         return villageHallService.villageHallSelect(adminId, villageHall);
     }
 
-
     //회원가입
     @PostMapping("/user")
     public String saveUser(@ModelAttribute Users users) {
         userService.userSave(users);
+        userStateService.saveUserState(users);
         return "ok";
     }
-
-
-
-
-
 }
