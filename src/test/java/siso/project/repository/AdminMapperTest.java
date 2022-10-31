@@ -1,5 +1,6 @@
 package siso.project.repository;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,13 +21,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(value = true)
 class AdminMapperTest {
 
     @Autowired
     AdminMapper adminMapper;
 
     @Test
+    @DisplayName("관리자 저장")
     void save() {
         //given
         Admin admin = Admin.builder()
@@ -41,6 +43,7 @@ class AdminMapperTest {
     }
 
     @Test
+    @DisplayName("관리자 조회")
     void idSelect() {
         //given
         Admin admin = Admin.builder()
@@ -64,6 +67,7 @@ class AdminMapperTest {
     }
 
     @Test
+    @DisplayName("관리자 업데이트")
     void infoUpdate() {
         //given
         Admin admin = Admin.builder()
@@ -87,6 +91,7 @@ class AdminMapperTest {
     }
 
     @Test
+    @DisplayName("관리자 삭제")
     void delete() {
         //given
         Admin admin = Admin.builder()

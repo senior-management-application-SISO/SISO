@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(value = true)
 public class UsersLocationMapperTest {
     @Autowired
     UsersLocationMapper usersLocationMapper;

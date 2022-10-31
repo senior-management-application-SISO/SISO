@@ -50,18 +50,16 @@ class UsersMapperTest {
                 .address("address")
                 .phoneNumber("010")
                 .alone(false)
-                .teamId(5L)
-                .adminId(4L)
                 .build();
 
         //when
         usersMapper.save(users);
 
         //then
-//        Users findUser = usersMapper.findById(users.getId()).get();
-//        assertThat(findUser.getUserId()).isEqualTo("id");
-//        assertThat(findUser.getPassword()).isEqualTo("password");
-//        assertThat(findUser.getUserName()).isEqualTo("joe");
+        Users findUser = usersMapper.findById(users.getId()).get();
+        assertThat(findUser.getUserId()).isEqualTo("qwe");
+        assertThat(findUser.getPassword()).isEqualTo("password");
+        assertThat(findUser.getUserName()).isEqualTo("joe");
     }
 
     @Test
@@ -76,8 +74,6 @@ class UsersMapperTest {
                 .address("address")
                 .phoneNumber("010")
                 .alone(false)
-                .teamId(3L)
-                .adminId(2L)
                 .build();
         usersMapper.save(users);
 

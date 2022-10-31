@@ -40,9 +40,6 @@
             <if test="updateParam.adminId != null">
                 admin_id=#{updateParam.adminId},
             </if>
-            <if test="updateParam.adminId == null">
-                admin_id #{updateParam.adminId},
-            </if>
             <if test="updateParam.usersLocationId != null">
                 users_location_id=#{updateParam.usersLocationId},
             </if>

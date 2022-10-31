@@ -1,6 +1,7 @@
 package siso.project.repository;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(value = true)
 class CountyOfficeMapperTest {
 
     @Autowired
@@ -29,6 +30,7 @@ class CountyOfficeMapperTest {
     CountyOfficeService countyOfficeService;
 
     @Test
+    @DisplayName("동사무소 저장")
     void save() {
         countyOfficeService.saveCountyOffices();
 
@@ -44,6 +46,7 @@ class CountyOfficeMapperTest {
     }
 
     @Test
+    @DisplayName("동사무소 조회")
     void idSelect() {
         //given
         CountyOffice countyOffice = CountyOffice.builder()
@@ -56,6 +59,8 @@ class CountyOfficeMapperTest {
         //when
         CountyOffice selectCountyOffice = CountyOffice.builder()
                 .officeName("woo")
+                .officeCity("seoul")
+                .officeCounty("tokyo")
                 .build();
         List<CountyOffice> woo = countyOfficeMapper.select(selectCountyOffice);
 
@@ -64,12 +69,14 @@ class CountyOfficeMapperTest {
     }
 
     @Test
+    @DisplayName("동사무소 조회")
     void findAll(){
         List<CountyOffice> countyOffices = countyOfficeMapper.findAll();
 //        System.out.println("countyOffices = " + countyOffices);
     }
 
     @Test
+    @DisplayName("동사무소 업데이트")
     void infoUpdate() {
         //given
         CountyOffice countyOffice = CountyOffice.builder()
@@ -83,18 +90,21 @@ class CountyOfficeMapperTest {
         CountyOfficeDto updateCountyOfficeDto = CountyOfficeDto.builder()
                 .officeName("koo")
                 .build();
-        countyOfficeMapper.update(countyOffice.getId(), updateCountyOfficeDto);
+         countyOfficeMapper.update(countyOffice.getId(), updateCountyOfficeDto);
 
         //then
         CountyOffice selectCountyOffice = CountyOffice.builder()
                 .officeName("koo")
+                .officeCity("seoul")
+                .officeCounty("tokyo")
                 .build();
         List<CountyOffice> findCountyOffice = countyOfficeMapper.select(selectCountyOffice);
-        assertThat(countyOffice.getId()).isEqualTo(findCountyOffice.get(0).getId());
+        assertThat(findCountyOffice.get(0).getOfficeName()).isEqualTo("koo");
 
     }
 
     @Test
+    @DisplayName("동사무소 삭제")
     void delete() {
         //given
         CountyOffice countyOffice = CountyOffice.builder()

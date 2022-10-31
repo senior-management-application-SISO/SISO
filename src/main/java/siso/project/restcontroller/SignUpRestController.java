@@ -25,13 +25,13 @@ public class SignUpRestController {
     private final VillageHallService villageHallService;
 
     //1. 회원가입 전 소속 조회
-    @GetMapping("/team/{teamName}")
-    public List<Teams> selectTeam(@PathVariable String teamName) {
+    @GetMapping("/team/{teamName}/{adminId}")
+    public List<Teams> selectTeam(@PathVariable String teamName, @PathVariable Long adminId) {
         TeamsDto findTeam = TeamsDto.builder()
                 .teamName(teamName)
                 .build();
 
-        return teamService.teamSelect(null, findTeam);
+        return teamService.teamSelect(adminId, findTeam);
     }
 
 
