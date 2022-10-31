@@ -25,8 +25,8 @@ public class SignUpRestController {
     private final VillageHallService villageHallService;
 
     //1. 회원가입 전 소속 조회
-    @GetMapping("/team/{teamName}/{adminId}")
-    public List<Teams> selectTeam(@PathVariable String teamName, @PathVariable Long adminId) {
+    @GetMapping(value = {"/team/{adminId}/{teamName}", "/team/{adminId}"})
+    public List<Teams> selectTeam(@PathVariable(required = false) String teamName, @PathVariable(required = false) Long adminId) {
         TeamsDto findTeam = TeamsDto.builder()
                 .teamName(teamName)
                 .build();
