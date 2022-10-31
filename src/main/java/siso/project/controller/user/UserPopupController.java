@@ -27,6 +27,4 @@ public class UserPopupController {
         return "users/addUserPopupForm";
     }
 
-    @GetMapping("/list/{userId}")
-    public
 }
