@@ -25,13 +25,13 @@ public class SignUpRestController {
     private final VillageHallService villageHallService;
 
     //1. 회원가입 전 소속 조회
-    @GetMapping("/team/{teamName}")
-    public List<Teams> selectTeam(@PathVariable String teamName) {
+    @GetMapping(value = {"/team/{adminId}/{teamName}", "/team/{adminId}"})
+    public List<Teams> selectTeam(@PathVariable(required = false) String teamName, @PathVariable(required = false) Long adminId) {
         TeamsDto findTeam = TeamsDto.builder()
                 .teamName(teamName)
                 .build();
 
-        return teamService.teamSelect(null, findTeam);
+        return teamService.teamSelect(adminId, findTeam);
     }
 
 
@@ -48,13 +48,12 @@ public class SignUpRestController {
 
 
     //3. 회원가입 전 마을회관 조회
-    @GetMapping(value= {"/villagehall/{name}/{address}", "/villagehall/{name}"})
-    public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) String address) {
+    @GetMapping(value= {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
+    public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) Long adminId) {
         VillageHall villageHall = VillageHall.builder()
                 .hallName(name)
-                .address(address)
                 .build();
-        return villageHallService.villageHallSelect(null, villageHall);
+        return villageHallService.villageHallSelect(adminId, villageHall);
     }
 
 
