@@ -48,13 +48,12 @@ public class SignUpRestController {
 
 
     //3. 회원가입 전 마을회관 조회
-    @GetMapping(value= {"/villagehall/{name}/{address}", "/villagehall/{name}"})
-    public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) String address) {
+    @GetMapping(value= {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
+    public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) Long adminId) {
         VillageHall villageHall = VillageHall.builder()
                 .hallName(name)
-                .address(address)
                 .build();
-        return villageHallService.villageHallSelect(null, villageHall);
+        return villageHallService.villageHallSelect(adminId, villageHall);
     }
 
 
