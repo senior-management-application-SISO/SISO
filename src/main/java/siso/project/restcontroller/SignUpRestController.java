@@ -12,6 +12,7 @@ import siso.project.service.AdminService;
 import siso.project.service.TeamService;
 import siso.project.service.UserService;
 import siso.project.service.VillageHallService;
+import siso.project.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class SignUpRestController {
     private final TeamService teamService;
     private final AdminService adminService;
     private final VillageHallService villageHallService;
+    private final UserStateService userStateService;
 
     //1. 회원가입 전 소속 조회
     @GetMapping(value = {"/team/{adminId}/{teamName}", "/team/{adminId}"})
@@ -56,7 +58,6 @@ public class SignUpRestController {
         return adminCountyOfficeVOList;
     }
 
-
     //3. 회원가입 전 마을회관 조회
     @GetMapping(value = {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
     public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) Long adminId) {
@@ -66,13 +67,11 @@ public class SignUpRestController {
         return villageHallService.villageHallSelect(adminId, villageHall);
     }
 
-
     //회원가입
     @PostMapping("/user")
     public String saveUser(@ModelAttribute Users users) {
         userService.userSave(users);
+        userStateService.saveUserState(users);
         return "ok";
     }
-
-
 }
