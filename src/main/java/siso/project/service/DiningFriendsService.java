@@ -6,6 +6,8 @@ import siso.project.domain.DiningFriends;
 import siso.project.repository.DiningFriendsMapper;
 import siso.project.repository.dto.DiningFriendsDto;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DiningFriendsService {
@@ -17,5 +19,13 @@ public class DiningFriendsService {
         diningFriendsMapper.save(diningFriends);
     }
 
+    //파티 조회
+    public List<DiningFriends> select(Long teamId) {
+        DiningFriendsDto diningFriendsDto = DiningFriendsDto.builder()
+                .teamId(teamId)
+                .build();
+
+        return diningFriendsMapper.select(diningFriendsDto);
+    }
 
 }

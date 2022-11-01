@@ -86,6 +86,9 @@
             <if test="phoneNumber != null and phoneNumber != ''">
                 and phone_number like concat('%', #{phoneNumber}, '%')
             </if>
+            <if test="teamId != null and teamId != ''">
+                and team_id = #{teamId}
+            </if>
         </where>
     </select>
 

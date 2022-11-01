@@ -7,11 +7,13 @@ import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.domain.VillageHall;
 import siso.project.repository.dto.TeamsDto;
+import siso.project.repository.vo.AdminCountyOfficeVO;
 import siso.project.service.AdminService;
 import siso.project.service.TeamService;
 import siso.project.service.UserService;
 import siso.project.service.VillageHallService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -37,18 +39,26 @@ public class SignUpRestController {
 
     //2. 회원가입 전 관리자 조회
     @GetMapping(value = {"/admin/{adminName}/{adminPhoneNumber}", "/admin/{adminName}"})
-    public List<Admin> selectAdmin(@PathVariable(required = false) String adminName, @PathVariable(required = false) String adminPhoneNumber) {
+    public List<AdminCountyOfficeVO> selectAdmin(@PathVariable(required = false) String adminName, @PathVariable(required = false) String adminPhoneNumber) {
         Admin selectAdmin = Admin.builder()
                 .adminName(adminName)
                 .adminPhoneNumber(adminPhoneNumber)
                 .build();
 
-        return adminService.adminListSelect(selectAdmin);
+        List<Admin> admins = adminService.adminListSelect(selectAdmin);
+
+        List<AdminCountyOfficeVO> adminCountyOfficeVOList = new ArrayList<>();
+
+        for (Admin admin : admins) {
+            adminCountyOfficeVOList.add(adminService.adminOfficeNameSelect(admin.getId()));
+        }
+
+        return adminCountyOfficeVOList;
     }
 
 
     //3. 회원가입 전 마을회관 조회
-    @GetMapping(value= {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
+    @GetMapping(value = {"/villagehall/{adminId}/{name}", "/villagehall/{adminId}"})
     public List<VillageHall> selectVillageHall(@PathVariable(required = false) String name, @PathVariable(required = false) Long adminId) {
         VillageHall villageHall = VillageHall.builder()
                 .hallName(name)
@@ -63,9 +73,6 @@ public class SignUpRestController {
         userService.userSave(users);
         return "ok";
     }
-
-
-
 
 
 }
