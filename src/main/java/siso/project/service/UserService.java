@@ -26,7 +26,7 @@ public class UserService {
 
     //전체 유저 출력(아이디, 이름, 주소)
     public List<Users> SelectUserList(UsersDto usersDto) {
-            return usersMapper.selectAllUser(usersDto);
+        return usersMapper.selectAllUser(usersDto);
     }
 
     //조인 조회
@@ -37,6 +37,7 @@ public class UserService {
 
         return usersMapper.findUserInfoTeamState(loginAdminId, cond, date);
     }
+
     public UserDetailInfoVO findUserDetailInfo(Long userId) {
         return usersMapper.findUserDetailInfo(userId).get();
     }
@@ -62,9 +63,14 @@ public class UserService {
     //로그인 가능한 회원인지 조회
     public Users selectIdPassword(UsersDto usersDto) {
         Users users = usersMapper.selectIdPassword(usersDto);
-        if(!Objects.isNull(users)) {    //로그인 가능하면
+        if (!Objects.isNull(users)) {    //로그인 가능하면
             return users;
         }
         return null;
+    }
+
+    //유저 정보 업데이트
+    public void userUpdate(Long id, UsersDto usersDto) {
+        usersMapper.update(id, usersDto);
     }
 }
