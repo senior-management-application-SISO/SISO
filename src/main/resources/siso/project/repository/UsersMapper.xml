@@ -40,9 +40,6 @@
             <if test="updateParam.adminId != null">
                 admin_id=#{updateParam.adminId},
             </if>
-            <if test="updateParam.adminId == null">
-                admin_id #{updateParam.adminId},
-            </if>
             <if test="updateParam.usersLocationId != null">
                 users_location_id=#{updateParam.usersLocationId},
             </if>
@@ -79,6 +76,16 @@
         update users
         <set>
             village_hall_id=#{villageHallId},
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
+    <update id="addUserAdmin">
+        update users
+        <set>
+            admin_id=#{adminId},
         </set>
         <where>
             Id = #{id}

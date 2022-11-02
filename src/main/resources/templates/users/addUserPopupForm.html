@@ -7,10 +7,17 @@
 
     <script type="text/javascript">
 
-        function addUser(id, name){
-            window.opener.setSelectUsers(id, name);
-            window.close();
+        function addUser(userId, adminId){
+            alert("추가하였습니다.");
+            location.href = "/users/add/"+userId+"/"+adminId;
+            setTimeout(function () {
+
+            location.reload();
+            }, 300);
+            window.opener.reload();
+
         }
+
 
     </script>
 </head>
@@ -20,7 +27,7 @@
         <h2>멤버 목록</h2>
     </div>
 
-    <form th:object="${UserSearch}" method="get" class="form-inline">
+    <form th:object="${userList}" method="get" class="form-inline">
         <div class="row">
             <div class="col">
                 <input type="text" th:field="*{userId}" class="form-control" placeholder="유저ID"/>
@@ -47,7 +54,7 @@
             </thead>
             <tbody>
             <tr th:each="selectUsers : ${selectUsers}">
-                <td><a th:href="list/{}" th:onclick="addUser([[${users?.userId}]], [[${users?.userName}]])"
+                <td><a href="/users/list" th:onclick="addUser([[${selectUsers.id}]], [[${selectUsers.adminId}]])"
                        th:text="${selectUsers.userId}">유저ID</a>
                 </td>
                 <td><a th:text="${selectUsers.userName}">이름</a></td>
