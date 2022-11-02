@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import siso.project.domain.DiningFriends;
+import siso.project.domain.DiningFriendsUsers;
 import siso.project.domain.Teams;
 import siso.project.domain.Users;
 import siso.project.repository.dto.DiningFriendsDto;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -29,14 +32,14 @@ public class DiningFriendsMapperTest {
     @Test
     void saveWithoutForeignKey() {
         Integer memNumber = 1;
-        LocalTime time = LocalTime.of(0, 0, 0);
+        Integer currentNumber = 0;
+        LocalDateTime time = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String address = "address";
         String name = "name";
         String phoneNumber = "phoneNumber";
-        String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = getDiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state, null, null);
+        DiningFriends diningFriends = getDiningFriends(memNumber, currentNumber, time, address, name, phoneNumber, memo, state, null, null);
 
         diningFriendsMapper.save(diningFriends);
     }
@@ -46,26 +49,27 @@ public class DiningFriendsMapperTest {
     void updateWithoutForeignKey() {
         // 기존 DiningFriends 정보 save
         Integer memNumber = 1;
-        LocalTime time = LocalTime.of(0, 0, 0);
+        Integer currentNumber = 0;
+        LocalDateTime time = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String address = "address";
         String name = "name";
         String phoneNumber = "phoneNumber";
         String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = getDiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state, null, null);
+        DiningFriends diningFriends = getDiningFriends(memNumber, currentNumber, time, address, name, phoneNumber, memo, state, null, null);
         diningFriendsMapper.save(diningFriends);
 
         // update DiningFriends 정보 update
         Integer updateMemNumber = 2;
-        LocalTime updateTime = LocalTime.of(1, 1, 1);
+        Integer updateCurrentNumber = 1;
+        LocalDateTime updateTime = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String updateAddress = "updateAddress";
         String updateName = "updateName";
         String updatePhoneNumber = "updatePhoneNumber";
-        String updateMember = "updateMember";
         String updateMemo = "updateMemo";
         Boolean updateState = false;
-        DiningFriendsDto diningFriendsDto = getDiningFriendsDto(updateMemNumber, updateTime, updateAddress, updateName, updatePhoneNumber, updateMember, updateMemo, updateState, null, null);
+        DiningFriendsDto diningFriendsDto = getDiningFriendsDto(updateMemNumber, updateCurrentNumber, updateTime, updateAddress, updateName, updatePhoneNumber, updateMemo, updateState, null, null);
 
         diningFriendsMapper.update(diningFriends.getId(), diningFriendsDto);
     }
@@ -74,14 +78,14 @@ public class DiningFriendsMapperTest {
     void updateForeignKeys() {
         // 기존 DiningFriends 정보
         Integer memNumber = 1;
-        LocalTime time = LocalTime.of(0, 0, 0);
+        Integer currentNumber = 0;
+        LocalDateTime time = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String address = "address";
         String name = "name";
         String phoneNumber = "phoneNumber";
-        String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = getDiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state, null, null);
+        DiningFriends diningFriends = getDiningFriends(memNumber, currentNumber, time, address, name, phoneNumber, memo, state, null, null);
         diningFriendsMapper.save(diningFriends);
 
         // Users 생성
@@ -118,14 +122,14 @@ public class DiningFriendsMapperTest {
     void delete() {
         // 기존 DiningFriends 정보
         Integer memNumber = 1;
-        LocalTime time = LocalTime.of(0, 0, 0);
+        Integer currentNumber = 0;
+        LocalDateTime time = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String address = "address";
         String name = "name";
         String phoneNumber = "phoneNumber";
-        String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriends = getDiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state, null, null);
+        DiningFriends diningFriends = getDiningFriends(memNumber, currentNumber, time, address, name, phoneNumber, memo, state, null, null);
         diningFriendsMapper.save(diningFriends);
 
         //삭제
@@ -135,14 +139,14 @@ public class DiningFriendsMapperTest {
     @Test
     void findById() {
         Integer memNumber = 1;
-        LocalTime time = LocalTime.of(0, 0, 0);
+        Integer currentNumber = 0;
+        LocalDateTime time = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String address = "address";
         String name = "name";
         String phoneNumber = "phoneNumber";
-        String member = "member";
         String memo = "memo";
         Boolean state = true;
-        DiningFriends diningFriend = getDiningFriends(memNumber, time, address, name, phoneNumber, member, memo, state, null, null);
+        DiningFriends diningFriend = getDiningFriends(memNumber, currentNumber, time, address, name, phoneNumber, memo, state, null, null);
         diningFriendsMapper.save(diningFriend);
 
         DiningFriends foundDiningFriend = diningFriendsMapper.findById(diningFriend.getId()).get();
@@ -155,24 +159,25 @@ public class DiningFriendsMapperTest {
     void select() {
         // 기존 DiningFriends 정보 save
         Integer memNumberA = 1;
-        LocalTime timeA = LocalTime.of(0, 0, 0);
+        Integer currentNumberA = 0;
+        LocalDateTime timeA = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String addressA = "addressA";
         String nameA = "nameA";
         String phoneNumberA = "phoneNumberA";
-        String memberA = "memberA";
         String memoA = "memoA";
         Boolean stateA = true;
-        DiningFriends diningFriendsA = getDiningFriends(memNumberA, timeA, addressA, nameA, phoneNumberA, memberA, memoA, stateA, null, null);
+        DiningFriends diningFriendsA = getDiningFriends(memNumberA, currentNumberA, timeA, addressA, nameA, phoneNumberA, memoA, stateA, null, null);
         diningFriendsMapper.save(diningFriendsA);
+
         Integer memNumberB = 2;
-        LocalTime timeB = LocalTime.of(1, 1, 1);
+        Integer currentNumberB = 0;
+        LocalDateTime timeB = LocalDateTime.of(2022, 11, 1, 0, 0, 0);
         String addressB = "addressB";
         String nameB = "nameB";
         String phoneNumberB = "phoneNumberB";
-        String memberB = "memberB";
         String memoB = "memoB";
         Boolean stateB = true;
-        DiningFriends diningFriendsB = getDiningFriends(memNumberB, timeB, addressB, nameB, phoneNumberB, memberB, memoB, stateB, null, null);
+        DiningFriends diningFriendsB = getDiningFriends(memNumberB, currentNumberB, timeB, addressB, nameB, phoneNumberB, memoB, stateB, null, null);
         diningFriendsMapper.save(diningFriendsB);
 
 
@@ -202,14 +207,14 @@ public class DiningFriendsMapperTest {
     }
 
 
-    private static DiningFriends getDiningFriends(Integer memNumber, LocalTime time, String address, String name, String phoneNumber, String member, String memo, Boolean state, Long teamId, Long userId) {
+    private static DiningFriends getDiningFriends(Integer memNumber, Integer currentNumber, LocalDateTime time, String address, String name, String phoneNumber, String memo, Boolean state, Long teamId, Long userId) {
         DiningFriends diningFriends = DiningFriends.builder()
                 .memNumber(memNumber)
+                .currentNumber(currentNumber)
                 .time(time)
                 .address(address)
                 .name(name)
                 .phoneNumber(phoneNumber)
-                .members(member)
                 .memo(memo)
                 .state(state)
                 .teamId(teamId)
@@ -218,19 +223,59 @@ public class DiningFriendsMapperTest {
         return diningFriends;
     }
 
-    private static DiningFriendsDto getDiningFriendsDto(Integer updateMemNumber, LocalTime updateTime, String updateAddress, String updateName, String updatePhoneNumber, String updateMember, String updateMemo, Boolean updateState, Long teamId, Long userId) {
+    private static DiningFriendsDto getDiningFriendsDto(Integer updateMemNumber, Integer currentNumber, LocalDateTime updateTime, String updateAddress, String updateName, String updatePhoneNumber, String updateMemo, Boolean updateState, Long teamId, Long userId) {
         DiningFriendsDto diningFriendsDto = DiningFriendsDto.builder()
                 .memNumber(updateMemNumber)
+                .currentNumber(currentNumber)
                 .time(updateTime)
                 .address(updateAddress)
                 .name(updateName)
                 .phoneNumber(updatePhoneNumber)
-                .members(updateMember)
                 .memo(updateMemo)
                 .state(updateState)
                 .teamId(teamId)
                 .usersId(userId)
                 .build();
         return diningFriendsDto;
+    }
+
+    @Test
+    void select1() {
+        //given
+        Teams teamA = Teams.builder()
+                .teamName("teamA")
+                .teamAddress("teamAddressA")
+                .build();
+        teamsMapper.save(teamA);
+
+        Users users = Users.builder()
+                .userName("joe")
+                .userId("qwe")
+                .password("password")
+                .dateOfBirth(Date.valueOf("2022-10-07"))
+                .address("address")
+                .phoneNumber("010")
+                .alone(false)
+                .teamId(teamA.getId())
+                .build();
+        usersMapper.save(users);
+
+        DiningFriends diningFriends = DiningFriends.builder()
+                .memNumber(2)
+                .currentNumber(0)
+                .time(LocalDateTime.of(2022, 11, 3, 0, 0, 0))
+                .address("address")
+                .name("name")
+                .memo("memo")
+                .teamId(teamA.getId())
+                .state(true)
+                .build();
+        diningFriendsMapper.save(diningFriends);
+
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        //when
+        DiningFriends findDiningFriends = diningFriendsMapper.selectDiningFriends(users.getTeamId(), dateTime).get();
+        System.out.println("diningFriendsUsers1 = " + findDiningFriends);
     }
 }

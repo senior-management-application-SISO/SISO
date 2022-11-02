@@ -4,9 +4,9 @@
 <mapper namespace="siso.project.repository.DiningFriendsMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into dining_friends (mem_number, time, address, name, phone_number, members, memo, state, team_id,
+        insert into dining_friends (mem_number, current_number, time, address, name, phone_number, memo, state, team_id,
         users_id)
-        values (#{memNumber}, #{time}, #{address}, #{name}, #{phoneNumber}, #{members}, #{memo}, #{state}, #{teamId},
+        values (#{memNumber}, #{currentNumber}, #{time}, #{address}, #{name}, #{phoneNumber}, #{memo}, #{state}, #{teamId},
         #{usersId})
     </insert>
 
@@ -15,6 +15,9 @@
         <set>
             <if test="updateParam.memNumber != null">
                 mem_number=#{updateParam.memNumber},
+            </if>
+            <if test="updateParam.currentNumber != null">
+                current_number=#{updateParam.currentNumber},
             </if>
             <if test="updateParam.time != null">
                 time=#{updateParam.time},
@@ -27,9 +30,6 @@
             </if>
             <if test="updateParam.phoneNumber != null">
                 phone_number=#{updateParam.phoneNumber},
-            </if>
-            <if test="updateParam.members != null">
-                members=#{updateParam.members},
             </if>
             <if test="updateParam.memo != null">
                 memo=#{updateParam.memo},
@@ -68,7 +68,7 @@
     </delete>
 
     <select id="findById" resultType="DiningFriends">
-        select id, mem_number, time, address, name, phone_number, members, memo, state, team_id, users_id
+        select id, mem_number, current_number, time, address, name, phone_number, memo, state, team_id, users_id
         from dining_friends
         <where>
             Id = #{id}
@@ -77,7 +77,7 @@
 
 
     <select id="select" resultType="DiningFriends">
-        select id, mem_number, time, address, name, phone_number, members, memo, state, team_id, users_id
+        select id, mem_number, current_number, time, address, name, phone_number, memo, state, team_id, users_id
         from dining_friends
         <where>
             <if test="name != null and name != ''">
@@ -92,5 +92,37 @@
         </where>
     </select>
 
+    <select id="selectDiningFriends" resultType="DiningFriends">
+        SELECT dining_friends.Id, dining_friends.mem_number, dining_friends.current_number, dining_friends.time, dining_friends.address, dining_friends.name, dining_friends.phone_number, dining_friends.memo, dining_friends.state
+        FROM dining_friends
+        <where>
+            <if test="teamId != null and teamId != ''">
+                and dining_friends.team_id = #{teamId}
+            </if>
+            <if test="dateTime != null">
+                and dining_friends.time >= #{dateTime}
+            </if>
+        </where>
+    </select>
+
+    <update id="currentNumberPlusUpdate">
+        update dining_friends
+        <set>
+            current_number = current_number + 1
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
+    <update id="currentNumberMinusUpdate">
+        update dining_friends
+        <set>
+            current_number = current_number - 1
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
 
 </mapper>
