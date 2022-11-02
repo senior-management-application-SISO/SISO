@@ -28,6 +28,11 @@ public class CountyOfficePopupController {
     @GetMapping("/list")
     public String selectCountyOffice(@ModelAttribute("countyOfficeSearch") CountyOffice countyOfficeSearch, Model model) {
         List<CountyOffice> countyOffices = countyOfficeService.selectCountyOffices(countyOfficeSearch);
+        if (countyOffices.isEmpty()) {
+            countyOfficeService.saveCountyOffices();
+            countyOfficeService.selectCountyOffices(countyOfficeSearch);
+        }
+
         model.addAttribute("countyOfficeList", countyOffices);
         return "admins/countyOfficeListForm";
     }

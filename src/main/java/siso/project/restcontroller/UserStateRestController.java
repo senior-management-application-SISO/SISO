@@ -21,4 +21,9 @@ public class UserStateRestController {
     public List<UserHallStateVO> selectHallState(@PathVariable Long hallId){
         return userStateService.selectVillageHall(hallId);
     }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
 }

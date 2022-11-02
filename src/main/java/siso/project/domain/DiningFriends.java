@@ -1,8 +1,10 @@
 package siso.project.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalTime;
 
@@ -13,6 +15,8 @@ public class DiningFriends {
     private Long id;
 
     private Integer memNumber;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     private LocalTime time;
     private String address;
     private String name;

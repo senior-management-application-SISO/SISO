@@ -1,6 +1,7 @@
 package siso.project.repository;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
+@Rollback(value = true)
 public class TeamsMapperTest {
 
     @Autowired
@@ -27,21 +28,9 @@ public class TeamsMapperTest {
     AdminMapper adminMapper;
 
     @Test
-    void saveWithoutAdminId() {
-        String teamName = "teamA";
-        String teamAddress = "teamAddress";
-        Teams team = Teams.builder()
-                .teamName(teamName)
-                .teamAddress(teamAddress)
-                .adminId(4L)
-                .build();
-
-        teamsMapper.save(team);
-    }
-
-    @Test
+    @DisplayName("소속 저장")
     void saveWithAdminId() {
-        // admin 등록
+        //given
         Admin admin = Admin.builder()
                 .adminName("admin")
                 .adminId("adminId")
@@ -49,20 +38,25 @@ public class TeamsMapperTest {
                 .adminPhoneNumber("010-1111-1111")
                 .countyOfficeId(null)
                 .build();
-
         adminMapper.save(admin);
 
-        // 등록된 admin id
-        Long adminId = admin.getId();
-
-        // Team 등록 with admin
+        // when
         Teams team = Teams.builder()
                 .teamName("teamA")
                 .teamAddress("teamAddress")
-                .adminId(adminId)
+                .adminId(admin.getId())
                 .build();
-
         teamsMapper.save(team);
+
+        //then
+        TeamsDto teamsDto = TeamsDto.builder()
+                .teamName("teamA")
+                .teamAddress("teamAddress")
+                .build();
+        List<Teams> teams = teamsMapper.select(admin.getId(), teamsDto);
+
+        Assertions.assertThat(teams.get(0).getTeamName()).isEqualTo("teamA");
+        Assertions.assertThat(teams.get(0).getTeamAddress()).isEqualTo("teamAddress");
     }
 
     @Test
@@ -178,48 +172,48 @@ public class TeamsMapperTest {
         assertThat(foundTeam.getTeamAddress()).isEqualTo(team.getTeamAddress());
     }
 
-//    @Test
-//    void select() {
-//        // Team 저장
-//        Teams teamA = Teams.builder()
-//                .teamName("teamA")
-//                .teamAddress("teamAddressA")
-//                .build();
-//        teamsMapper.save(teamA);
-//        Teams teamB = Teams.builder()
-//                .teamName("teamB")
-//                .teamAddress("teamAddressB")
-//                .build();
-//        teamsMapper.save(teamB);
-//
-//
-//
-//        // 검색 A : teamDto.teamName - "team" / teamDto.teamAddress - "address"
-//        TeamsDto teamsDtoA = TeamsDto.builder()
-//                .teamName("team")
-//                .teamAddress("address")
-//                .build();
-//        // 검색 B : teamDto.teamName - "teamA" / teamDto.teamAddress - null
-//        TeamsDto teamsDtoB = TeamsDto.builder()
-//                .teamName("teamA")
-//                .build();
-//
-//
-//
-//        // 조회
-//        List<Teams> teamsResultA = teamsMapper.select(teamsDtoA);
-//        List<Teams> teamsResultB = teamsMapper.select(teamsDtoB);
-//
-//
-//
-//        // 검증 result A
-//        assertThat(teamsResultA.size()).isEqualTo(2);
-//        assertThat(teamsResultA.get(0).getTeamName()).isEqualTo(teamA.getTeamName());
-//        assertThat(teamsResultA.get(1).getTeamName()).isEqualTo(teamB.getTeamName());
-//        // 검증 result B
-//        assertThat(teamsResultB.size()).isEqualTo(1);
-//        assertThat(teamsResultB.get(0).getTeamName()).isEqualTo(teamA.getTeamName());
-//    }
+    @Test
+    void select() {
+        // Team 저장
+        Teams teamA = Teams.builder()
+                .teamName("teamA")
+                .teamAddress("teamAddressA")
+                .build();
+        teamsMapper.save(teamA);
+        Teams teamB = Teams.builder()
+                .teamName("teamB")
+                .teamAddress("teamAddressB")
+                .build();
+        teamsMapper.save(teamB);
+
+
+
+        // 검색 A : teamDto.teamName - "team" / teamDto.teamAddress - "address"
+        TeamsDto teamsDtoA = TeamsDto.builder()
+                .teamName("team")
+                .teamAddress("address")
+                .build();
+        // 검색 B : teamDto.teamName - "teamA" / teamDto.teamAddress - null
+        TeamsDto teamsDtoB = TeamsDto.builder()
+                .teamName("teamA")
+                .build();
+
+
+
+        // 조회
+        List<Teams> teamsResultA = teamsMapper.select(null, teamsDtoA);
+        List<Teams> teamsResultB = teamsMapper.select(null, teamsDtoB);
+
+
+
+        // 검증 result A
+        assertThat(teamsResultA.size()).isEqualTo(2);
+        assertThat(teamsResultA.get(0).getTeamName()).isEqualTo(teamA.getTeamName());
+        assertThat(teamsResultA.get(1).getTeamName()).isEqualTo(teamB.getTeamName());
+        // 검증 result B
+        assertThat(teamsResultB.size()).isEqualTo(1);
+        assertThat(teamsResultB.get(0).getTeamName()).isEqualTo(teamA.getTeamName());
+    }
 
 
 }

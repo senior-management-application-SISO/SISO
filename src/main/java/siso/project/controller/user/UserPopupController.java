@@ -26,13 +26,13 @@ public class UserPopupController {
         return "users/addUserPopupForm";
     }
 
-    @GetMapping("/add/{userId}/{adminId}")
-    public String addUserAdminId(@PathVariable String userId, @PathVariable String adminId) {
-        Long UserId = Long.valueOf(userId);
-        Long AdminId = Long.valueOf(adminId);
-        log.info(UserId.toString() + " 어쩔 남윤찬 " + AdminId.toString());
-        userService.addUserAdmin(UserId, AdminId);
-
-        return "redirect:/";
-    }
+//    @GetMapping("/add/{userId}/{adminId}")
+//    public String addUserAdminId(@PathVariable String userId, @PathVariable String adminId) {
+//        Long UserId = Long.valueOf(userId);
+//        Long AdminId = Long.valueOf(adminId);
+//        log.info(UserId.toString() + " 어쩔 남윤찬 " + AdminId.toString());
+//        userService.addUserAdmin(UserId, AdminId);
+//
+//        return "redirect:/";
+//    }
 }
