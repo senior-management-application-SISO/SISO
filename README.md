@@ -22,6 +22,8 @@
         - 식사 친구찾기 <br>
         - 마을 회관 <br>
        
+#### ERD
+![image](https://user-images.githubusercontent.com/90389323/199907541-dc9b7707-b90c-492c-9ac9-77f835136f20.png)
 
 ## 😊 팀원(가나다순) 😊
 <table align=center>
