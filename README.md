@@ -1,6 +1,6 @@
 #  독거노인 케어 프로그램 - SISO Spring Server 
 
-#### [📱 안드로이드 깃허브 주소](https://github.com/senior-management-application-SISO/SISO-Android.git)
+#### [📱 SISO 안드로이드 깃허브 주소](https://github.com/senior-management-application-SISO/SISO-Android.git)
 
 ## 📌 프로젝트 개요 📌
 
