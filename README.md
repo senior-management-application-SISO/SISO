@@ -82,6 +82,7 @@
 
 <p>
 <img src="https://img.shields.io/badge/MySQL-f1d8d9?style=flat&logo=MySQL&logoColor=4479A1"/>&nbsp;&nbsp;
+<img src="https://img.shields.io/badge/MyBatis-black?style=flat&logo=MyBatis&logoColor=white"/>&nbsp;&nbsp;
 </p>
 
 <p>
