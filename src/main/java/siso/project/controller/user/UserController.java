@@ -35,7 +35,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public String users(@PathVariable long userId, Model model) throws IOException, WriterException {
         UserDetailInfoVO userDetailInfo = userService.findUserDetailInfo(userId);
-        model.addAttribute("userDetailInfo",userDetailInfo);
+        model.addAttribute("userDetailInfo", userDetailInfo);
 
         return "users/userPopupForm";
     }
@@ -43,5 +43,12 @@ public class UserController {
     @GetMapping("/delete")
     public void deleteUserTeamAndAdmin(@RequestParam final Long id, Long teamId, Long adminId) {
         userService.deleteUserTeamAndAdmin(id, teamId, adminId);
+    }
+
+    @GetMapping("villagehall/update")
+    public String updateUserVillageHall(@RequestParam long userId, long villageHallId) {
+        userService.updateVillageHall(userId, villageHallId);
+
+        return "redirect:/users/" + userId;
     }
 }

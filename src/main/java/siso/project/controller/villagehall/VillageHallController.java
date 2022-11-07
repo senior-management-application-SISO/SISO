@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import siso.project.controller.signup.SignUpForm;
 import siso.project.domain.Admin;
+import siso.project.domain.CountyOffice;
 import siso.project.domain.Users;
 import siso.project.domain.VillageHall;
 import siso.project.etc.GeoCoder;
@@ -16,6 +17,8 @@ import siso.project.repository.dto.VillageHallDto;
 import siso.project.service.VillageHallService;
 import siso.project.web.SessionConst;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -80,6 +83,21 @@ public class VillageHallController {
         villageHallService.villageHallUpdate(villageHallId, villageHallDto);
 
         return "redirect:/villagehall/" + villageHallId;
+    }
+
+    @GetMapping("/list")
+    public String selectVillageHall(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession();
+        Admin admin = (Admin) session.getAttribute(SessionConst.LOGIN_ADMIN);
+
+        VillageHall selectVillageHall = VillageHall.builder()
+                .adminId(admin.getId())
+                .build();
+
+        List<VillageHall> villageHalls = villageHallService.villageHallSelect(admin.getId(), selectVillageHall);
+        model.addAttribute("villageHallList", villageHalls);
+        return "villagehall/villageHallListForm";
     }
 
     @GetMapping("/delete")
