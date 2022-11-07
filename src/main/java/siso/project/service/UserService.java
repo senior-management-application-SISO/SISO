@@ -31,11 +31,11 @@ public class UserService {
 
     //조인 조회
     public List<UserInfoTeamStateVO> findUserListVO(Long loginAdminId, UsersDto cond) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE, -3);
-        Date date = new Date(calendar.getTimeInMillis());
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.add(Calendar.DATE, -3);
+//        Date date = new Date(calendar.getTimeInMillis());
 
-        return usersMapper.findUserInfoTeamState(loginAdminId, cond, date);
+        return usersMapper.findUserInfoTeamState(loginAdminId, cond, null);
     }
 
     public UserDetailInfoVO findUserDetailInfo(Long userId) {
