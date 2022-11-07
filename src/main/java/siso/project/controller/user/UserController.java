@@ -44,11 +44,4 @@ public class UserController {
     public void deleteUserTeamAndAdmin(@RequestParam final Long id, Long teamId, Long adminId) {
         userService.deleteUserTeamAndAdmin(id, teamId, adminId);
     }
-
-    @GetMapping("villagehall/update")
-    public String updateUserVillageHall(@RequestParam long userId, long villageHallId) {
-        userService.updateVillageHall(userId, villageHallId);
-
-        return "redirect:/users/" + userId;
-    }
 }

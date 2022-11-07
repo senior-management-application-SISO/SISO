@@ -26,9 +26,20 @@ public class UserPopupController {
         return "users/addUserPopupForm";
     }
 
-    @GetMapping("/team")
-    public String selectTeamList(){
-        return "users/editUserTeamForm";
+    @GetMapping("/teams/update")
+    public String selectTeamList(@RequestParam long userId, long teamId){
+
+        userService.updateTeams(userId, teamId);
+
+        return "redirect:/users/" + userId;
+    }
+
+
+    @GetMapping("villagehall/update")
+    public String updateUserVillageHall(@RequestParam long userId, long villageHallId) {
+        userService.updateVillageHall(userId, villageHallId);
+
+        return "redirect:/users/" + userId;
     }
 //    @GetMapping("/add/{userId}/{adminId}")
 //    public String addUserAdminId(@PathVariable String userId, @PathVariable String adminId) {

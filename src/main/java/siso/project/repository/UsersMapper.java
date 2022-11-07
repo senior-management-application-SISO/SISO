@@ -29,6 +29,9 @@ public interface UsersMapper {
     //마을회관 업데이트
     void updateVillageHall(@Param("id") Long id, @Param("villageHallId") Long villageHallId);
 
+    //팀 업데이트
+    void updateTeams(@Param("id") Long id, @Param("teamId") Long teamId);
+
     //삭제
     void delete(Long id);
 
