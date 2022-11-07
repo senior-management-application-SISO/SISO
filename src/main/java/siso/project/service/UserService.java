@@ -46,8 +46,9 @@ public class UserService {
         usersMapper.updateVillageHall(id, villageHallId);
     }
 
-    public void addUserAdmin(Long id, UsersDto usersDto) {
-        usersMapper.update(id, usersDto);
+    //유저 관리자 등록
+    public void addUserAdmin(Long id, Long adminId) {
+        usersMapper.addUserAdmin(id, adminId);
     }
 
     public void deleteUserTeamAndAdmin(Long id, Long teamId, Long adminId) {

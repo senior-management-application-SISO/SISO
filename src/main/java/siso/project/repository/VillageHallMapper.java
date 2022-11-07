@@ -21,3 +21,4 @@ public interface VillageHallMapper {
     void delete(Long id);
 
 }
+

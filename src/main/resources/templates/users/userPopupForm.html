@@ -23,6 +23,23 @@
             }
 
 
+            function setTeam(id, name){
+                document.getElementById('teamId').value = id;
+                document.getElementById('teamName').value = name;
+                document.getElementById('teamAddress').value = address;
+
+            }
+
+            window.onload = function(){
+                document.getElementById("newwin").onclick = function(){
+                    window.open("/team/list","","width=700px,height=500px,top=200px,left=200px;");
+                }
+            };
+
+            function popupReload(){
+                    opener.parent.reload();
+            }
+
             function deleteUserTeam() {
                 const id = [[ ${userDetailInfo.id}]];
                 const userName = [[ ${userDetailInfo.userName}]];
@@ -60,9 +77,36 @@
 <body>
 
 <div class="container">
+  <div class="py-5 text-center">
+    <h2>멤버 정보</h2>
+  </div>
 
-    <div class="py-5 text-center">
-        <h2>멤버 정보</h2>
+  <form action="users.html" th:action th:object="${userDetailInfo}" method="post">
+
+    <div>
+      <label for="id">유저 ID</label>
+      <input type="text" id="id" class="form-control" th:field="*{userId}" disabled>
+    </div>
+    <div>
+      <label for="userName">이름</label>
+      <input type="text" id="userName" class="form-control" th:field="*{userName}" disabled>
+    </div>
+    <div>
+      <label for="dateOfBirth">생년월일</label>
+      <input type="text" id="dateOfBirth" class="form-control" th:field="*{dateOfBirth}" disabled>
+    </div>
+    <div>
+      <label for="address">주소</label>
+      <input type="text" id="address" class="form-control" th:field="*{address}" disabled>
+    </div>
+    <div>
+      <label for="phoneNumber">핸드폰 번호</label>
+      <input type="text" id="phoneNumber" class="form-control" th:field="*{phoneNumber}" disabled>
+    </div>
+    <div>
+      <label for="alone">독거 여부</label>
+      <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o">
+      <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x">
     </div>
 
     <form action="users.html" th:action th:object="${userDetailInfo}" method="post">
@@ -96,6 +140,28 @@
             <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o" disabled>
             <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x" disabled>
         </div>
+    <div class="row align-items-center">
+
+      <div class="col" style="display: none;">
+        <label for="teamId">마을 Id</label>
+        <input type="text" id="teamId" class="form-control" th:field="*{teamId}">
+      </div>
+
+      <div class="col">
+      <label for="teamName">마을 이름</label>
+      <input type="text" id="teamName" class="form-control" th:field="*{teamName}">
+      </div>
+
+      <div class="col-md-4">
+      <button id="newwin" class="w-15 btn btn-success" type="button">마을 찾기</button>
+    </div>
+
+    </div>
+
+    <div>
+      <label for="teamAddress">마을 주소</label>
+      <input type="text" id="teamAddress" class="form-control" th:field="*{teamAddress}">
+    </div>
 
         <hr class="my-4">
 
@@ -122,6 +188,14 @@
             <label for="locationTime">위치 등록 시간</label>
             <input type="text" id="locationTime" class="form-control" th:field="*{locationTime}" disabled>
         </div>
+    <div>
+      <label for="villageHallName">마을 회관 이름</label>
+      <input type="text" id="villageHallName" class="form-control" th:field="*{villageHallName}">
+    </div>
+    <div>
+      <label for="villageHallAddress">마을 회관 주소</label>
+      <input type="text" id="villageHallAddress" class="form-control" th:field="*{villageHallAddress}">
+    </div>
 
         <hr class="my-4">
 
@@ -149,6 +223,11 @@
 
     <div class="col">
         <button class="w-100 btn btn-danger btn-lg" onclick="deleteUserTeam()">삭제</button>
+      <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="popupReload()">수정</button>
+    </div>
+
+    <div class="col">
+      <button class="w-100 btn btn-danger btn-lg" onclick="deleteUserTeam()">삭제</button>
     </div>
 
     <button style="visibility:hidden;" class="w-100 btn btn-danger btn-lg">x</button>

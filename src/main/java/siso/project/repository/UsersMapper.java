@@ -20,6 +20,8 @@ public interface UsersMapper {
     //업데이트
     void update(@Param("id") Long id, @Param("updateParam") UsersDto updateDto);
 
+    void addUserAdmin (@Param("id") Long id, @Param("adminId") Long adminId);
+
     void userTeamDelete(@Param("id") Long id, @Param("userTeamId") Long userTeamId);
 
     void userAdminDelete(@Param("id") Long id, @Param("userAdminId") Long userAdminId);

@@ -82,6 +82,16 @@
         </where>
     </update>
 
+    <update id="addUserAdmin">
+        update users
+        <set>
+            admin_id=#{adminId},
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
     <delete id="delete">
         delete from users where id=#{id}
     </delete>
