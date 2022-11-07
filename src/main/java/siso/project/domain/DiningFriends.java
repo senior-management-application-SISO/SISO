@@ -18,6 +18,7 @@ public class DiningFriends {
     private Integer currentNumber;
 
     //@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime time;
     private String address;
     private String name;
