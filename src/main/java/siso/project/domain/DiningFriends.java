@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -13,15 +14,14 @@ import java.time.LocalTime;
 public class DiningFriends {
 
     private Long id;
-
     private Integer memNumber;
+    private Integer currentNumber;
 
-    @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
-    private LocalTime time;
+    //@DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
+    private LocalDateTime time;
     private String address;
     private String name;
     private String phoneNumber;
-    private String members;
     private String memo;
     private Boolean state;
 
@@ -29,18 +29,23 @@ public class DiningFriends {
     private Long teamId;
     private Long usersId;
 
+    public void setCurrentNumber() {
+        this.currentNumber = 1;
+    }
+
     @Builder
-    public DiningFriends(Long id, Integer memNumber, LocalTime time, String address, String name, String phoneNumber, String members, String memo, Boolean state, Long teamId, Long usersId) {
+    public DiningFriends(Long id, Integer memNumber, Integer currentNumber, LocalDateTime time, String address, String name, String phoneNumber, String memo, Boolean state, Long teamId, Long usersId) {
         this.id = id;
         this.memNumber = memNumber;
+        this.currentNumber = currentNumber;
         this.time = time;
         this.address = address;
         this.name = name;
         this.phoneNumber = phoneNumber;
-        this.members = members;
         this.memo = memo;
         this.state = state;
         this.teamId = teamId;
         this.usersId = usersId;
     }
+
 }
