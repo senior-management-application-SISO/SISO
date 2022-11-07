@@ -13,6 +13,23 @@
   <th:block layout:fragment="script">
     <script th:inline="javascript">
 
+            function setTeam(id, name){
+                document.getElementById('teamId').value = id;
+                document.getElementById('teamName').value = name;
+                document.getElementById('teamAddress').value = address;
+
+            }
+
+            window.onload = function(){
+                document.getElementById("newwin").onclick = function(){
+                    window.open("/team/list","","width=700px,height=500px,top=200px,left=200px;");
+                }
+            };
+
+            function popupReload(){
+                    opener.parent.reload();
+            }
+
             function deleteUserTeam() {
                 const id = [[ ${userDetailInfo.id} ]];
                 const userName = [[ ${userDetailInfo.userName} ]];
@@ -70,19 +87,33 @@
     </div>
     <div>
       <label for="alone">독거 여부</label>
-      <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o" disabled>
-      <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x" disabled>
+      <input th:if="*{alone == true}" type="text" id="alone" class="form-control" value="o">
+      <input th:if="*{alone == false}" type="text" id="alone1" class="form-control" value="x">
     </div>
 
     <hr class="my-4">
 
-    <div>
+    <div class="row align-items-center">
+
+      <div class="col" style="display: none;">
+        <label for="teamId">마을 Id</label>
+        <input type="text" id="teamId" class="form-control" th:field="*{teamId}">
+      </div>
+
+      <div class="col">
       <label for="teamName">마을 이름</label>
-      <input type="text" id="teamName" class="form-control" th:field="*{teamName}" disabled>
+      <input type="text" id="teamName" class="form-control" th:field="*{teamName}">
+      </div>
+
+      <div class="col-md-4">
+      <button id="newwin" class="w-15 btn btn-success" type="button">마을 찾기</button>
     </div>
+
+    </div>
+
     <div>
       <label for="teamAddress">마을 주소</label>
-      <input type="text" id="teamAddress" class="form-control" th:field="*{teamAddress}" disabled>
+      <input type="text" id="teamAddress" class="form-control" th:field="*{teamAddress}">
     </div>
 
     <hr class="my-4">
@@ -104,15 +135,19 @@
 
     <div>
       <label for="villageHallName">마을 회관 이름</label>
-      <input type="text" id="villageHallName" class="form-control" th:field="*{villageHallName}" disabled>
+      <input type="text" id="villageHallName" class="form-control" th:field="*{villageHallName}">
     </div>
     <div>
       <label for="villageHallAddress">마을 회관 주소</label>
-      <input type="text" id="villageHallAddress" class="form-control" th:field="*{villageHallAddress}" disabled>
+      <input type="text" id="villageHallAddress" class="form-control" th:field="*{villageHallAddress}">
     </div>
 
     <hr class="my-4">
   </form>
+
+    <div class="col">
+      <button class="w-100 btn btn-primary btn-lg" type="submit" onclick="popupReload()">수정</button>
+    </div>
 
     <div class="col">
       <button class="w-100 btn btn-danger btn-lg" onclick="deleteUserTeam()">삭제</button>

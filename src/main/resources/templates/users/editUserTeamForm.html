@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <link th:href="@{/css/bootstrap.min.css}"
+        href="css/bootstrap.min.css" rel="stylesheet">
+
+  <script type="text/javascript">
+
+        function sendCountyOffice(id, name){
+            window.opener.setTeam(id, name, address);
+            window.close();
+        }
+
+    </script>
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+  <div class="py-5 text-center">
+    <h2>마을 목록</h2>
+  </div>
+
+  <form th:object="${countyOfficeSearch}" method="get" class="form-inline">
+    <div class="row">
+      <div class="col">
+        <input type="text" th:field="*{officeName}" class="form-control" placeholder="마을 이름"/>
+      </div>
+      <div class="col">
+        <input type="text" th:field="*{officeAddress}" class="form-control" placeholder="마을 주소"/>
+      </div>
+      <div class="col">
+        <button type="submit" class="btn btn-secondary mb-2">검색</button>
+      </div>
+    </div>
+  </form>
+
+  <hr class="my-4">
+  <div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>동사무소</th>
+        <th>주소</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="countyOffice : ${countyOfficeList}">
+        <td><a href="#" th:onclick="sendCountyOffice([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
+               th:text="${countyOffice.officeName}">동사무소</a>
+        </td>
+        <td><a th:text="${countyOffice.officeAddress}">주소</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
