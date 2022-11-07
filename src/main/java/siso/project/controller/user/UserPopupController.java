@@ -26,6 +26,10 @@ public class UserPopupController {
         return "users/addUserPopupForm";
     }
 
+    @GetMapping("/team")
+    public String selectTeamList(){
+        return "users/editUserTeamForm";
+    }
 //    @GetMapping("/add/{userId}/{adminId}")
 //    public String addUserAdminId(@PathVariable String userId, @PathVariable String adminId) {
 //        Long UserId = Long.valueOf(userId);

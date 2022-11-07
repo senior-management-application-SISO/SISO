@@ -22,7 +22,7 @@
 
             window.onload = function(){
                 document.getElementById("newwin").onclick = function(){
-                    window.open("/team/list","","width=700px,height=500px,top=200px,left=200px;");
+                    window.open("/users/team","width=700px,height=500px,top=200px,left=200px;");
                 }
             };
 
@@ -102,7 +102,7 @@
 
       <div class="col">
       <label for="teamName">마을 이름</label>
-      <input type="text" id="teamName" class="form-control" th:field="*{teamName}">
+      <input type="text" id="teamName" class="form-control" th:field="*{teamName}" disabled>
       </div>
 
       <div class="col-md-4">

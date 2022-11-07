@@ -7,7 +7,7 @@
 
   <script type="text/javascript">
 
-        function sendCountyOffice(id, name){
+        function sendTeamAddress(id, name){
             window.opener.setTeam(id, name, address);
             window.close();
         }
@@ -45,7 +45,7 @@
       </thead>
       <tbody>
       <tr th:each="countyOffice : ${countyOfficeList}">
-        <td><a href="#" th:onclick="sendCountyOffice([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
+        <td><a href="#" th:onclick="sendTeamAddress([[${countyOffice.id}]], [[${countyOffice.officeName}]])"
                th:text="${countyOffice.officeName}">동사무소</a>
         </td>
         <td><a th:text="${countyOffice.officeAddress}">주소</a></td>
