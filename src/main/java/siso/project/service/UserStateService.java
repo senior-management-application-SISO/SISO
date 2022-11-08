@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import siso.project.domain.Users;
 import siso.project.domain.UsersState;
 import siso.project.repository.UsersStateMapper;
+import siso.project.repository.dto.UsersQrStateDto;
 import siso.project.repository.vo.UserHallStateVO;
 
 import java.time.LocalDate;
@@ -33,5 +34,14 @@ public class UserStateService {
                 .build();
 
         usersStateMapper.save(usersState);
+    }
+
+    public void updateUserState(Long userId) {
+        UsersQrStateDto dto = UsersQrStateDto.builder()
+                .attendanceState(true)
+                .date(LocalDateTime.now())
+                .build();
+
+        usersStateMapper.updateByUserId(userId, dto);
     }
 }

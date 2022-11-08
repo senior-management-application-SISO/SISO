@@ -19,6 +19,9 @@ public interface UsersStateMapper {
     //업데이트
     void update(@Param("id") Long id, @Param("updateParam") UsersQrStateDto usersQrStateDto);
 
+    //userId로 업데이트
+    void updateByUserId(@Param("id") Long userId, @Param("updateParam") UsersQrStateDto usersQrStateDto);
+
     //삭제
     void delete(Long id);
 

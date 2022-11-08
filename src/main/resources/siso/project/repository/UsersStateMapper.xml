@@ -29,6 +29,24 @@
         </where>
     </update>
 
+    <update id="updateByUserId">
+        update users_state
+        <set>
+            <if test="updateParam.date != null">
+                date=#{updateParam.date},
+            </if>
+            <if test="updateParam.attendanceState != null">
+                attendance_state=#{updateParam.attendanceState},
+            </if>
+            <if test="updateParam.hallState != null">
+                hall_state=#{updateParam.hallState},
+            </if>
+        </set>
+        <where>
+            users_id = #{id}
+        </where>
+    </update>
+
     <delete id="delete">
         delete from users_state
         <where>

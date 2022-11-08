@@ -263,10 +263,11 @@ public class DiningFriendsMapperTest {
         DiningFriends diningFriends = DiningFriends.builder()
                 .memNumber(2)
                 .currentNumber(0)
-                .time(LocalDateTime.of(2022, 11, 3, 0, 0, 0))
+                .time(LocalDateTime.now())
                 .address("address")
                 .name("name")
                 .memo("memo")
+                .usersId(users.getId())
                 .teamId(teamA.getId())
                 .state(true)
                 .build();

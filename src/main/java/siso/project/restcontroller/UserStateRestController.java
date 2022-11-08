@@ -17,9 +17,16 @@ public class UserStateRestController {
 
     private final UserStateService userStateService;
 
+    //마을회관 Id로 해당 마을회관에 있는 사람 조회)
     @GetMapping("/hallstate/{hallId}")
     public List<UserHallStateVO> selectHallState(@PathVariable Long hallId){
         return userStateService.selectVillageHall(hallId);
+    }
+
+    //유저 아이디로 출석체크
+    @GetMapping("/userstate/{userId}")
+    public void attendanceState(@PathVariable Long userId) {
+        userStateService.updateUserState(userId);
     }
 
     @GetMapping("/hello")
