@@ -89,6 +89,7 @@
             <if test="teamId != null and teamId != ''">
                 and team_id = #{teamId}
             </if>
+            and time > now()
         </where>
     </select>
 
