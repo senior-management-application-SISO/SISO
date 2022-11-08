@@ -35,7 +35,7 @@ public class UserController {
     @GetMapping("/{userId}")
     public String users(@PathVariable long userId, Model model) throws IOException, WriterException {
         UserDetailInfoVO userDetailInfo = userService.findUserDetailInfo(userId);
-        model.addAttribute("userDetailInfo",userDetailInfo);
+        model.addAttribute("userDetailInfo", userDetailInfo);
 
         return "users/userPopupForm";
     }

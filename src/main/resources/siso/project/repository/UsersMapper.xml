@@ -82,6 +82,17 @@
         </where>
     </update>
 
+    <update id="updateTeams">
+        update users
+        <set>
+            team_id=#{teamId},
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
+
+
     <update id="addUserAdmin">
         update users
         <set>

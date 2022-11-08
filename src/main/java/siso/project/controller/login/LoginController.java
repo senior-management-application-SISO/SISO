@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import siso.project.domain.Admin;
+import siso.project.service.AdminService;
 import siso.project.service.LoginService;
 import siso.project.web.SessionConst;
 
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
     private final LoginService loginService;
+    private final AdminService adminService;
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm form) {
