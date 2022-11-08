@@ -47,6 +47,7 @@ public class UsersLocationService {
     }
 
     public void updateUsersLocationByUsersLocationId(long id, UsersLocationDto usersLocationDto) {
+        usersLocationDto.setTime(LocalDateTime.now());
         usersLocationMapper.update(id, usersLocationDto);
     }
 
