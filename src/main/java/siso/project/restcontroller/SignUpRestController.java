@@ -72,6 +72,6 @@ public class SignUpRestController {
     public String saveUser(@ModelAttribute Users users) {
         userService.userSave(users);
         userStateService.saveUserState(users);
-        return "ok";
+        return String.valueOf(users.getId());
     }
 }

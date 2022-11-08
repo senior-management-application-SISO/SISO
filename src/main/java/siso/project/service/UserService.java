@@ -61,8 +61,9 @@ public class UserService {
     }
 
     //회원가입
-    public void userSave(Users users) {
+    public Users userSave(Users users) {
         usersMapper.save(users);
+        return users;
     }
 
     //로그인 가능한 회원인지 조회

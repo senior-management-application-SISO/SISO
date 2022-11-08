@@ -99,7 +99,7 @@
                 <td th:text="${user.phoneNumber}">010-0000-0000</td>
                 <td th:if="${user.alone == true}">o</td>
                 <td th:if="${user.alone == false}">x</td>
-                <td th:text="${user.date}">0000-00-00</td>
+                <td th:text="${#temporals.format(user.date, 'yyyy-MM-dd HH:mm:ss')}">0000-00-00</td>
                 <td th:if="${user.attendanceState == true}">o</td>
                 <td th:if="${user.attendanceState == false}">x</td>
                 <td th:text="${user.teamName}">소속</td>

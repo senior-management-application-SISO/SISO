@@ -1,4 +1,4 @@
-package siso.project.domain;
+package siso.project.repository.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,9 +6,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class UsersLocation {
-
-    private Long id;
+public class UsersLocationDto {
 
     private String address;
     private double lat;
@@ -16,13 +14,10 @@ public class UsersLocation {
     private LocalDateTime time;
 
     @Builder
-    public UsersLocation(Long id, String address, double lat, double lon, LocalDateTime time) {
-        this.id = id;
+    public UsersLocationDto(String address, double lat, double lon, LocalDateTime time) {
         this.address = address;
         this.lat = lat;
         this.lon = lon;
         this.time = time;
     }
-
-
 }

@@ -11,13 +11,13 @@ public class VillageHall {
     private Long id;
 
     private String hallName;
-    private Integer lat;
-    private Integer lon;
+    private double lat;
+    private double lon;
     private String address;
     private Long adminId;
 
     @Builder
-    public VillageHall(Long id, String hallName, Integer lat, Integer lon, String address, Long adminId) {
+    public VillageHall(Long id, String hallName, double lat, double lon, String address, Long adminId) {
         this.id = id;
         this.hallName = hallName;
         this.lat = lat;

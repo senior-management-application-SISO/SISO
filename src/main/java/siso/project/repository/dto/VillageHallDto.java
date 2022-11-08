@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 public class VillageHallDto {
 
     private String hallName;
-    private Integer lat;
-    private Integer lon;
+    private double lat;
+    private double lon;
     private String address;
     private Long adminId;
 
     @Builder
-    public VillageHallDto(String hallName, Integer lat, Integer lon, String address, Long adminId) {
+    public VillageHallDto(String hallName, double lat, double lon, String address, Long adminId) {
         this.hallName = hallName;
         this.lat = lat;
         this.lon = lon;

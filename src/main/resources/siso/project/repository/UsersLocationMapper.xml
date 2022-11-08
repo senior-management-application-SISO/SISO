@@ -4,7 +4,36 @@
 <mapper namespace="siso.project.repository.UsersLocationMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into users_location (lat, lon, time)
-        values (#{lat}, #{lon}, #{time})
+        insert into users_location (address, lat, lon, time)
+        values (#{address}, #{lat}, #{lon}, #{time})
     </insert>
+
+    <select id="selectUserLocationByLocationId" resultType="UsersLocation">
+        select *
+        from users_location
+        <where>
+            Id = #{id}
+        </where>
+    </select>
+
+    <update id="update" parameterType="UsersLocationDto">
+        update users_location
+        <set>
+            <if test="usersLocationDto.address != null">
+                address=#{usersLocationDto.address},
+            </if>
+            <if test="usersLocationDto.lat != null">
+                lat=#{usersLocationDto.lat},
+            </if>
+            <if test="usersLocationDto.lon != null">
+                lon=#{usersLocationDto.lon},
+            </if>
+            <if test="usersLocationDto.time != null">
+                time=#{usersLocationDto.time},
+            </if>
+        </set>
+        <where>
+            Id = #{id}
+        </where>
+    </update>
 </mapper>
