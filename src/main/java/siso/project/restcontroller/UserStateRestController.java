@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import siso.project.domain.Users;
 import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserHallStateVO;
+import siso.project.repository.vo.UserInfoStateVO;
 import siso.project.repository.vo.UserStateVO;
 import siso.project.service.UserService;
 import siso.project.service.UserStateService;
@@ -28,10 +29,17 @@ public class UserStateRestController {
         return userStateService.selectVillageHall(hallId);
     }
 
+    //팀 id로 유저 정보, 상태 조회
+    @GetMapping("/userstate/detail/byteamid/{teamId}")
+    public List<UserInfoStateVO> selectUserListByTeamId(@PathVariable long teamId) {
+        return userService.selectUserListByTeamId(teamId);
+    }
+
     //유저 아이디로 출석체크
     @GetMapping("/userstate/{userId}")
-    public void attendanceState(@PathVariable Long userId) {
+    public String attendanceState(@PathVariable Long userId) {
         userStateService.updateUserState(userId);
+        return "ok";
     }
 
     //팀 아이디로 소속 사람들 출석 현황 조회
