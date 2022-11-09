@@ -7,6 +7,7 @@ import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserDetailInfoVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
+import siso.project.repository.vo.UserStateVO;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -36,6 +37,11 @@ public class UserService {
 //        Date date = new Date(calendar.getTimeInMillis());
 
         return usersMapper.findUserInfoTeamState(loginAdminId, cond, null);
+    }
+
+    //소속 팀의 출석 현황 조회
+    public List<UserStateVO> findUserStateByTeamId(Long teamId) {
+        return usersMapper.findUserStateByTeamId(teamId);
     }
 
     public UserDetailInfoVO findUserDetailInfo(Long userId) {

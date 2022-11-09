@@ -177,6 +177,21 @@
         </where>
     </select>
 
+    <select id="findUserStateByTeamId" resultType="UserStateVO">
+        SELECT
+        users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
+        users_state.date, users_state.attendance_state, users_state.hall_state
+        FROM users
+        LEFT OUTER JOIN teams
+        ON users.team_id = teams.id
+        LEFT OUTER JOIN (select users_state.Id, max(users_state.date) as date, users_state.attendance_state,
+        users_state.hall_state, users_state.users_id from users_state group by users_state.users_id) users_state
+        ON users.id = users_state.users_id
+        <where>
+            and users.team_id = #{teamId}
+        </where>
+    </select>
+
     <select id="findUserDetailInfo" resultType="UserDetailInfoVO">
         SELECT users.id, users.user_id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
         users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id,
