@@ -11,7 +11,10 @@ import siso.project.repository.dto.UsersDto;
 import siso.project.repository.dto.UsersQrStateDto;
 import siso.project.repository.dto.VillageHallDto;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -58,7 +61,9 @@ public class VillageHallService {
 
         UsersQrStateDto updateDto;
 
-        if (states.get(0).getHallState().equals(false)) {
+        LocalDate today = LocalDate.now();
+
+        if (states.get(0).getHallState().equals(false) || (states.get(0).getDate().getYear() != today.getYear() || states.get(0).getDate().getMonthValue() != today.getMonthValue() || states.get(0).getDate().getDayOfMonth() != today.getDayOfMonth())) {
             updateDto = UsersQrStateDto.builder()
                     .date(LocalDateTime.now())
                     .hallState(true)

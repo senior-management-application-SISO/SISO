@@ -91,7 +91,7 @@
         <where>
             and users_state.hall_state = 1
             <if test="date != null">
-                and users_state.date = #{date}
+                and DATE_FORMAT(users_state.date, '%Y-%m-%d') = #{date}
             </if>
             <if test="hallId != null and hallId != ''">
                 and users.village_hall_id = #{hallId}
