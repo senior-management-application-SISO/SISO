@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import siso.project.domain.Users;
 import siso.project.repository.dto.UsersDto;
+import siso.project.repository.vo.UserInfoStateVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 import siso.project.repository.vo.UserDetailInfoVO;
 
@@ -20,7 +21,7 @@ public interface UsersMapper {
     //업데이트
     void update(@Param("id") Long id, @Param("updateParam") UsersDto updateDto);
 
-    void addUserAdmin (@Param("id") Long id, @Param("adminId") Long adminId);
+    void addUserAdmin(@Param("id") Long id, @Param("adminId") Long adminId);
 
     void userTeamDelete(@Param("id") Long id, @Param("userTeamId") Long userTeamId);
 
@@ -39,7 +40,7 @@ public interface UsersMapper {
     Optional<Users> findById(Long id);
 
     //팀, 출석 여부 조회
-    List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId")Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date")Date date);
+    List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId") Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date") Date date);
 
     //유저 모든 정보
     Optional<UserDetailInfoVO> findUserDetailInfo(Long userId);
@@ -51,5 +52,8 @@ public interface UsersMapper {
 
     //아이디, 비밀번호 조회
     Users selectIdPassword(UsersDto usersDto);
+
+    //팀 아이디로 유저 정보와 상태 조회
+    List<UserInfoStateVO> selectUserInfoStateByTeamId(long teamId);
 }
 

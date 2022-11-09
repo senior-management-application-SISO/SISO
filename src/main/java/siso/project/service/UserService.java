@@ -6,6 +6,7 @@ import siso.project.domain.Users;
 import siso.project.repository.UsersMapper;
 import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserDetailInfoVO;
+import siso.project.repository.vo.UserInfoStateVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 
 import java.sql.Date;
@@ -78,5 +79,10 @@ public class UserService {
     //유저 정보 업데이트
     public void userUpdate(Long id, UsersDto usersDto) {
         usersMapper.update(id, usersDto);
+    }
+
+    //팀id로 유저 정보와 상태 가져오기
+    public List<UserInfoStateVO> selectUserListByTeamId(long teamId) {
+        return usersMapper.selectUserInfoStateByTeamId(teamId);
     }
 }

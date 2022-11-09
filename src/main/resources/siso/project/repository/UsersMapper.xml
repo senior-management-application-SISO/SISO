@@ -5,9 +5,9 @@
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into users (user_name, user_id, password, date_of_birth, address, phone_number, alone, team_id,
-        users_location_id, admin_id, village_hall_id)
+                           users_location_id, admin_id, village_hall_id)
         values (#{userName}, #{userId}, #{password}, #{dateOfBirth}, #{address}, #{phoneNumber}, #{alone}, #{teamId},
-        #{usersLocationId}, #{adminId}, #{villageHallId})
+                #{usersLocationId}, #{adminId}, #{villageHallId})
     </insert>
 
     <update id="update" parameterType="Users">
@@ -104,7 +104,9 @@
     </update>
 
     <delete id="delete">
-        delete from users where id=#{id}
+        delete
+        from users
+        where id = #{id}
     </delete>
 
 
@@ -138,7 +140,7 @@
     </select>
 
     <select id="selectAllUser" resultType="Users">
-        select  user_id, user_name, address
+        select user_id, user_name, address
         from users
         <where>
             <if test="userId != null">
@@ -178,7 +180,8 @@
     </select>
 
     <select id="findUserDetailInfo" resultType="UserDetailInfoVO">
-        SELECT users.id, users.user_id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
+        SELECT users.id, users.user_id, users.user_name, users.date_of_birth, users.address, users.phone_number,
+        users.alone,
         users.team_id, teams.team_name, teams.team_address, users.users_location_id, users.village_hall_id,
         users_state.date as user_state_date, users_state.attendance_state, users_state.hall_state,
         users_location.address as location_address, users_location.lat as location_lat, users_location.lon as
@@ -203,7 +206,20 @@
     <select id="selectIdPassword" resultType="Users">
         SELECT *
         FROM users
-        WHERE users.user_id=#{userId} and users.password=#{password}
+        WHERE users.user_id = #{userId}
+          and users.password = #{password}
     </select>
 
+    <select id="selectUserInfoStateByTeamId" resultType="UserInfoStateVO">
+        SELECT users.id, users.user_name, users.date_of_birth, users.address, users.phone_number, users.alone,
+        users.team_id, users.admin_id, users.users_location_id, users.village_hall_id,
+        users_state.date, users_state.attendance_state, users_state.hall_state
+        FROM users
+        LEFT OUTER JOIN (select users_state.Id, max(users_state.date) as date, users_state.attendance_state,
+        users_state.hall_state, users_state.users_id from users_state group by users_state.users_id) users_state
+        ON users.id = users_state.users_id
+        <where>
+            and users.team_id = #{teamId}
+        </where>
+    </select>
 </mapper>
