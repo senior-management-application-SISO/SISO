@@ -7,6 +7,7 @@ import siso.project.repository.dto.UsersDto;
 import siso.project.repository.vo.UserInfoStateVO;
 import siso.project.repository.vo.UserInfoTeamStateVO;
 import siso.project.repository.vo.UserDetailInfoVO;
+import siso.project.repository.vo.UserStateVO;
 
 import java.sql.Date;
 import java.util.List;
@@ -41,6 +42,9 @@ public interface UsersMapper {
 
     //팀, 출석 여부 조회
     List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId") Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date") Date date);
+
+    //소속 팀의 출석 현황 조회
+    List<UserStateVO> findUserStateByTeamId(Long teamId);
 
     //유저 모든 정보
     Optional<UserDetailInfoVO> findUserDetailInfo(Long userId);
