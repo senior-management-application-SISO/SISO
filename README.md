@@ -67,7 +67,7 @@
         - 마을 회관 <br>
        
 #### ERD
-![image](https://user-images.githubusercontent.com/90389323/199907541-dc9b7707-b90c-492c-9ac9-77f835136f20.png)
+![image](https://user-images.githubusercontent.com/90389323/200712049-b4d33a33-3eca-480b-b1de-fe8521fc1ffd.png)
 
 ## 🔥 기술 스택 🔥
 
