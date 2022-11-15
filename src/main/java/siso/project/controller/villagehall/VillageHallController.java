@@ -3,6 +3,7 @@ package siso.project.controller.villagehall;
 import com.google.code.geocoder.model.LatLng;
 import com.google.zxing.WriterException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +34,9 @@ public class VillageHallController {
 
     private final VillageHallService villageHallService;
 
+    @Value("{server.ip}")
+    private String serverIp;
+
     @GetMapping
     public String villageHalls(@SessionAttribute(name = SessionConst.LOGIN_ADMIN, required = false) Admin loginAdmin, @ModelAttribute("villageHallSearch") VillageHall cond, Model model) {
         List<VillageHall> villageHalls = villageHallService.villageHallSelect(loginAdmin.getId(), cond);
@@ -49,7 +53,7 @@ public class VillageHallController {
         List<VillageHall> select = villageHallService.villageHallSelect(null, villageHall);
         model.addAttribute("villageHall", select.get(0));
 
-        String img = getQRCodeImage("localhost:8080/villagehall/qrcheck?villageHallId=" + villageHallId, 350, 350);
+        String img = getQRCodeImage(serverIp + ":8080/villagehall/qrcheck?villageHallId=" + villageHallId, 350, 350);
         model.addAttribute("img", img);
 
         return "villagehall/villageHallPopupForm";

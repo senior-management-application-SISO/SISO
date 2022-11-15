@@ -22,7 +22,7 @@
                 and id = #{id}
             </if>
             <if test="adminName != null">
-                and admin_name = #{adminName}
+                and admin_name like concat('%', #{adminName}, '%')
             </if>
             <if test="adminId != null">
                 and admin_id = #{adminId}
