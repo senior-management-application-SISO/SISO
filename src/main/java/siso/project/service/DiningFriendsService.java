@@ -9,6 +9,7 @@ import siso.project.repository.DiningFriendsUsersMapper;
 import siso.project.repository.dto.DiningFriendsDto;
 import siso.project.repository.vo.DiningFriendsUsersVO;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -43,7 +44,7 @@ public class DiningFriendsService {
     }
 
     //파티 참가
-    public void saveDiningFriendsUsers(DiningFriendsUsers diningFriendsUsers) {
+    public void saveDiningFriendsUsers(DiningFriendsUsers diningFriendsUsers) throws Exception {
         diningFriendsUsersMapper.save(diningFriendsUsers);
         diningFriendsMapper.currentNumberPlusUpdate(diningFriendsUsers.getDiningFriendsId());
     }

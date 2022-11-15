@@ -7,6 +7,7 @@ import siso.project.domain.DiningFriendsUsers;
 import siso.project.repository.vo.DiningFriendsUsersVO;
 import siso.project.service.DiningFriendsService;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -19,9 +20,13 @@ public class DiningFriendsRestController {
 
     //파티 생성
     @PostMapping("/save")
-    public String create(@ModelAttribute DiningFriends diningFriends) {
-        diningFriendsService.create(diningFriends);
-        return "ok";
+    public String create(DiningFriends diningFriends) {
+        try {
+            diningFriendsService.create(diningFriends);
+            return "saved";
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     //파티 삭제
@@ -45,13 +50,23 @@ public class DiningFriendsRestController {
 
     //파티 참가
     @PostMapping("/save/dining-friends-users")
-    public void saveDiningFriendsUsers(@ModelAttribute DiningFriendsUsers diningFriendsUsers) {
-        diningFriendsService.saveDiningFriendsUsers(diningFriendsUsers);
+    public String saveDiningFriendsUsers(DiningFriendsUsers diningFriendsUsers) {
+        try {
+            diningFriendsService.saveDiningFriendsUsers(diningFriendsUsers);
+            return "saved";
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     //파티 탈퇴
     @PostMapping("/delete/dining-friends-users")
-    public void deleteDiningFriendsUsers(@ModelAttribute DiningFriendsUsers diningFriendsUsers) {
-        diningFriendsService.deleteDiningFriendsUsers(diningFriendsUsers);
+    public String deleteDiningFriendsUsers(@RequestBody DiningFriendsUsers diningFriendsUsers) {
+        try {
+            diningFriendsService.deleteDiningFriendsUsers(diningFriendsUsers);
+            return "deleted";
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
