@@ -24,4 +24,7 @@ public interface DiningFriendsUsersMapper {
     // 특정 파티에 참가하는 참가자 정보 조회
     List<DiningFriendsUsersVO> selectDiningFriendsUsers(Long diningFriendsId);
 
+    // user id로 파티 조회
+    Optional<DiningFriendsUsersVO> selectByUserId(Long userId);
+
 }

@@ -23,6 +23,12 @@ public class DiningFriendsService {
     public void create(DiningFriends diningFriends) {
         diningFriends.setCurrentNumber();
         diningFriendsMapper.save(diningFriends);
+
+        DiningFriendsUsers diningFriendsUsers = DiningFriendsUsers.builder()
+                .usersId(diningFriends.getUsersId())
+                .userName(diningFriends.getName())
+                .diningFriendsId(diningFriends.getId()).build();
+        diningFriendsUsersMapper.save(diningFriendsUsers);
     }
 
     //파티 조회
@@ -55,4 +61,8 @@ public class DiningFriendsService {
         diningFriendsMapper.currentNumberMinusUpdate(diningFriendsUsers.getDiningFriendsId());
     }
 
+    //유저 아이디로 파티 조회
+    public DiningFriendsUsersVO selectByUserId(Long userId) {
+        return diningFriendsUsersMapper.selectByUserId(userId).get();
+    }
 }

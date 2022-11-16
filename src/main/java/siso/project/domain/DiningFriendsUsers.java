@@ -12,12 +12,14 @@ public class DiningFriendsUsers {
 
     //외래키
     private Long usersId;
+    private String userName;
     private Long diningFriendsId;
 
     @Builder
-    public DiningFriendsUsers(Long id, Long usersId, Long diningFriendsId) {
+    public DiningFriendsUsers(Long id, Long usersId, String userName, Long diningFriendsId) {
         this.id = id;
         this.usersId = usersId;
+        this.userName = userName;
         this.diningFriendsId = diningFriendsId;
     }
 }

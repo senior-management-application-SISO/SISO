@@ -4,8 +4,8 @@
 <mapper namespace="siso.project.repository.DiningFriendsUsersMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into dining_friends_users (users_id, dining_friends_id)
-        values (#{usersId}, #{diningFriendsId})
+        insert into dining_friends_users (users_id, users_name, dining_friends_id)
+        values (#{usersId}, #{userName}, #{diningFriendsId})
     </insert>
 
     <delete id="selectedDelete">
@@ -40,5 +40,22 @@
         </where>
     </select>
 
+    <select id="selectByUserId" resultType="DiningFriendsUsersVO">
+        SELECT dining_friends.Id, dining_friends.mem_number, dining_friends.current_number, dining_friends.time,
+        dining_friends.address, dining_friends.name, dining_friends.phone_number, dining_friends.memo,
+        dining_friends.state,
+        users.user_name
+        FROM dining_friends_users
+        JOIN dining_friends
+        ON dining_friends.Id = dining_friends_users.dining_friends_id
+        JOIN users
+        ON users.Id = dining_friends_users.users_id
+        <where>
+            <if test="userId != null and userId != ''">
+                and dining_friends_users.users_id = #{userId}
+            </if>
+            and dining_friends.time > now()
+        </where>
+    </select>
 
 </mapper>
