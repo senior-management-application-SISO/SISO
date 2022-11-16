@@ -67,7 +67,7 @@ public class DiningFriendsRestController {
 
     //파티 탈퇴
     @PostMapping("/delete/dining-friends-users")
-    public String deleteDiningFriendsUsers(@RequestBody DiningFriendsUsers diningFriendsUsers) {
+    public String deleteDiningFriendsUsers(DiningFriendsUsers diningFriendsUsers) {
         try {
             diningFriendsService.deleteDiningFriendsUsers(diningFriendsUsers);
             return "deleted";
