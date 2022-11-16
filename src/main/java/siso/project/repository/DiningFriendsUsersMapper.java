@@ -1,9 +1,8 @@
 package siso.project.repository;
 
 import org.apache.ibatis.annotations.Mapper;
-import siso.project.domain.DiningFriends;
+import org.apache.ibatis.annotations.Param;
 import siso.project.domain.DiningFriendsUsers;
-import siso.project.repository.dto.DiningFriendsUsersDto;
 import siso.project.repository.vo.DiningFriendsUsersVO;
 
 import java.util.List;
@@ -17,6 +16,8 @@ public interface DiningFriendsUsersMapper {
 
     // 삭제
     void delete(Long id);
+
+    void deleteAllByDfId(Long id);
 
     // 삭제
     void selectedDelete(DiningFriendsUsers diningFriendsUsers);

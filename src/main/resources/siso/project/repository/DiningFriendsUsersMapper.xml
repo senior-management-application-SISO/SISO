@@ -23,6 +23,13 @@
         </where>
     </delete>
 
+    <delete id="deleteAllByDfId">
+        delete from dining_friends_users
+        <where>
+            dining_friends_id=#{id}
+        </where>
+    </delete>
+
     <select id="selectDiningFriendsUsers" resultType="DiningFriendsUsersVO">
         SELECT dining_friends.Id, dining_friends.mem_number, dining_friends.current_number, dining_friends.time,
         dining_friends.address, dining_friends.name, dining_friends.phone_number, dining_friends.memo,

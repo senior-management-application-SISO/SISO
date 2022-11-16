@@ -9,7 +9,6 @@ import siso.project.repository.DiningFriendsUsersMapper;
 import siso.project.repository.dto.DiningFriendsDto;
 import siso.project.repository.vo.DiningFriendsUsersVO;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -41,6 +40,7 @@ public class DiningFriendsService {
     }
 
     public void delete(DiningFriends diningFriends) {
+        diningFriendsUsersMapper.deleteAllByDfId(diningFriends.getId());
         diningFriendsMapper.delete(diningFriends.getId());
     }
 
