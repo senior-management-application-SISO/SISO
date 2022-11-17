@@ -40,6 +40,8 @@ public interface UsersMapper {
     //Id로 멤버 조회
     Optional<Users> findById(Long id);
 
+    Optional<Users> findByUserId(String id);
+
     //팀, 출석 여부 조회
     List<UserInfoTeamStateVO> findUserInfoTeamState(@Param("adminId") Long adminId, @Param("searchParam") UsersDto usersDto, @Param("date") Date date);
 

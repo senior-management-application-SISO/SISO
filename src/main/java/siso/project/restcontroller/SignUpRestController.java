@@ -39,8 +39,8 @@ public class SignUpRestController {
     }
 
     @GetMapping(value = {"/signup/valid/{id}"})
-    public Users validId(@PathVariable long id) {
-        return userService.findById(id);
+    public Users validId(@PathVariable String id) {
+        return userService.findByUserId(id);
     }
 
     //2. 회원가입 전 관리자 조회

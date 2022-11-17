@@ -45,8 +45,8 @@ public class UserService {
         return usersMapper.findUserStateByTeamId(teamId);
     }
 
-    public Users findById(long id) {
-        return usersMapper.findById(id).get();
+    public Users findByUserId(String id) {
+        return usersMapper.findByUserId(id).get();
     }
 
     public UserDetailInfoVO findUserDetailInfo(Long userId) {
