@@ -79,7 +79,7 @@
 spring.profiles.active=local <br>
 
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver <br>
-spring.datasource.url=jdbc:mysql://db 엔드포인트 or localhost:3306/test?useSSL=false&serverTimezone=Asia/Seoul <br>
+spring.datasource.url=jdbc:mysql://db 엔드포인트 or localhost:3306/스키마 ?useSSL=false&serverTimezone=Asia/Seoul <br>
 spring.datasource.username=MySQL ID <br>
 spring.datasource.password=MySQL PW <br>
 
