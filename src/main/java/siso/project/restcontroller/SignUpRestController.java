@@ -38,6 +38,10 @@ public class SignUpRestController {
         return teamService.teamSelect(adminId, findTeam);
     }
 
+    @GetMapping(value = {"/signup/valid/{id}"})
+    public Users validId(@PathVariable long id) {
+        return userService.findById(id);
+    }
 
     //2. 회원가입 전 관리자 조회
     @GetMapping(value = {"/admin/{adminName}/{adminPhoneNumber}", "/admin/{adminName}"})
