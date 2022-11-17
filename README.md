@@ -67,7 +67,31 @@
         - 마을 회관 <br>
        
 #### ERD
+
+- model 위치: src/main/resouces/dbmodel/siso-db.mwb
+
 ![image](https://user-images.githubusercontent.com/90389323/200712049-b4d33a33-3eca-480b-b1de-fe8521fc1ffd.png)
+
+#### application.properties 설정
+
+---
+
+spring.profiles.active=local <br>
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver <br>
+spring.datasource.url=jdbc:mysql://db 엔드포인트 or localhost:3306/test?useSSL=false&serverTimezone=Asia/Seoul <br>
+spring.datasource.username=MySQL ID <br>
+spring.datasource.password=MySQL PW <br>
+
+mybatis.type-aliases-package = siso.project.domain, siso.project.repository.vo, siso.project.repository.dto <br>
+mybatis.configuration.map-underscore-to-camel-case=true <br>
+logging.level.siso.project.repository=trace <br>
+
+spring.messages.basename=errors <br>
+
+server.ip=서버 ip(localhost or aws ip) <br>
+
+---
 
 ## 🔥 기술 스택 🔥
 
@@ -143,7 +167,7 @@
 
 - 식사 친구 찾기
 
-![image](https://user-images.githubusercontent.com/90389323/202346087-3a788b70-5592-4b24-a72b-80e79e456126.png)
+![image](https://user-images.githubusercontent.com/90389323/202347208-79992cba-fea7-423a-b251-0478b152ac73.png)
 
 - 마을 회관 현황
 
